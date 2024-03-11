@@ -1,5 +1,5 @@
 import { ChevronLast, ChevronFirst } from "lucide-react"
-import { useContext, createContext, useState } from "react"
+import { useState } from "react"
 import lhfund from '../assets/lhFund.png';
 const navigation = [
   { icon: <i className="uil uil-create-dashboard text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Dashboard", active: false },
@@ -18,7 +18,7 @@ export default function Sidebar() {
           <img
             src={lhfund}
             className={`overflow-hidden transition-all ${
-              expanded ? "w-40 mt-[-12px] mb-[-8px] ml-[24px]" : "w-0"
+              expanded ? "w-32 m-1" : "w-0"
             }`}
             alt=""
           />

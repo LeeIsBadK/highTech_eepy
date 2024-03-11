@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import './search.css';
 
 interface Fund {
-  id: string;
+  id: number;
   name: string;
+  href: string;
+  risk: number;
+  type: string;
+  value: number;
 }
 
 interface Props {
@@ -91,7 +95,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
           className="flex items-center justify-center filter-button text-gray-600 font-semibold py-[7px] px-3 rounded-[12px] cursor-pointer shadow-md mr-2"
           style={{
             fontSize: 'calc(13px + 0.5vmin)',
-            background: '#ffbb5b -webkit-linear-gradient(90deg, #ffbb5b 0%, #ffd66d 50%, #ffeb93 100%) linear-gradient(90deg, #ffbb5b 0%, #ffd66d 50%, #ffeb93 100%)',
+            background: '#ffbb5b-webkit-linear-gradient(90deg, #ffbb5b 0%, #ffd66d 50%, #ffeb93 100%) linear-gradient(90deg, #ffbb5b 0%, #ffd66d 50%, #ffeb93 100%)',
           }}
         >
           <i

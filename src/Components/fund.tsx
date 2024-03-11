@@ -1,3 +1,5 @@
+import {riskColor} from "../assets/color";
+
 const Fund = ({funds}: { funds: Array<any> }) => {
     return (
         <div className="bg-white">
@@ -22,9 +24,9 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                         </div>
                       </div>
                       <div className="flex mt-4">
-                        <div className={`px-3 py-1 border border-2  rounded-md border-riskColor${fund.risk}`}
+                        <div className={`px-3 py-1 border border-2  rounded-md`} style={{borderColor:`${riskColor[fund.risk]}`}}
                           >
-                          <p className={`text-[24px] font-bold text-riskColor${fund.risk}`}>{fund.risk}</p>
+                          <p className={`text-[24px] font-bold`} style={{color:`${riskColor[fund.risk]}`}}>{fund.risk}</p>
                           
                         </div>
                         <div className="ml-3 px-3 py-1 border border-gray-300 border-2 items-center rounded-md">

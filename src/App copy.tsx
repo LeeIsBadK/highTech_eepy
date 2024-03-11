@@ -1,8 +1,9 @@
-import "react";
-import Sidebar from "./Components/sidebar";
-import SearchBar from "./Components/search";
-import Fund from "./Components/fund";
-interface Fund {
+/*import React from 'react';
+import SearchBar from './Components/search';
+import Fund from './Components/fund';
+import Sidebar from './Components/sidebar';
+
+interface FundData {
   id: number;
   name: string;
   href: string;
@@ -11,7 +12,7 @@ interface Fund {
   value: number;
 }
 
-export const fundData = [
+export const funds: FundData[] = [
   {
     id: 1,
     name: 'K-USXNDQ-A(A)',
@@ -70,19 +71,23 @@ export const fundData = [
   }
 ]
 
-const App = () => {
+console.log(funds);
+const App: React.FC = () => {
   return (
-    <>
     <div className="flex">
       <Sidebar />
-      <div className="w-full pl-2 pt-16" style={{alignItems:"center"}}>
-        <div className="pl-8">
-          <SearchBar funds={fundData as Fund[]} />
+      <div className='w-full pl-2'>
+        <div className='flex max-w-2xl px-2 py-4 mt-1 sm:px-6 sm:py-12 sm:mt-2 lg:max-w-7xl lg:px-8'>
+          <h2 className="text-3xl mr-[4vw] ml-[1vw] font-bold tracking-tight text-[#072C29]">Funds</h2>
+          <SearchBar funds={funds}/>
         </div>
-          <Fund funds={fundData as Fund[]} />
+        <div className='max-h-[84vh] overflow-y-auto'>
+          <Fund funds={funds}/>
+        </div>
       </div>
     </div>
-    </>
   );
 }
+
 export default App;
+*/
