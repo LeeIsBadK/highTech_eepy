@@ -38,7 +38,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
         <div>
           <button
-            className="relative outline-none rounded-[15px] px-4 py-1 border border-gray-300 shadow-md min-w-[240px] mr-2"
+            className="relative outline-none rounded-[5px] px-4 py-1 border border-[#A3BFB4] shadow-sm min-w-[240px] mr-2 bg-white"
             onClick={() => {
               setShowSearch(!showSearch);
               handleSearch();
@@ -52,35 +52,29 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
             ></i>
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search Mutual Funds"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="ml-3 outline-none min-w-[100px]"
+              className="ml-3 outline-none min-w-[100px] placeholder-[#A3BFB4]"
               style={{
-                width: 'calc(5px + 25vmin)',
+                width: 'calc(5px + 35vmin)',
                 fontSize: 'calc(13px + 0.5vmin)',
               }}
             />
             <label htmlFor="Filter" className="sr-only">
               Filter
             </label>
-            <select
-              id="Filter"
-              name="Filter"
-              className="rounded-md border-0 bg-transparent py-0.5 pl-2 pr-2 text-gray-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              style={{
-                fontSize: 'calc(13px + 0.5vmin)',
-              }}
-            >
-              <option>Filter</option>
-            </select>
           </button>
           <div
-            className={`block absolute px-12 mt-2 z-10 bg-white rounded-md shadow-md overflow-hidden transition-max-height duration-400 ease-in-out ${
+            className={`block absolute px-12 mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-height duration-400 ease-in-out ${
               showSearch ? 'max-h-300' : 'max-h-0'
             }`}
           >
-            <ul className="mt-5 max-h-200 py-2 overflow-y-auto pr-7">
+            <ul className="max-h-200 py-2 overflow-y-auto pr-7"
+              style={{
+                width: 'calc(-26px + 35vmin)',
+              }}
+            >
               {funds.map((fund) => (
                 <li key={fund.id} className="h-full w-full px-2 py-2 text-[1.05rem] text-gray-600 ml-[0px]">
                   {fund.name}
@@ -91,29 +85,19 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
         </div>
         <button
           onClick={handleFilter}
-          className="flex items-center justify-center filter-button text-gray-600 font-semibold py-[7px] px-3 rounded-[12px] cursor-pointer shadow-md mr-2"
+          className="items-center justify-center ml-3 text-white py-[0px] px-3 rounded-[5px] cursor-pointer shadow-sm"
           style={{
             fontSize: 'calc(13px + 0.5vmin)',
-            background: '#ffbb5b-webkit-linear-gradient(90deg, #ffbb5b 0%, #ffd66d 50%, #ffeb93 100%) linear-gradient(90deg, #ffbb5b 0%, #ffd66d 50%, #ffeb93 100%)',
+            background: '#A3BFB4',
           }}
         >
           <i
-            className="uil uil-filter mr-1.5 ml-[-1px] mt-[1px]"
+            className="uil uil-filter mr-1.5 ml-[-1px] mt-[1px] text-white"
             style={{
               fontSize: 'calc(13px + 0.5vmin)',
             }}
           ></i>
-          Filter
-        </button>
-        <button
-          onClick={handleSearch}
-          className="flex items-center justify-center search-button py-[7px] px-3 rounded-[12px] font-semibold text-gray-600 cursor-pointer shadow-md"
-          style={{
-            fontSize: 'calc(13px + 0.5vmin)',
-            background: '#29fbed -webkit-linear-gradient(270deg, #29fbed 0%, #28d7cb 50%, #1eb0a7 100%) linear-gradient(270deg, #29fbed 0%, #28d7cb 50%, #1eb0a7 100%)',
-          }}
-        >
-          Search
+          Sort & Filter
         </button>
       </div>
     </div>
