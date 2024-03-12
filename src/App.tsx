@@ -75,11 +75,18 @@ const App = () => {
     <>
     <div className="flex">
       <Sidebar />
-      <div className="w-full pl-2 pt-16" style={{alignItems:"center"}}>
+      <div className="w-full pl-2 items-center bg-gray-100">
         <div className="pl-8">
-          <SearchBar funds={fundData as Fund[]} />
+          <div className='flex max-w-2xl px-2 py-4 mt-1 sm:px-6 sm:py-12 sm:mt-2 lg:max-w-7xl lg:px-8'>
+            <h2 className="text-4xl font-bold tracking-tight text-[#072C29]">Funds</h2>
+            <div className="ml-auto mr-auto">
+              <SearchBar funds={fundData as Fund[]} />
+            </div>
+          </div>
         </div>
+        <div className='max-h-[84vh] overflow-y-auto'>
           <Fund funds={fundData as Fund[]} />
+        </div>
       </div>
     </div>
     </>
