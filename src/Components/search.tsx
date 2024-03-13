@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { X ,Search } from 'lucide-react';
 
 interface Fund {
   id: number;
@@ -35,48 +36,40 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
       }}
     >
       <div className="flex">
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
         <div>
           <button
-            className="relative outline-none rounded-[5px] px-4 py-1 border border-[#A3BFB4] shadow-sm min-w-[240px] mr-2 bg-white"
-            onClick={() => {
-              setShowSearch(!showSearch);
-              handleSearch();
-            }}
+            className="relative flex outline-none rounded-[5px] px-4 py-1 border border-[#A3BFB4] shadow-sm min-w-[240px] mr-2 bg-white"
           >
-            <i
-              className="uil uil-search"
-              style={{
-                fontSize: 'calc(15px + 0.5vmin)',
-              }}
-            ></i>
+            <Search size={21} className="mt-[3px]"/>
             <input
               type="text"
               placeholder="Search Mutual Funds"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="ml-3 outline-none min-w-[100px] placeholder-[#A3BFB4]"
+              className="ml-3 outline-none min-w-[100px] placeholder-[#A3BFB4] mt-[2px]"
               style={{
                 width: 'calc(5px + 35vmin)',
                 fontSize: 'calc(13px + 0.5vmin)',
               }}
+              onClick={() => {
+                setShowSearch(true);
+                handleSearch();
+              }}
             />
-            <label htmlFor="Filter" className="sr-only">
-              Filter
-            </label>
+            {showSearch && (<X className="items-end absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowSearch(false)}/>)}
           </button>
           <div
-            className={`block absolute px-12 mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-height duration-400 ease-in-out ${
-              showSearch ? 'max-h-300' : 'max-h-0'
+            className={`block absolute px-12 mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-y-auto transition-max-height duration-400 ease-in-out ${
+              showSearch ? 'max-h-[25vh]' : 'max-h-0'
             }`}
           >
-            <ul className="max-h-200 py-2 overflow-y-auto pr-7"
+            <ul className="py-2 pr-7"
               style={{
                 width: 'calc(-26px + 35vmin)',
               }}
             >
               {funds.map((fund) => (
-                <li key={fund.id} className="h-full w-full px-2 py-2 text-[1.05rem] text-gray-600 ml-[0px]">
+                <li key={fund.id} className="h-[5vh] w-full px-2 py-2 text-[1.05rem] text-gray-600 ml-[0px]">
                   {fund.name}
                 </li>
               ))}

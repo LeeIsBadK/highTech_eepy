@@ -1,17 +1,27 @@
 
-import { ChevronLast, ChevronFirst } from "lucide-react"
-import { useState } from "react"
+import { ChevronLast, ChevronFirst, LayoutDashboard, Handshake, LineChart, Scale } from "lucide-react"
+import { useState, useEffect } from "react"
 import lhfund from '../assets/lhFund.png';
 
+
+
 const navigation = [
-  { icon: <i className="uil uil-create-dashboard text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Dashboard", active: false },
-  { icon: <i className="uil uil-list-ul text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Funds", active: true},
-  { icon: <i className="uil uil-chart text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Chart", active: false},
-  { icon: <i className="uil uil-comparison text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Compare", active: false},
-]
+  { icon: <LayoutDashboard size={30} className="m-1" />, text: "Dashboard", href: "/dashboard" },
+  { icon: <Handshake size={30} className="m-1" />, text: "Funds", href: "/funds" },
+  { icon: <LineChart size={30} className="m-1" />, text: "Chart", href: "/chart" },
+  { icon: <Scale size={30} className="m-1" />, text: "Compare", href: "/compare" },
+];
+
 
 export default function Sidebar() {
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState(true);
+  const [active, setActive] = useState<string>('');
+
+  useEffect(() => {
+    // Set the active state based on the current URL path
+    const currentPath = window.location.pathname;
+    setActive(navigation.find(item => currentPath.startsWith(item.href))?.text || '');
+  }, []); // Run this effect only once when the component mounts
   
   return (
     <aside className="h-screen">
@@ -33,33 +43,36 @@ export default function Sidebar() {
         </div>
         <div className="">
           {navigation.map((item) => (
-           <li
-           className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group
-             ${item.active ? "bg-gradient-to-tr from-[#1CA59B] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
-            `}
-            >
-           {item.icon}
-           <span
-             className={`overflow-hidden transition-all ${
-               expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
-             }`}
-           >
-             {item.text}
-           </span>
+            <a href={item.href}>
+              <li
+                className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group
+                  ${ active.match(item.text) ? "bg-gradient-to-tr from-[#1CA59B] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
+                  `}
+                  onClick={() => setActive(item.text)}
+                  >
+                {item.icon}
+                <span
+                  className={`overflow-hidden transition-all ${
+                    expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
+                  }`}
+                >
+                  {item.text}
+                </span>
 
-           {!expanded && (
-             <div
-               className={`
-               absolute left-full rounded-md px-2 py-1 ml-6
-               bg-indigo-100 text-indigo-800 text-sm
-               invisible opacity-20 -translate-x-3 transition-all
-               group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 z-10
-              `}
-             >
-               {item.text}
-             </div>
-           )}
-         </li>
+                {!expanded && (
+                  <div
+                    className={`
+                    absolute left-full rounded-md px-2 py-1 ml-6
+                    bg-indigo-100 text-indigo-800 text-sm
+                    invisible opacity-20 -translate-x-3 transition-all
+                    group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 z-10
+                    `}
+                  >
+                    {item.text}
+                  </div>
+                )}
+              </li>
+            </a>
           ))}
         </div>
       </nav>
