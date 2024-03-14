@@ -5,7 +5,6 @@ import { Check, X } from 'lucide-react';
 const Fund = ({funds}: { funds: Array<any> }) => {
 
   const [selectedFund, setSelectedFund] = useState<string[]>([]);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const handleFundClick = (fund: string): void => {
     if (selectedFund.includes(fund)) {
@@ -15,23 +14,11 @@ const Fund = ({funds}: { funds: Array<any> }) => {
     }
   };
 
-  useEffect(() => {
-    // Show popup when selectedFund array is not empty
-    setShowPopup(selectedFund.length !== 0);
-  }, [selectedFund]);
-
   const generateCompareUrl = () => {
     // Combine the selected funds into a string separated by commas
     const fundsQuery = selectedFund.join(",");
     // Generate the compare URL with the selected funds
     return `/compare?selectedFund=${fundsQuery}`;
-  };
-
-  const handleScrollToEnd = () => {
-    window.scrollTo({
-      top:0,
-      behavior: "smooth"
-    });
   };
   
 
@@ -111,13 +98,6 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                 </button>
               </div>
             )}
-            {/*showPopup && (
-              <div className="fixed bottom-0 left-0 w-full flex justify-center items-center">
-                <button className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md" onClick={handleScrollToEnd}>
-                  Scroll to End
-                </button>
-              </div>
-            )*/}
           </div>
         </div>
       );
