@@ -1,19 +1,39 @@
 import {riskColor} from "../assets/color";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, X } from 'lucide-react';
 
 const Fund = ({funds}: { funds: Array<any> }) => {
 
-  const [selectedFund, setselectedFund] = useState<string[]>([]);
+  const [selectedFund, setSelectedFund] = useState<string[]>([]);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const handleFundClick = (fund: string): void => {
     if (selectedFund.includes(fund)) {
-      setselectedFund(selectedFund.filter((f) => f !== fund));
+      setSelectedFund(selectedFund.filter((f) => f !== fund));
     } else {
-      setselectedFund([...selectedFund, fund]);
+      setSelectedFund([...selectedFund, fund]);
     }
-    console.log(selectedFund);
   };
+
+  useEffect(() => {
+    // Show popup when selectedFund array is not empty
+    setShowPopup(selectedFund.length !== 0);
+  }, [selectedFund]);
+
+  const generateCompareUrl = () => {
+    // Combine the selected funds into a string separated by commas
+    const fundsQuery = selectedFund.join(",");
+    // Generate the compare URL with the selected funds
+    return `/compare?selectedFund=${fundsQuery}`;
+  };
+
+  const handleScrollToEnd = () => {
+    window.scrollTo({
+      top:0,
+      behavior: "smooth"
+    });
+  };
+  
 
     return (
         <div className=""
@@ -40,8 +60,8 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                       <div className="w-full">
                         <div className="w-full flex items-center">
                           <div className={`flex py-1 mt-[-5px] min-w-[100px] w-[7vw]`}>
-                            <button className={`${selectedFund.includes(fund.name) ? 'bg-[#1CA59B] border border-[#1CA59B]' : ''} 
-                                                flex items-center justify-center h-[18px] w-[18px] ml-7 rounded-[5px] border border-2 border-gray-400 transition-all duration-300 ease-in-out`}
+                            <button className={`${selectedFund.includes(fund.name) ? 'bg-[#1CA59B] border border-[#1CA59B]' : 'border border-2 border-gray-400'} 
+                                                flex items-center justify-center h-[18px] w-[18px] ml-7 rounded-[5px] transition-all duration-300 ease-in-out`}
                               onClick={() => handleFundClick(fund.name)}>
                               <Check className={`${selectedFund.includes(fund.name) ? 'scale-100' : ''} text-white transform scale-0 transition-all duration-200 ease-in-out`}/>
                             </button>
@@ -69,23 +89,35 @@ const Fund = ({funds}: { funds: Array<any> }) => {
               <div className="p-5 rounded-[15px] bg-white mt-9">
                 <div className="flex">
                   <span className="px-3 text-[20px] font-bold text-[#072C29]">Compare Funds:</span>
-                  <button className="ml-auto flex" onClick={() => setselectedFund([])}>
+                  <button className="ml-auto flex" onClick={() => setSelectedFund([])}>
                     <X className="mt-[2px] mr-1"/>
                     <span className="text-[20px] font-bold text-[#072C29]">Reset</span>
                   </button>
                 </div>
                 <div className="flex flex-wrap pt-3 px-1 max-w-5xl">
                   {selectedFund.map((fund) => (
-                    <div className="px-2 mb-3">
+                    <div className="px-2 mb-3" key={fund}>
                       <div className="flex px-2 py-1 bg-gray-200 rounded-md shadow-sm">
                         <span>{fund}</span>
-                          <X className="ml-1" onClick={ () => setselectedFund(selectedFund.filter((f) => f !== fund))}/>
+                          <X className="ml-1" onClick={ () => setSelectedFund(selectedFund.filter((f) => f !== fund))}/>
                       </div>
                     </div>
                   ))}
                 </div>
+                <button className="ml-auto flex">
+                  <a href={generateCompareUrl()} className="py-2">
+                  <span className="text-[18px] text-white font-bold bg-[#072C29] rounded-[5px] px-2 py-1.5 hover:bg-[#116564] hover:text-gray-100">Compare</span>
+                  </a>
+                </button>
               </div>
             )}
+            {/*showPopup && (
+              <div className="fixed bottom-0 left-0 w-full flex justify-center items-center">
+                <button className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md" onClick={handleScrollToEnd}>
+                  Scroll to End
+                </button>
+              </div>
+            )*/}
           </div>
         </div>
       );

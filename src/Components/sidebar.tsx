@@ -20,7 +20,7 @@ export default function Sidebar() {
   useEffect(() => {
     // Set the active state based on the current URL path
     const currentPath = window.location.pathname;
-    setActive(navigation.find(item => currentPath.startsWith(item.href))?.text || '');
+    setActive(navigation.find(item => currentPath.startsWith(item.href))?.text ?? '');
   }, []); // Run this effect only once when the component mounts
   
   return (
@@ -43,16 +43,16 @@ export default function Sidebar() {
         </div>
         <div className="">
           {navigation.map((item) => (
-            <a href={item.href}>
-              <li
+            <a href={item.href} key={item.text}>
+              <button
                 className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group
-                  ${ active.match(item.text) ? "bg-gradient-to-tr from-[#1CA59B] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
+                  ${ active === item.text ? "bg-gradient-to-tr from-[#1CA59B] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
                   `}
                   onClick={() => setActive(item.text)}
                   >
                 {item.icon}
                 <span
-                  className={`overflow-hidden transition-all ${
+                  className={`overflow-hidden transition-all flex px-4 ${
                     expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
                   }`}
                 >
@@ -71,7 +71,7 @@ export default function Sidebar() {
                     {item.text}
                   </div>
                 )}
-              </li>
+              </button>
             </a>
           ))}
         </div>

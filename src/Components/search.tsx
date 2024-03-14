@@ -48,8 +48,8 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="ml-3 outline-none min-w-[100px] placeholder-[#A3BFB4] mt-[2px]"
               style={{
-                width: 'calc(5px + 35vmin)',
-                fontSize: 'calc(13px + 0.5vmin)',
+                width: 'calc(5px + 20vw)',
+                fontSize: 'calc(13px + 0.25vw)',
               }}
               onClick={() => {
                 setShowSearch(true);
@@ -58,18 +58,16 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
             />
             {showSearch && (<X className="items-end absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowSearch(false)}/>)}
           </button>
-          <div
-            className={`block absolute px-12 mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-y-auto transition-max-height duration-400 ease-in-out ${
-              showSearch ? 'max-h-[25vh]' : 'max-h-0'
-            }`}
-          >
+          <div className={`block absolute px-12 mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-y-auto ${
+              showSearch ? 'max-h-[26.5vh]' : 'max-h-0'
+            }`}>
             <ul className="py-2 pr-7"
               style={{
-                width: 'calc(-26px + 35vmin)',
+                width: 'calc(-26px + 20vw)',
               }}
             >
               {funds.map((fund) => (
-                <li key={fund.id} className="h-[5vh] w-full px-2 py-2 text-[1.05rem] text-gray-600 ml-[0px]">
+                <li key={fund.id} className="flex items-center min-h-[44px] h-[5vh] w-full px-4 py-2 text-[1.05rem] text-gray-600 hover:bg-gray-200 rounded-[10px]">
                   {fund.name}
                 </li>
               ))}
@@ -84,12 +82,6 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
             background: '#A3BFB4',
           }}
         >
-          <i
-            className="uil uil-filter mr-1.5 ml-[-1px] mt-[1px] text-white"
-            style={{
-              fontSize: 'calc(13px + 0.5vmin)',
-            }}
-          ></i>
           Sort & Filter
         </button>
       </div>
