@@ -1,5 +1,5 @@
 import {riskColor} from "../assets/color";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Check, X } from 'lucide-react';
 
 const Fund = ({funds}: { funds: Array<any> }) => {
