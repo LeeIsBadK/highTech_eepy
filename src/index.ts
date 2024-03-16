@@ -60,12 +60,12 @@ app.get('/filter', async (req, res) => {
 
 ///////////////////////////////// test /////////////////////////////////////////
 //เอาทุกอัน
-app.get('/fund', async (req, res) => {
+app.get('/product', async (req, res) => {
   const products = await prisma.product.findMany()
   res.json(products)
 })
 
-// /filter?searchString={searchString}&take={take}&skip={skip}&orderBy={orderBy}
+// /filter/product?searchString={searchString}&take={take}&skip={skip}&orderBy={orderBy}
 app.get('/filter/product', async (req, res) => {
   const { searchString, skip, take, orderBy } = req.query
 
@@ -92,11 +92,4 @@ app.get('/filter/product', async (req, res) => {
   res.json(products)
 })
 
-
-
-
-const server = app.listen(3000, () =>
-  console.log(`
-🚀 Server ready at: http://localhost:3000
-⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`),
-)
+app.listen(5173)

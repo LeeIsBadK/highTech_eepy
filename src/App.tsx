@@ -2,6 +2,10 @@ import "react";
 import Sidebar from "./Components/sidebar";
 import SearchBar from "./Components/search";
 import Fund from "./Components/fund";
+import { useEffect, useState } from "react";
+
+
+
 interface Fund {
   id: number;
   name: string;
@@ -71,6 +75,24 @@ export const fundData = [
 ]
 
 const App = () => {
+  const [fundData2] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/filter/product?searchString=Vietnam&take=20&skip=0&orderBy=asc");
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
     <div className="flex">

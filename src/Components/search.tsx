@@ -42,6 +42,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
             onClick={() => {
               setShowSearch(!showSearch);
               handleSearch();
+              
             }}
           >
             <i
