@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  proj_id String    @unique
+  proj_abbr_name String
+  proj_name_th  String
+  proj_name_en  String
+  unique_id String
+  risk_spectrum String
+}
+
+
+
+model Fund {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  proj_id String    @unique
+  regis_id  String
+  regis_date  String
+  cancel_date String
+  proj_name_th  String
+  proj_name_en  String
+  proj_abbr_name  String
+  fund_status String
+  unique_id String
+  permit_us_investment  String?
+  invest_country_flag String
+  last_upd_date String
+}
