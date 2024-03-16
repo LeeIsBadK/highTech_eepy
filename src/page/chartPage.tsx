@@ -88,7 +88,11 @@ interface Fund {
 
 const ChartPage = () => {
     return (
-        <div className="flex">
+        <div className="flex"
+        style={{
+          fontFamily: "'Noto Sans Thai', sans-serif",
+        }}
+        >
           <Sidebar />
           <div className="w-full pl-2 pt-4 sm:pt-8 lg:pt-12 pb-4 sm:pb-8 lg:pb-12 items-center bg-gray-100 max-h-[100vh] overflow-y-auto">
             <div className="pl-8">

@@ -2,90 +2,123 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../Components/sidebar";
 import SearchBar from "../Components/search";
-import { CirclePlus, X, Search } from "lucide-react";
-import TradingViewWidget from "../Components/chart";
+import { CirclePlus, X, Search, HandCoins, PieChart, ReceiptText, LineChart, Coins } from "lucide-react";
+import TradingViewWidget from "../compareComponent/chart";
+import OverView from "../compareComponent/overview";
+import OperatingResults from "../compareComponent/operatingResults";
+import Investment from "../compareComponent/investment";
 
 interface Fund {
   id: number;
   name: string;
+  detail: string;
   href: string;
   risk: number;
   type: string;
   value: number;
+  returns: number;
 }
 
 export const fundData = [
   {
     id: 1,
-    name: 'K-USXNDQ-A(A)',
+    name: 'ASP-DIGIBLOC-SSF',
+    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม',
     href: '#',
     risk: 6,
-    type: 'A',
-    value: 32.7534,
+    type: 'SSFEQ',
+    value: 8.4301,
+    returns: 138.70
   },
   {
     id: 2,
-    name: 'KFLRMF',
+    name: 'ASP-DIGIBLOCRMF',
+    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการเลี้ยงชีพ',
     href: '#',
     risk: 6,
-    type: 'RMF',
-    value: 81.3507,
+    type: 'RMFEQ',
+    value: 7.7214,
+    returns: 130.12
   },
   {
     id: 3,
-    name: 'SCBRM1',
-    href: '#',  
-    risk: 4,
-    type: 'RMF',
-    value: 14.6425,
+    name: 'ASP-DIGIBLOC',
+    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน',
+    href: '#',
+    risk: 6,
+    type: 'FIFEQ',
+    value: 7.4037,
+    returns: 125.88
   },
   {
     id: 4,
-    name: 'K-CHANGE-A(A)',
-    href: '#',  
+    name: 'LHBLOCKCHAIN',
+    detail: 'กองทุนเปิด แอล เอช บล็อกเชน',
+    href: '#',
     risk: 6,
-    type: 'A',
-    value: 16.0144,
+    type: 'MIXFLEX',
+    value: 9.8522,
+    returns: 81.36
   },
   {
     id: 5,
-    name: 'K-US500X-A(A)',
-    href: '#',  
-    risk: 6,
-    type: 'A',
-    value: 11.4849,
+    name: 'SCBSEMI(SSFE)',
+    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดเพื่อการออมผ่านช่องทางอิเล็กทรอนิกส์)',
+    href: '#',
+    risk: 7,
+    type: 'SSFEQ',
+    value: 15.5487,
+    returns: 77.20
   },
   {
     id: 6,
-    name: 'SCBRS2000(A)',
+    name: 'SCBSEMI(E)',
+    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดช่องทางอิเล็กทรอนิกส์)',
     href: '#',
-    risk: 6,
-    type: 'A',
-    value: 11.9956,
+    risk: 7,
+    type: 'RMFEQ',
+    value: 15.7053,
+    returns: 77.17
   },
   {
     id: 7,
-    name: 'ONE-UGG-RA',
+    name: 'SCBSEMI(P)',
+    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดผู้ลงทุนกลุ่ม/บุคคล)',
     href: '#',
-    risk: 6,
-    type: 'A',
-    value: 26.95,
+    risk: 7,
+    type: 'FIFEQ',
+    value: 15.2816,
+    returns: 75.52
   },
   {
     id: 8,
-    name: 'KKP GNP',
+    name: 'KT-BLOCKCHAIN-A',
+    detail: 'กองทุนเปิดเคแทม Blockchain Economy (ชนิดสะสมมูลค่า)',
     href: '#',
     risk: 6,
-    type: 'A',
-    value: 18.3118,
+    type: 'FIFEQ',
+    value: 10.7280,
+    returns: 73.10
   },
   {
     id: 9,
-    name: 'TSF-A',
+    name: 'TNEXTGEN-SSF',
+    detail: 'กองทุนเปิด ทิสโก้ Next Generation Internet ชนิดหน่วยลงทุนเพื่อการออม',
     href: '#',
     risk: 6,
-    type: 'A',
-    value: 64.6817,
+    type: 'SSFEQ',
+    value: 6.5763,
+    returns: 64.94
+  },
+  {
+    id: 10,
+    name: 'KKP TECH-H-SSF',
+    detail: 'กองทุนเปิดเคเคพี EXPANDED TECH - HEDGED ชนิดเพื่อการออม',
+    href: '#',
+    risk: 7,
+    type: 'SSFEQ',
+    value: 15.1590,
+    returns: 63.65
   }
 ]
 
@@ -116,6 +149,8 @@ const ComparePage = () => {
     const fundArrayCopy = selectedFundArray.filter((f) => f !== fund);
     const fundsQuery = fundArrayCopy.join(",");
     // Generate the compare URL with the selected funds
+    if (fundArrayCopy.length === 0)
+      return `/fund`;
     return `/compare?selectedFund=${fundsQuery}`;
   };
 
@@ -136,7 +171,7 @@ const ComparePage = () => {
           <div className="w-full pl-2 pt-4 sm:pt-8 lg:pt-12 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100vh] overflow-y-auto">
             <div className="pl-8">
               <div className='flex max-w-2xl px-2 pb-4 mt-1 sm:px-6 sm:pb-8 sm:mt-2 lg:max-w-7xl lg:px-8 lg:pb-12'>
-                <h2 className="text-4xl font-bold tracking-tight text-[#072C29]">Compare</h2>
+                <h2 className="text-4xl font-bold tracking-tight text-[#072C29]">เปรียบเทียบกองทุน</h2>
                 <div className="ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]} />
                 </div>
@@ -235,90 +270,40 @@ const ComparePage = () => {
             </div>
             <div className="flex items-center max-w-2xl ml-8 pt-7 sm:px-3 lg:max-w-7xl lg:px-5">
               <div className="border-b border-b-2 w-full">
-                <button className={`${selected === 'ภาพรวม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} onClick={() => setSelected('ภาพรวม')}>ภาพรวม</button>
-                <button className={`${selected === 'กราฟ' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} onClick={() => setSelected('กราฟ')}>กราฟ</button>
-                <button className={`${selected === 'ผลการดำเนินงานและปันผล' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} onClick={() => setSelected('ผลการดำเนินงานและปันผล')}>ผลการดำเนินงานและปันผล</button>
-                <button className={`${selected === 'พอร์ตการลงทุน' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} onClick={() => setSelected('พอร์ตการลงทุน')}>พอร์ตการลงทุน</button>
-                <button className={`${selected === 'ค่าธรรมเนียม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} onClick={() => setSelected('ค่าธรรมเนียม')}>ค่าธรรมเนียม</button>
+                <button className={`${selected === 'ภาพรวม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+                  onClick={() => setSelected('ภาพรวม')}>
+                  <span className="flex items-center"><ReceiptText size={19} className="mr-[5px]" />ภาพรวม</span>
+                </button>
+                <button className={`${selected === 'กราฟ' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+                  onClick={() => setSelected('กราฟ')}>
+                  <span className="flex items-center"><LineChart size={19} className="mr-[5px]"/>กราฟ</span>
+                </button>
+                <button className={`${selected === 'ผลการดำเนินงานและปันผล' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+                  onClick={() => setSelected('ผลการดำเนินงานและปันผล')}>
+                  <span className="flex items-center"><HandCoins size={19} className="mr-[5px]" />ผลการดำเนินงานและปันผล</span>
+                </button>
+                <button className={`${selected === 'พอร์ตการลงทุน' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+                  onClick={() => setSelected('พอร์ตการลงทุน')}>
+                  <span className="flex items-center"><PieChart size={19} className="mr-[5px]" />พอร์ตการลงทุน</span>
+                </button>
+                <button className={`${selected === 'ค่าธรรมเนียม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+                  onClick={() => setSelected('ค่าธรรมเนียม')}>
+                  <span className="flex items-center"><Coins size={19} className="mr-[5px]" />ค่าธรรมเนียม</span>
+                </button>
               </div>
             </div>
             <div className="h-full max-w-2xl ml-8 py-8 sm:px-6 lg:max-w-7xl lg:px-8">
               {selected === 'ภาพรวม' && (
-                <div className="pb-[60px]">
-                  <div className="flex">
-                    <div className="pr-10"
-                      style={{ whiteSpace: 'nowrap' }}
-                    >
-                      <div className="px-4 py-8 font-bold text-[20px] text-[#072C29]">Funds</div>
-                      <div className="text-[18px] text-gray-600">
-                        <p className="p-4">บลจ</p>
-                        <p className="p-4">ประเภทกอง</p>
-                        <p className="p-4">ค่าความเสี่ยง</p>
-                        <p className="p-4">Feeder Fund</p>
-                        <p className="p-4">นโยบายค่าเงิน</p>
-                        <p className="p-4">นโยบายการจ่ายปันผล</p>
-                      </div>
-                    </div>
-                    <div className="flex overflow-x-auto max-w-5xl mt-[-2px]">
-                      {selectedFundArray?.map((fund) => (
-                          <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
-                            style={{ whiteSpace: 'nowrap'}}
-                          >
-                            <div className="py-4 px-2 font-bold text-[20px] text-[#072C29]">
-                              <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}>{fund}<a href={generateDeleteFundUrl(fund)}><X className="mt-[3px] ml-1 text-gray-400" /></a></span>
-                            </div>
-                            <div className={`${selectedFundArray.indexOf(fund)%2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]' } border border-gray-300 rounded-[10px] text-[18px] text-gray-600 px-5 shadow-md w-full`}>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                            </div>
-                          </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="flex">
-                    <div className="pr-10"
-                      style={{ whiteSpace: 'nowrap' }}
-                    >
-                      <div className="px-4 py-8 font-bold text-[20px] text-[#072C29]">Funds</div>
-                      <div className="text-[18px] text-gray-600">
-                        <p className="p-4">ค่าธรรมเนียมขาย</p>
-                        <p className="p-4">ค่าธรรมเนียมรับซื้อคืน</p>
-                        <p className="p-4">ค่าใช้จ่ายกองทุนรวม</p>
-                        <p className="p-4">ลงทุนครั้งแรกขั้นต่ำ</p>
-                        <p className="p-4">ลงทุนครั้งต่อไปขั้นต่ำ</p>
-                        <p className="p-4">วันที่จดทะเบียนกองทุน</p>
-                        <p className="p-4">มูลค่าทรัพย์สินสุทธิ</p>
-                      </div>
-                    </div>
-                    <div className="flex overflow-x-auto max-w-5xl mt-[-2px]">
-                      {selectedFundArray?.map((fund) => (
-                          <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
-                            style={{ whiteSpace: 'nowrap' }}
-                          >
-                            <div className="py-4 px-2 font-bold text-[20px] text-[#072C29]">
-                              <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}>{fund}<a href={generateDeleteFundUrl(fund)}><X className="mt-[3px] ml-1 text-gray-400" /></a></span>
-                            </div>
-                            <div className={`${selectedFundArray.indexOf(fund)%2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]' } border border-gray-300 rounded-[10px] text-[18px] text-gray-600 px-5 shadow-md w-full`}>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                              <p className="flex justify-center p-4">-</p>
-                            </div>
-                          </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>   
+                <OverView funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
               )}
               {selected === 'กราฟ' && (
                 <TradingViewWidget />
+              )}
+              {selected === 'ผลการดำเนินงานและปันผล' && (
+                <OperatingResults funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
+              )}
+              {selected === 'พอร์ตการลงทุน' && (
+                <Investment funds={selectedFundArray}  generateDeleteFundUrl={generateDeleteFundUrl} />
               )}
             </div>
           </div>

@@ -7,7 +7,7 @@ import lhfund from '../assets/lhFund.png';
 
 const navigation = [
   { icon: <LayoutDashboard size={30} className="m-1" />, text: "Dashboard", href: "/dashboard" },
-  { icon: <Handshake size={30} className="m-1" />, text: "Funds", href: "/funds" },
+  { icon: <Handshake size={30} className="m-1" />, text: "Funds", href: "/fund" },
   { icon: <LineChart size={30} className="m-1" />, text: "Chart", href: "/chart" },
   { icon: <Scale size={30} className="m-1" />, text: "Compare", href: "/compare" },
 ];
@@ -25,8 +25,8 @@ export default function Sidebar() {
   
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-white border-r shadow-lg">
-        <div className="p-4 pb-2 flex justify-between items-center border-b">
+      <nav className="h-full flex flex-col bg-white border-r shadow-lg pl-1 pr-1">
+        <div className="p-4 px-2 pb-2 flex justify-between items-center border-b">
           <img
             src={lhfund}
             className={`overflow-hidden transition-all ${
@@ -46,14 +46,14 @@ export default function Sidebar() {
             <a href={item.href} key={item.text}>
               <button
                 className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group
-                  ${ active === item.text ? "bg-gradient-to-tr from-[#1CA59B] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
+                  ${ active === item.text || (active === '' && item.text === 'Funds') ? "bg-gradient-to-tr from-[#1CA59B] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
                   `}
                   onClick={() => setActive(item.text)}
                   >
                 {item.icon}
                 <span
-                  className={`overflow-hidden transition-all flex px-4 ${
-                    expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
+                  className={`overflow-hidden transition-all flex  ${
+                    expanded ? "w-52 px-4 text-[1.1rem]" : "w-0"
                   }`}
                 >
                   {item.text}
