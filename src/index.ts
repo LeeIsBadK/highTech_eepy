@@ -12,7 +12,6 @@ app.get('/fund', async (req, res) => {
   const funds = await prisma.fund.findMany()
   res.json(funds)
 })
-
 //เอาอันที่ไอดีตรง
 app.get('/fund/:unique_id', async (req, res) => {
   try {
