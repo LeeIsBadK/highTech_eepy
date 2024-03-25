@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
 import Fund from '../Components/fund';
