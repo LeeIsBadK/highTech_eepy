@@ -94,7 +94,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
             fontFamily: "'Noto Sans Thai', sans-serif",
           }}
         >
-          <div className="max-w-4xl sm:px-4 lg:max-w-7xl lg:px-8">
+          <div className="sm:px-4 max-w-full lg:px-9">
             <div className="w-full bg-white sm:p-6 lg:p-8 rounded-[15px] shadow-md">
               <div className="w-full h-full flex pt-2 pb-3 sm:text-[10px] md:text-[13px] lg:text-[16px] font-medium text-[#999999]"
                 style={{ whiteSpace: 'nowrap' }}
