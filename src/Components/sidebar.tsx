@@ -1,22 +1,40 @@
 
-import { ChevronLast, ChevronFirst } from "lucide-react"
-import { useState } from "react"
+import { ChevronLast, ChevronFirst, LayoutDashboard, LineChart, Scale, MoreVertical, List } from "lucide-react"
+import { useState, useEffect, useContext } from "react"
 import lhfund from '../assets/lhFund.png';
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../loginComponent/context/AuthProvider";
 
 const navigation = [
-  { icon: <i className="uil uil-create-dashboard text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Dashboard", active: false },
-  { icon: <i className="uil uil-list-ul text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Funds", active: true},
-  { icon: <i className="uil uil-chart text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Chart", active: false},
-  { icon: <i className="uil uil-comparison text-[2rem] mt-[-8px] mb-[-5px] ml-[4px]"></i>, text: "Compare", active: false},
-]
+  { icon: <LayoutDashboard size={30} className="m-1" />, text: "Dashboard", href: "/dashboard" },
+  { icon: <List size={30} className="m-1" />, text: "Funds", href: "/fund" },
+  { icon: <LineChart size={30} className="m-1" />, text: "Chart", href: "/chart" },
+  { icon: <Scale size={30} className="m-1" />, text: "Compare", href: "/compare" },
+];
+
 
 export default function Sidebar() {
-  const [expanded, setExpanded] = useState(true)
+  const [expanded, setExpanded] = useState(true);
+  const [active, setActive] = useState<string>('');
+  const [showProfile, setShowProfile] = useState<boolean>(false);
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logout = async () => { //ยังไม่ได้
+    setAuth({});
+    navigate('/login');
+  }
+
+  useEffect(() => {
+    // Set the active state based on the current URL path
+    const currentPath = window.location.pathname;
+    setActive(navigation.find(item => currentPath.startsWith(item.href))?.text ?? '');
+  }, []); // Run this effect only once when the component mounts
   
   return (
-    <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-white border-r shadow-lg">
-        <div className="p-4 pb-2 flex justify-between items-center border-b">
+    <aside className="min-h-[100svh]">
+      <nav className="h-full flex flex-col bg-white border-r shadow-lg pl-1 pr-1">
+        <div className="p-4 px-2 pb-2 flex justify-between items-center border-b">
           <img
             src={lhfund}
             className={`overflow-hidden transition-all ${
@@ -26,41 +44,75 @@ export default function Sidebar() {
           />
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="p-1.5 my-5 rounded-lg bg-gray-50 hover:bg-gray-100"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
         </div>
         <div className="">
           {navigation.map((item) => (
-           <li
-           className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group
-             ${item.active ? "bg-gradient-to-tr from-[#1CA59B] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
-            `}
-            >
-           {item.icon}
-           <span
-             className={`overflow-hidden transition-all ${
-               expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
-             }`}
-           >
-             {item.text}
-           </span>
+            <a href={item.href} key={item.text}>
+              <button
+                className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
+                  ${ active === item.text ? "bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
+                  `}
+                  onClick={() => setActive(item.text)}
+                  >
+                {item.icon}
+                <span
+                  className={`overflow-hidden transition-all flex  ${
+                    expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
+                  }`}
+                >
+                  {item.text}
+                </span>
 
-           {!expanded && (
-             <div
-               className={`
-               absolute left-full rounded-md px-2 py-1 ml-6
-               bg-indigo-100 text-indigo-800 text-sm
-               invisible opacity-20 -translate-x-3 transition-all
-               group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 z-10
-              `}
-             >
-               {item.text}
-             </div>
-           )}
-         </li>
+                {!expanded && (
+                  <div
+                    className={`
+                    absolute left-full rounded-md px-2 py-1 ml-6
+                    bg-[#cdfaf6] text-[#14938a] text-sm
+                    invisible opacity-20 -translate-x-3 transition-all
+                    group-hover:visible group-hover:opacity-100 group-hover:translate-x-0 z-10
+                    `}
+                  >
+                    {item.text}
+                  </div>
+                )}
+              </button>
+            </a>
           ))}
+        </div>      
+        <div className="flex-grow" /> {/* This will push the user profile section to the bottom */}
+        <div className="border-t flex p-3 pb-4">
+          <img
+            src=""
+            alt=""
+            className="w-10 h-10 rounded-md bg-[#cdfaf6]"
+          />
+          <div
+            className={`
+              flex justify-between items-center
+              overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
+          `}
+          >
+            <div className="leading-4">
+              <h4 className="font-semibold">LHFund01</h4>
+              <span className="text-xs text-gray-600">LHFund01@gmail.com</span>
+            </div>
+            <button onClick={() => setShowProfile(!showProfile)}>
+              <MoreVertical size={20} />
+            </button>
+            <div className={`block absolute ml-[235px] z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-300 ease-in-out ${
+              showProfile ? 'max-w-[300px]' : 'max-w-[0px]'}`} 
+            >
+              <ul className="py-1.5 px-3">
+                <button onClick={logout} className="flex items-center h-[40px] w-full px-6 py-1 text-[1rem] text-gray-600 hover:bg-gray-200 rounded-[10px]" style={{ whiteSpace: 'nowrap' }}>
+                  Sign out
+                </button>
+              </ul>
+            </div>
+          </div>
         </div>
       </nav>
     </aside>

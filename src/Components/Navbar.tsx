@@ -1,6 +1,5 @@
 const Navbar = () => {
     return (
-        <>
             <div className="flex justify-between items-center min-w-120 h-20 pt-4 sm:h-20 sm:pt-0 bg-main" style={{ width: "100%" }}>
                 <div className="flex justify-between items-center" style={{ width: "100%" }}>
                     <div className="flex items-center" style={{ width: "100%" }}  >
@@ -32,7 +31,6 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </>
     );
 }
 export default Navbar;
