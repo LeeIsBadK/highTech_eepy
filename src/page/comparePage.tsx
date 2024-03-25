@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../Components/sidebar";
 import SearchBar from "../Components/search";
-import { CirclePlus, X, Search, HandCoins, PieChart, ReceiptText, LineChart, Coins } from "lucide-react";
-import TradingViewWidget from "../compareComponent/chart";
-import OverView from "../compareComponent/overview";
-import OperatingResults from "../compareComponent/operatingResults";
-import Investment from "../compareComponent/investment";
+import { CirclePlus, X, Search } from "lucide-react";
+import Detail from "../compareComponent/detail";
 
 interface Fund {
   id: number;
@@ -125,10 +122,10 @@ export const fundData = [
 const ComparePage = () => {
   const location = useLocation();
   const [selectedFundArray,setSelectedFundArray] = useState<string[]>([]);
-  const [selected,setSelected] = useState<string>('ภาพรวม');
   const [showAddFund,setShowAddFund] = useState<boolean>(false);
   const [showAddSearch,setShowAddSearch] = useState<boolean>(false);
   const [searchAddFund,setSearchAddFund] = useState<string>('');
+  const [filteredFunds, setFilteredFunds] = useState<Fund[]>([]);
 
   useEffect(() => {
     // Parse the query parameters
@@ -144,6 +141,12 @@ const ComparePage = () => {
     setSelectedFundArray(selectedFund ? selectedFund.split(",") : []);
     console.log(selectedFundArray); // Output: ["K-USXNDQ-A(A)", "KFLRMF", "SCBRM1", "K-CHANGE-A(A)"]
   }, [location.search]);
+
+  useEffect(() => {
+    // Filter out the funds that are already in selectedFundArray
+    const filtered = fundData.filter(fund => !selectedFundArray.includes(fund.name));
+    setFilteredFunds(filtered);
+  }, [selectedFundArray]);
 
   const generateDeleteFundUrl = (fund: string) => {
     const fundArrayCopy = selectedFundArray.filter((f) => f !== fund);
@@ -168,7 +171,7 @@ const ComparePage = () => {
           }}
         >
           <Sidebar />
-          <div className="w-full pl-2 pt-4 sm:pt-8 lg:pt-12 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100vh] overflow-y-auto">
+          <div className="w-full pl-2 pt-4 sm:pt-8 lg:pt-12 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100svh] overflow-y-auto">
             <div className="pl-8">
               <div className='flex max-w-2xl px-2 pb-4 mt-1 sm:px-6 sm:pb-8 sm:mt-2 lg:max-w-7xl lg:px-8 lg:pb-12'>
                 <h2 className="text-4xl font-bold tracking-tight text-[#072C29]">เปรียบเทียบกองทุน</h2>
@@ -177,7 +180,7 @@ const ComparePage = () => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center max-w-2xl ml-8 mb-6 py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white shadow-md rounded-[10px]">
+            <div className="flex items-center max-w-4xl ml-8 mb-6 py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white shadow-md rounded-[10px]">
               <div className="flex flex-wrap"
                 style={{ whiteSpace: 'nowrap' }}
               >
@@ -200,7 +203,7 @@ const ComparePage = () => {
                 <span className="text-[17px] px-1 font-bold text-[#072C29]">Add Fund</span>
               </button>
               {showAddFund && (
-                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 backdrop-filter backdrop-blur-[0px] flex items-center justify-center">
+                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center z-50">
                   <div className="bg-[#fafafa] p-6 rounded-lg shadow-lg min-w-[400px] w-[24vw] min-h-[225px] h-[25vh]"
                     style={{ whiteSpace: 'nowrap' }}
                   >
@@ -229,12 +232,12 @@ const ComparePage = () => {
                           }}/>
                         )}
                       </button>
-                      <div className={`block absolute px-12 mt-[50px] z-10 bg-white rounded-[5px] shadow-md overflow-y-auto ${
+                      <div className={`block absolute px-12 ml-[-8px] mt-[50px] z-10 bg-white rounded-[5px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out  ${
                           showAddSearch ? 'max-h-[25vh]' : 'max-h-0'
                         }`}>
-                        <ul className="py-2 pr-7 min-w-[175px] w-[12.5vw]">
-                          {fundData.map((fund) => (
-                            <button key={fund.id} className="flex items-center min-h-[44px] h-[5vh] w-full px-4 py-2 text-[1.05rem] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
+                        <ul className="py-2 pr-6 min-w-[175px] w-[12.5vw]">
+                          {filteredFunds.map((fund) => (
+                            <button key={fund.id} className="flex items-center min-h-[44px] h-[4.6vh] w-full px-4 py-2 text-[1rem] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
                               onClick={() => {
                                 setSearchAddFund(fund.name)
                                 setShowAddSearch(false)
@@ -246,7 +249,7 @@ const ComparePage = () => {
                         </ul>
                       </div>
                     </div>
-                    <div className="flex py-4">
+                    <div className="flex py-2">
                       <div className="flex">
                         <span className="mr-1 text-[14px]">ตอนนี้มี:</span>
                         <div className="flex flex-wrap text-[14px]">
@@ -260,7 +263,7 @@ const ComparePage = () => {
                           ))}
                         </div>
                       </div>
-                      <button className="ml-auto flex px-2">
+                      <button className="ml-auto flex px-2 pt-1">
                         <a href={generateAddFundUrl(searchAddFund)}><span className="text-[18px] ml-auto shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-3 py-1.5 hover:bg-[#116564] hover:text-gray-100">Add</span></a>
                       </button>
                     </div>
@@ -268,44 +271,7 @@ const ComparePage = () => {
                 </div>
               )}
             </div>
-            <div className="flex items-center max-w-2xl ml-8 pt-7 sm:px-3 lg:max-w-7xl lg:px-5">
-              <div className="border-b border-b-2 w-full">
-                <button className={`${selected === 'ภาพรวม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-                  onClick={() => setSelected('ภาพรวม')}>
-                  <span className="flex items-center"><ReceiptText size={19} className="mr-[5px]" />ภาพรวม</span>
-                </button>
-                <button className={`${selected === 'กราฟ' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-                  onClick={() => setSelected('กราฟ')}>
-                  <span className="flex items-center"><LineChart size={19} className="mr-[5px]"/>กราฟ</span>
-                </button>
-                <button className={`${selected === 'ผลการดำเนินงานและปันผล' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-                  onClick={() => setSelected('ผลการดำเนินงานและปันผล')}>
-                  <span className="flex items-center"><HandCoins size={19} className="mr-[5px]" />ผลการดำเนินงานและปันผล</span>
-                </button>
-                <button className={`${selected === 'พอร์ตการลงทุน' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-                  onClick={() => setSelected('พอร์ตการลงทุน')}>
-                  <span className="flex items-center"><PieChart size={19} className="mr-[5px]" />พอร์ตการลงทุน</span>
-                </button>
-                <button className={`${selected === 'ค่าธรรมเนียม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-                  onClick={() => setSelected('ค่าธรรมเนียม')}>
-                  <span className="flex items-center"><Coins size={19} className="mr-[5px]" />ค่าธรรมเนียม</span>
-                </button>
-              </div>
-            </div>
-            <div className="h-full max-w-2xl ml-8 py-8 sm:px-6 lg:max-w-7xl lg:px-8">
-              {selected === 'ภาพรวม' && (
-                <OverView funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
-              )}
-              {selected === 'กราฟ' && (
-                <TradingViewWidget />
-              )}
-              {selected === 'ผลการดำเนินงานและปันผล' && (
-                <OperatingResults funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
-              )}
-              {selected === 'พอร์ตการลงทุน' && (
-                <Investment funds={selectedFundArray}  generateDeleteFundUrl={generateDeleteFundUrl} />
-              )}
-            </div>
+            <Detail selectedFundArray={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />               
           </div>
         </div>
       );

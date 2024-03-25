@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
 import Fund from '../Components/fund';
-import Favorite from '../Components/favorite';
+import Favorite from '../fundDetailComponent/favorite';
+import { useLocation } from 'react-router-dom';
+import Detail from '../fundDetailComponent/detail';
+import { Clock, Triangle } from 'lucide-react';
+import Compare from '../fundDetailComponent/compare';
 
 interface Fund {
     id: number;
@@ -21,7 +24,7 @@ interface Fund {
       id: 1,
       name: 'ASP-DIGIBLOC-SSF',
       detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม',
-      href: '/fund/ASP-DIGIBLOC-SSF',
+      href: '#',
       risk: 6,
       type: 'SSFEQ',
       value: 8.4301,
@@ -31,7 +34,7 @@ interface Fund {
       id: 2,
       name: 'ASP-DIGIBLOCRMF',
       detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการเลี้ยงชีพ',
-      href: '/fund/ASP-DIGIBLOCRMF',
+      href: '#',
       risk: 1,
       type: 'RMFEQ',
       value: 7.7214,
@@ -41,7 +44,7 @@ interface Fund {
       id: 3,
       name: 'ASP-DIGIBLOC',
       detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน',
-      href: '/fund/ASP-DIGIBLOC',
+      href: '#',
       risk: 3,
       type: 'FIFEQ',
       value: 7.4037,
@@ -51,7 +54,7 @@ interface Fund {
       id: 4,
       name: 'LHBLOCKCHAIN',
       detail: 'กองทุนเปิด แอล เอช บล็อกเชน',
-      href: '/fund/LHBLOCKCHAIN',
+      href: '#',
       risk: 2,
       type: 'MIXFLEX',
       value: 9.8522,
@@ -61,7 +64,7 @@ interface Fund {
       id: 5,
       name: 'SCBSEMI(SSFE)',
       detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดเพื่อการออมผ่านช่องทางอิเล็กทรอนิกส์)',
-      href: '/fund/SCBSEMI(SSFE)',
+      href: '#',
       risk: 4,
       type: 'SSFEQ',
       value: 15.5487,
@@ -71,7 +74,7 @@ interface Fund {
       id: 6,
       name: 'SCBSEMI(E)',
       detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดช่องทางอิเล็กทรอนิกส์)',
-      href: '/fund/SCBSEMI(E)',
+      href: '#',
       risk: 5,
       type: 'RMFEQ',
       value: 15.7053,
@@ -81,7 +84,7 @@ interface Fund {
       id: 7,
       name: 'SCBSEMI(P)',
       detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดผู้ลงทุนกลุ่ม/บุคคล)',
-      href: '/fund/SCBSEMI(P)',
+      href: '#',
       risk: 7,
       type: 'FIFEQ',
       value: 15.2816,
@@ -91,7 +94,7 @@ interface Fund {
       id: 8,
       name: 'KT-BLOCKCHAIN-A',
       detail: 'กองทุนเปิดเคแทม Blockchain Economy (ชนิดสะสมมูลค่า)',
-      href: '/fund/KT-BLOCKCHAIN-A',
+      href: '#',
       risk: 6,
       type: 'FIFEQ',
       value: 10.7280,
@@ -101,7 +104,7 @@ interface Fund {
       id: 9,
       name: 'TNEXTGEN-SSF',
       detail: 'กองทุนเปิด ทิสโก้ Next Generation Internet ชนิดหน่วยลงทุนเพื่อการออม',
-      href: '/fund/TNEXTGEN-SSF',
+      href: '#',
       risk: 8,
       type: 'SSFEQ',
       value: 6.5763,
@@ -111,7 +114,7 @@ interface Fund {
       id: 10,
       name: 'KKP TECH-H-SSF',
       detail: 'กองทุนเปิดเคเคพี EXPANDED TECH - HEDGED ชนิดเพื่อการออม',
-      href: '/fund/KKP TECH-H-SSF',
+      href: '#',
       risk: 1,
       type: 'SSFEQ',
       value: 15.1590,
@@ -119,22 +122,15 @@ interface Fund {
     }
   ]
 
-const FundPage = () => {
-  /*const [fundData2, setFundData2] = useState<string[]>([]);
+const FundDetailPage = () => {
+  const location = useLocation();
+  const [fund, setFund] = useState<string>('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/filter/product?searchString=Viet&take=20&skip=&orderBy=asc');
-        setFundData2(response.data); // Assuming the API response is an array of fund objects
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+    const url = location.pathname; // Get the current pathname from the location object
+    setFund(url.split('/fund/')[1]); // Extract the data after '/fund/' from the URL
+  }, [location.pathname]); // Run the effect whenever the pathname changes
 
-    fetchData();
-  }, []);
-  console.log(fundData2);*/
 
     return (
         <div className="flex"
@@ -150,15 +146,33 @@ const FundPage = () => {
                 <div className="ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]}/>
                 </div>
-                <div className="ml-auto pl-4">
-                  <Favorite />
+              </div>
+            </div>
+            <div className="flex items-center max-w-4xl ml-8 mb-6 py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white shadow-md rounded-[10px]">
+              <div className='px-2 w-full'>
+                <div className='flex'>
+                  <div>
+                    <h2 className="text-[23px] py-1 font-bold text-[#072C29]">{fund}</h2>
+                    <span className='py-1 text-gray-400 text-[18px]'>กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม</span>
+                  </div>
+                  <div className='flex flex-col items-end ml-auto'>
+                    <span className='flex items-center px-2 text-[24px] font-bold text-[#072C29]'><Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px]'/>8.4301</span>
+                    <span className='px-2 text-[18px] font-semibold text-[#00bc91]'>+ 0.9027</span>
+                  </div>
+                </div>
+                <div className='flex'>
+                  <div className='pb-1 pt-5 flex space-x-6'>
+                    <Favorite />
+                    <Compare />
+                  </div>
+                  <span className='flex ml-auto items-center pt-5 px-2 py-1 text-[16px] text-gray-400'><Clock size={18} className='mr-[6px]'/> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
                 </div>
               </div>
             </div>
-            <Fund funds={fundData as Fund[]}/>
+            <Detail selectedFundArray={[fund]} />
           </div>
         </div>
       );
 }
 
-export default FundPage;
+export default FundDetailPage;

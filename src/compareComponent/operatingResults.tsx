@@ -1,12 +1,12 @@
 import { X } from 'lucide-react';
 
-interface OverviewProps {
+interface OperatingResultsProps {
   funds: Array<string>;
   generateDeleteFundUrl: (fund: string) => string;
 }
 
 
-const OperatingResults = ({funds, generateDeleteFundUrl}: OverviewProps) => {
+const OperatingResults = ({funds, generateDeleteFundUrl}: OperatingResultsProps) => {
     return (
         <div className="pb-[60px]">
             <div className="flex">
