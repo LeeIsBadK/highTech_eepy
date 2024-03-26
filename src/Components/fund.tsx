@@ -94,59 +94,61 @@ const Fund = ({funds}: { funds: Array<any> }) => {
             fontFamily: "'Noto Sans Thai', sans-serif",
           }}
         >
-          <div className="sm:px-4 max-w-full lg:px-9">
+          <div className="sm:px-5 max-w-full lg:px-9">
             <div className="w-full bg-white sm:p-6 lg:p-8 rounded-[15px] shadow-md">
               <div className="w-full h-full flex pt-2 pb-3 sm:text-[10px] md:text-[13px] lg:text-[16px] font-medium text-[#999999]"
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <span className="flex  sm:min-w-[70px] md:min-w-[85px] lg:min-w-[100px]">
-                  เปรียบเทียบ
-                </span>
-                <span className="flex sm:min-w-[150px] md:min-w-[165px] lg:min-w-[180px] w-[15vw]">
-                  ชื่อกองทุน
-                  {((sort === 'name' && sortNum !== 2) || sort !== 'name') && (
-                    <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} mt-[-0.5px] lg:mt-[4px] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
-                  )}
-                  {sort === 'name' && sortNum === 2 && (
-                    <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
-                  )}
-                </span>
-                <span className="flex sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[8vw] mr-auto ml-auto pl-9">
-                  ความเสี่ยง
-                  {((sort === 'risk' && sortNum !== 2) || sort !== 'risk') && (
-                    <CircleChevronDown size={17} className={`${sort === 'risk' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px] `} onClick={() => handleSort('risk')}/>
-                  )}
-                  {sort === 'risk' && sortNum === 2 && (
-                    <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('risk')}/>
-                  )}
-                </span>
-                <span className="flex sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[9vw] mr-auto ml-auto">
-                  ประเภทกองทุน
-                  {((sort === 'type' && sortNum !== 2) || sort !== 'type') && (
-                    <CircleChevronDown size={17} className={`${sort === 'type' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('type')}/>
-                  )}
-                  {sort === 'type' && sortNum === 2 && (
-                    <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('type')}/>
-                  )}
-                </span>
-                <span className="flex sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[8vw] mr-auto ml-auto pl-1">
-                  NAV
-                  {((sort === 'value' && sortNum !== 2) || sort !== 'value') && (
-                    <CircleChevronDown size={17} className={`${sort === 'value' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('value')}/>
-                  )}
-                  {sort === 'value' && sortNum === 2 && (
-                    <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('value')}/>
-                  )}
-                </span>
-                <span className="flex sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[8vw] mr-auto ml-auto">
-                  ผลตอบแทน (%)
-                  {((sort === 'returns' && sortNum !== 2) || sort !== 'returns') && (
-                    <CircleChevronDown size={17} className={`${sort === 'returns' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('returns')}/>
-                  )}
-                  {sort === 'returns' && sortNum === 2 && (
-                    <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('returns')}/>
-                  )}
-                </span>
+                <div className="w-full grid grid-cols-12 gap-x-10">
+                  <span className="flex items-center justify-center">
+                    เปรียบเทียบ
+                  </span>
+                  <span className="flex col-span-3">
+                    ชื่อกองทุน
+                    {((sort === 'name' && sortNum !== 2) || sort !== 'name') && (
+                      <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} mt-[-0.5px] lg:mt-[4px] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
+                    )}
+                    {sort === 'name' && sortNum === 2 && (
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
+                    )}
+                  </span>
+                  <span className="flex col-span-2 justify-center items-center">
+                    ความเสี่ยง
+                    {((sort === 'risk' && sortNum !== 2) || sort !== 'risk') && (
+                      <CircleChevronDown size={17} className={`${sort === 'risk' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px] `} onClick={() => handleSort('risk')}/>
+                    )}
+                    {sort === 'risk' && sortNum === 2 && (
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('risk')}/>
+                    )}
+                  </span>
+                  <span className="flex col-span-2 justify-center items-center">
+                    ประเภทกองทุน
+                    {((sort === 'type' && sortNum !== 2) || sort !== 'type') && (
+                      <CircleChevronDown size={17} className={`${sort === 'type' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('type')}/>
+                    )}
+                    {sort === 'type' && sortNum === 2 && (
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('type')}/>
+                    )}
+                  </span>
+                  <span className="flex col-span-2 justify-center items-center">
+                    NAV
+                    {((sort === 'value' && sortNum !== 2) || sort !== 'value') && (
+                      <CircleChevronDown size={17} className={`${sort === 'value' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('value')}/>
+                    )}
+                    {sort === 'value' && sortNum === 2 && (
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('value')}/>
+                    )}
+                  </span>
+                  <span className="flex col-span-2 justify-center items-center">
+                    ผลตอบแทน (%)
+                    {((sort === 'returns' && sortNum !== 2) || sort !== 'returns') && (
+                      <CircleChevronDown size={17} className={`${sort === 'returns' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('returns')}/>
+                    )}
+                    {sort === 'returns' && sortNum === 2 && (
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('returns')}/>
+                    )}
+                  </span>
+                </div>
               </div>
               <div className="max-h-[69svh] overflow-y-auto">
                 {showFunds.map((fund) => (
@@ -154,36 +156,38 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                     <div className="h-full w-full flex justify-between">
                       <div className="w-full">
                         <div className="w-full h-full flex items-center">
-                          <div className={`py-2 mt-[-5px] sm:min-w-[70px] md:min-w-[85px] lg:min-w-[100px] h-full`}>
-                            <div className="ml-7 h-full flex flex-col justify-between">
-                              <button className={`${selectedFund.includes(fund.name) ? 'bg-[#1CA59B] border border-[#1CA59B]' : 'border border-2 border-gray-400'} 
-                                                  flex items-center justify-center sm:h-[14px] sm:w-[14px] md:h-[16px] md:w-[16px] lg:h-[18px] lg:w-[18px] rounded-[5px] transition-all duration-250 ease-in-out transition ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125`}
-                                onClick={() => handleFundClick(fund.name)}>
-                                <Check className={`${selectedFund.includes(fund.name) ? 'scale-100' : ''} text-white transform scale-0 transition-all duration-200 ease-in-out`}/>
-                              </button>
-                              <button className="mt-4 w-[20px] transition duration-250 ease-in-out delay-100 hover:-translate-y-[0px] hover:scale-125" onClick={() => handleFavorite(fund.name)}>
-                                <Star 
-                                  size={22} 
-                                  fill={selectedFavorite.includes(fund.name) ? "#ffea00" : "none"} 
-                                  className={`${selectedFavorite.includes(fund.name) ? "text-[#faea00]" : "text-gray-400"} sm:h-[18px] sm:w-[18px] md:h-[20px] md:w-[20px] lg:h-[22px] lg:w-[22px] mt-auto ml-[-2px] transition-colors duration-250 ease-in-out`}
-                                />
-                              </button>
+                          <div className="w-full grid grid-cols-12 gap-x-10">
+                            <div className='flex items-center justify-center h-full'>
+                              <div className="px-2 h-full flex flex-col justify-between">
+                                <button className={`${selectedFund.includes(fund.name) ? 'bg-[#1CA59B] border border-[#1CA59B]' : 'border border-2 border-gray-400'} 
+                                                    flex items-center justify-center sm:h-[14px] sm:w-[14px] md:h-[16px] md:w-[16px] lg:h-[18px] lg:w-[18px] rounded-[5px] transition-all duration-250 ease-in-out transition ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125`}
+                                  onClick={() => handleFundClick(fund.name)}>
+                                  <Check className={`${selectedFund.includes(fund.name) ? 'scale-100' : ''} text-white transform scale-0 transition-all duration-200 ease-in-out`}/>
+                                </button>
+                                <button className="mt-4 w-[20px] transition duration-250 ease-in-out delay-100 hover:-translate-y-[0px] hover:scale-125" onClick={() => handleFavorite(fund.name)}>
+                                  <Star 
+                                    size={22} 
+                                    fill={selectedFavorite.includes(fund.name) ? "#ffea00" : "none"} 
+                                    className={`${selectedFavorite.includes(fund.name) ? "text-[#faea00]" : "text-gray-400"} sm:h-[18px] sm:w-[18px] md:h-[20px] md:w-[20px] lg:h-[22px] lg:w-[22px] mt-auto ml-[-2px] transition-colors duration-250 ease-in-out`}
+                                  />
+                                </button>
+                              </div>
                             </div>
+                            <div className="flex col-span-3 sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">
+                              <a href={fund.href}>
+                                <span className="pt-1">{fund.name}</span>
+                                <span className="sm:text-[9px] md:text-[12px] lg:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.detail}</span>
+                              </a>
+                            </div> 
+                            <div className='flex col-span-2 justify-center items-center'>
+                              <p className='sm:text-[14px] md:text-[17px] lg:text-[20px] font-semibold px-[11px] py-[2px] border sm:w-[36px] lg:w-[37px] border-2 rounded-md' style={{color:`${riskColor[fund.risk]}`,borderColor:`${riskColor[fund.risk]}`}}>{fund.risk}</p>
+                            </div>
+                            <div className="flex col-span-2 justify-center items-center">
+                              <p className="sm:px-3 lg:px-4 py-[2px] items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold">{fund.type}</p>
+                            </div>
+                            <p className="flex col-span-2 justify-center items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] sm:px-0 lg:px-2">{fund.value}</p>
+                            <p className="flex col-span-2 justify-center items-center mr-auto ml-auto sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] ml-auto sm:px-4 lg:px-8">{fund.returns}</p>
                           </div>
-                          <h3 className="flex sm:min-w-[150px] md:min-w-[165px] lg:min-w-[180px] w-[15vw] sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">
-                            <a href={fund.href}>
-                              <span className="pt-1">{fund.name}</span>
-                              <span className="sm:text-[9px] md:text-[12px] lg:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.detail}</span>
-                            </a>
-                          </h3> 
-                          <div className={`sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[8vw] sm:pl-[44px] lg:pl-[54px] mr-auto ml-auto`}>
-                            <p className={`sm:text-[14px] md:text-[17px] lg:text-[20px] font-semibold px-[11px] py-[2px] border sm:w-[36px] lg:w-[37px] border-2 rounded-md `} style={{color:`${riskColor[fund.risk]}`,borderColor:`${riskColor[fund.risk]}`}}>{fund.risk}</p>
-                          </div>
-                          <div className="sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[9vw] mr-auto ml-auto">
-                            <p className="sm:px-3 lg:px-4 py-[2px] items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold">{fund.type}</p>
-                          </div>
-                          <p className="sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[8vw] mr-auto ml-auto sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] sm:px-0 lg:px-2">{fund.value}</p>
-                          <p className="sm:min-w-[110px] md:min-w-[125px] lg:min-w-[140px] w-[8vw] mr-auto ml-auto sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] ml-auto sm:px-4 lg:px-8">{fund.returns}</p>
                         </div>
                       </div>
                     </div>
