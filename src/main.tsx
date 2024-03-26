@@ -1,11 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { AuthProvider } from './loginComponent/context/AuthProvider';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
 import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './loginComponent/context/AuthProvider.tsx';
 
-ReactDOM.render(
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
@@ -13,5 +14,4 @@ ReactDOM.render(
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
-);
+)
