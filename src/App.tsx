@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import FundPage from './page/fundPage';
 import ComparePage from './page/comparePage';
 import DashboardPage from './page/dashboardPage';
@@ -7,7 +7,6 @@ import ChartPage from './page/chartPage';
 import LoginPage from './page/loginPage';
 import RequireAuth from './loginComponent/RequireAuth';
 import FundDetailPage from './page/fundDetailPage';
-import Layout from './page/layout';
 import Missing from './page/missingPage';
 import RegisterPage from './page/registerPage';
 import CheckLogin from './loginComponent/checkLogin';
@@ -15,8 +14,7 @@ import CheckLogin from './loginComponent/checkLogin';
 
 const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
+      <Routes>
         {/* public routes */}
         <Route element={<CheckLogin />}>
           <Route path="/login" element={<LoginPage />} />
@@ -47,8 +45,7 @@ const App: React.FC = () => {
 
         {/* catch all */}
         <Route path="*" element={<Missing />} />
-      </Route>
-    </Routes>
+      </Routes>
   );
 };
 
