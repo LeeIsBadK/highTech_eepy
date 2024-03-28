@@ -18,7 +18,6 @@ const App: React.FC = () => {
   
   return (
       <Routes>
-        <Route path="/" element={<Layout />}>
           {/* public routes */}
           <Route element={<CheckLogin />}>
             <Route path="/login" element={<LoginPage />} />
@@ -49,7 +48,6 @@ const App: React.FC = () => {
 
           {/* catch all */}
           <Route path="*" element={<Missing />} />
-        </Route>
       </Routes>
   );
 };
