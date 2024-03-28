@@ -17,7 +17,7 @@ const defaultState = {
         pwd: '',
         accessToken: ''
     },
-    setAuth: (auth: Auth) => {}
+    setAuth: () => {}
 } as AuthContextType
 
 const AuthContext = createContext(defaultState);
