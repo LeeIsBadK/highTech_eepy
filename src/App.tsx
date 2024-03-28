@@ -8,7 +8,6 @@ import LoginPage from './page/loginPage';
 import FundDetailPage from './page/fundDetailPage';
 import Missing from './page/missingPage';
 import RegisterPage from './page/registerPage';
-import Layout from './page/layout';
 import RequireAuth from './loginComponent/RequireAuth';
 import CheckLogin from './loginComponent/checkLogin';
 
