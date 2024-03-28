@@ -1,15 +1,38 @@
 import { createContext, useState, ReactNode } from "react";
 
-interface AuthContextType {
-    auth: any;
+export type Auth = {
+    user: string;
+    pwd: string;
+    accessToken: string;
+}
+
+export interface AuthContextType {
+    auth: Auth;
     setAuth: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const AuthContext = createContext<AuthContextType>({ auth: {}, setAuth: () => {} });
+const defaultState = {
+    auth: {
+        user: '',
+        pwd: '',
+        accessToken: ''
+    },
+    setAuth: (auth: Auth) => {}
+} as AuthContextType
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [auth, setAuth] = useState<any>({});
-    console.log(children);
+const AuthContext = createContext(defaultState);
+
+type AuthProviderProps = {
+    children: ReactNode
+}
+
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+    const [auth, setAuth] = useState<Auth>({
+        user: '',
+        pwd: '',
+        accessToken: ''
+    });
+
     return (
         <AuthContext.Provider value={{ auth, setAuth }}>
             {children}

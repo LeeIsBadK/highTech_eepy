@@ -1,6 +1,7 @@
 import {riskColor} from "../assets/color";
 import { useState , useRef, useEffect } from "react";
 import { Check, X ,CornerRightDown, Star, CircleChevronDown, CircleChevronUp } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 const Fund = ({funds}: { funds: Array<any> }) => {
   const [selectedFund, setSelectedFund] = useState<string[]>([]);
@@ -169,18 +170,18 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                                 </button>
                               </div>
                             </div>
-                            <a href={fund.href} className="col-span-4 hover:bg-gray-100 p-2 rounded-[10px] sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">
+                            <Link to={fund.href} className="col-span-4 hover:bg-gray-100 p-2 rounded-[10px] sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">
                                 <span className="pt-1">{fund.name}</span>
                                 <span className="sm:text-[9px] md:text-[12px] lg:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.detail}</span>
-                            </a>
+                            </Link>
                             <div className='flex col-span-1 justify-center items-center'>
                               <p className='sm:text-[14px] md:text-[17px] lg:text-[20px] font-semibold px-[11px] py-[2px] border sm:w-[36px] lg:w-[37px] border-2 rounded-md' style={{color:`${riskColor[fund.risk]}`,borderColor:`${riskColor[fund.risk]}`}}>{fund.risk}</p>
                             </div>
-                            <a href={fund.href} className="col-span-2 flex justify-center items-center">
+                            <Link to={fund.href} className="col-span-2 flex justify-center items-center">
                                 <p className="sm:px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold">{fund.type}</p>
-                            </a>
-                            <p className="flex col-span-2 justify-center items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] sm:px-0 lg:px-2">{fund.value}</p>
-                            <p className="flex col-span-2 justify-center items-center mr-auto ml-auto sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] ml-auto sm:px-4 lg:px-8">{fund.returns}</p>
+                            </Link>
+                            <p className="flex col-span-2 justify-center items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">{fund.value}</p>
+                            <p className="flex col-span-2 justify-center items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">{fund.returns}</p>
                           </div>
                         </div>
                       </div>
@@ -209,9 +210,9 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                   ))}
                 </div>
                 <button className="ml-auto flex">
-                  <a href={generateCompareUrl()} className="py-2">
+                  <Link to={generateCompareUrl()} className="py-2">
                   <span className="sm:text-[12px] md:text-[15px] lg:text-[18px] text-white font-bold bg-[#072C29] rounded-[5px] px-2 py-1.5 hover:bg-[#116564] hover:text-gray-100">เปรียบเทียบ</span>
-                  </a>
+                  </Link>
                 </button>
               </div>
             )}

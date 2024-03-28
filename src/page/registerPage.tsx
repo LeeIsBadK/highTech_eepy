@@ -27,6 +27,8 @@ const RegisterPage: React.FC = () => {
     const [errMsg, setErrMsg] = useState<string>('');
     const [success, setSuccess] = useState<boolean>(false);
 
+    const [clickButton, setClickButton] = useState<boolean>(false);
+
     useEffect(() => {
         if (userRef.current) {
             userRef.current.focus();
@@ -82,6 +84,7 @@ const RegisterPage: React.FC = () => {
             if (errRef.current) {
                 errRef.current.focus();
             }
+            setClickButton(false);
         }
     }
 
@@ -95,26 +98,26 @@ const RegisterPage: React.FC = () => {
             {success ? (
                 <div className="max-w-md w-full space-y-4 bg-white shadow-xl rounded-[10px] pt-6 px-10 pb-10 mt-8">
                     <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">สมัครสมาชิกสำเร็จ</h2>
-                    <Check size={120} className="flex w-full items-center text-[#00bc91]"/>
+                    <Check size={120} className="flex w-full items-center text-[#00bc91]" />
                     <div className="py-1">
-                        <a href="/login">
-                            <button 
-                                    type="submit"
-                                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-[16px] sm:text-[14px] lg:text-[18px] font-medium rounded-md shadow-md text-white bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        <Link to="/login">
+                            <button
+                                type="submit"
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-[16px] sm:text-[14px] lg:text-[18px] font-medium rounded-md shadow-md text-white bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 เข้าสู่ระบบ
                             </button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
-            
+
             ) : (
                 <div className="max-w-md w-full space-y-8 bg-white shadow-xl rounded-[10px] p-6 mt-8">
                     <p ref={errRef} className={errMsg ? "bg-[#ffb6b7] text-[#b22222] font-bold py-2 px-4 mb-2 rounded-[5px]" : " "} aria-live="assertive">{errMsg}</p>
                     <div>
                         <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">สมัครสมาชิก</h2>
                     </div>
-                    <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+                    <form className="mt-8 space-y-6">
                         <div>
                             <div>
                                 <label htmlFor="username">ชื่อผู้ใช้:</label>
@@ -133,7 +136,7 @@ const RegisterPage: React.FC = () => {
                                     className="appearance-none relative block w-full mt-1 mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-[#1CA59B] focus:z-10 text-[16px] sm:text-[14px] lg:text-[18px]"
                                 />
                                 <p id="uidnote" className={userFocus && user && !validName ? "text-[14px] rounded-md bg-gray-300 px-1 py-1 relative" : "hidden"}>
-                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1"/> 4 to 24 characters.</span>
+                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" /> 4 to 24 characters.</span>
                                     Must begin with a letter.<br />
                                     Letters, numbers, underscores, hyphens allowed.
                                 </p>
@@ -153,9 +156,8 @@ const RegisterPage: React.FC = () => {
                                     className="appearance-none relative block w-full mt-1 mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-[#1CA59B] focus:z-10 text-[16px] sm:text-[14px] lg:text-[18px]"
                                 />
                                 <p id="pwdnote" className={pwdFocus && !validPwd ? "text-[14px] rounded-md bg-gray-300 px-1 py-1 relative" : "hidden"}>
-                                <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1"/>8 to 24 characters.</span>
-                                Must include uppercase and lowercase letters, a number and a special character.<br />
-                                Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" />8 to 24 characters.</span>
+                                    Must include uppercase and lowercase letters, a number and a special character.<br />
                                 </p>
                             </div>
                             <div className="mt-3">
@@ -173,17 +175,33 @@ const RegisterPage: React.FC = () => {
                                     className="appearance-none relative block w-full mt-1 mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-[#1CA59B] focus:z-10 text-[16px] sm:text-[14px] lg:text-[18px]"
                                 />
                                 <p id="confirmnote" className={matchFocus && !validMatch ? "text-[14px] rounded-md bg-gray-300 px-1 py-1 relative" : "hidden"}>
-                                <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1"/>Must match the first password input field.</span>
+                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" />Must match the first password input field.</span>
                                 </p>
                             </div>
-                        </div> 
-                        <button 
-                            type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-[16px] sm:text-[14px] lg:text-[18px] font-medium rounded-md shadow-md text-white bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            disabled={!validName || !validPwd || !validMatch ? true : false}
-                        >
-                            สมัครสมาชิก
-                        </button>
+                        </div>
+                        {!clickButton ? (
+                            <button
+                                type="submit"
+                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-[16px] sm:text-[14px] lg:text-[18px] font-medium rounded-md shadow-md text-white bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                disabled={!validName || !validPwd || !validMatch ? true : false}
+                                onClick={(e:any) => {
+                                    e.preventDefault();
+                                    setClickButton(true);
+                                    handleSubmit(e);
+                                }}
+                            >
+                                สมัครสมาชิก
+                            </button>
+                        ) : (
+                            <span className='flex w-full flex justify-center py-2 px-4 border border-transparent md:text-[16px] sm:text-[14px] lg:text-[18px] font-medium rounded-md shadow-md text-white bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B]'>
+                                <svg className="animate-spin -ml-1 mt-[3px] mr-[10px] h-[22px] w-[22px] text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path className="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                กำลังสมัครสมาชิก...
+                            </span>
+                        )
+                        }
                     </form>
                     <p>
                         เป็นสมาชิกอยู่แล้ว?<br />

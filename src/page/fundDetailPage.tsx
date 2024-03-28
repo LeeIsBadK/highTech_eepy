@@ -3,7 +3,7 @@ import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
 import Fund from '../Components/fund';
 import Favorite from '../fundDetailComponent/favorite';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Detail from '../fundDetailComponent/detail';
 import { ChevronLeft, Clock, Triangle } from 'lucide-react';
 import Compare from '../fundDetailComponent/compare';
@@ -143,7 +143,7 @@ const FundDetailPage: React.FC = () => {
           <div className="w-full sm:px-12 px-16 pt-4 sm:pt-7 lg:pt-11 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100svh] overflow-y-auto">
             <div className='pb-4 mt-1 sm:pb-8 sm:mt-2 lg:pb-12'>
               <div className="grid grid-cols-4 gap-x-10 items-center">
-                <h2 className="flex items-center sm:text-[22px] md:text-[26px] lg:text-[32px] font-bold tracking-tight text-[#072C29]"><a href='/fund'><ChevronLeft size={36} className='mr-4'/></a>รายละเอียดกองทุน</h2>
+                <h2 className="flex items-center sm:text-[22px] md:text-[26px] lg:text-[32px] font-bold tracking-tight text-[#072C29]"><Link to='/fund'><ChevronLeft size={36} className='mr-4'/></Link>รายละเอียดกองทุน</h2>
                 <div className="col-span-2 ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]}/>
                 </div>

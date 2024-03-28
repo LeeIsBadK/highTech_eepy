@@ -1,9 +1,11 @@
+import { useContext } from 'react';
 import axios from '../api/axios';
-import useAuth from './useAuth';
+import AuthContext from '../context/AuthProvider';
+
 type RefreshFunction = () => Promise<string>;
 
 const useRefreshToken: () => RefreshFunction = () => {
-    const { auth, setAuth } = useAuth();
+    const { auth, setAuth } = useContext(AuthContext);
 
     console.log(auth)
     const refresh: RefreshFunction = async () => {

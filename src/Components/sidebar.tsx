@@ -2,7 +2,7 @@
 import { ChevronLast, ChevronFirst, LayoutDashboard, LineChart, Scale, MoreVertical, List } from "lucide-react"
 import { useState, useEffect, useContext } from "react"
 import lhfund from '../assets/lhFund.png';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../loginComponent/context/AuthProvider";
 
 const navigation = [
@@ -18,10 +18,10 @@ const Sidebar: React.FC = () => {
   const [expanded, setExpanded] = useState(true);
   const [active, setActive] = useState<string>('');
   const [showProfile, setShowProfile] = useState<boolean>(false);
-  const { setAuth } = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = async () => { //ยังไม่ได้
+  const handleLogout = async () => { 
     setAuth({});
     navigate('/login');
   }
@@ -52,7 +52,7 @@ const Sidebar: React.FC = () => {
         </div>
         <div className="">
           {navigation.map((item) => (
-            <a href={item.href} key={item.text}>
+            <Link to={item.href} key={item.text}>
               <button
                 className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
                   ${ active === item.text ? "bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
@@ -81,7 +81,7 @@ const Sidebar: React.FC = () => {
                   </div>
                 )}
               </button>
-            </a>
+            </Link>
           ))}
         </div>      
         <div className="flex-grow" /> {/* This will push the user profile section to the bottom */}
@@ -97,14 +97,13 @@ const Sidebar: React.FC = () => {
               overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "w-52 ml-3" : "w-0"}
           `}
           >
-            <div className="leading-4">
-              <h4 className="font-semibold">LHFund01</h4>
-              <span className="text-xs text-gray-600">LHFund01@gmail.com</span>
+            <div className="px-2 w-full">
+              <h4 className="flex items-center font-semibold text-[18px] text-[#072C29]">{auth.user}</h4>
             </div>
             <button onClick={() => setShowProfile(!showProfile)}>
               <MoreVertical size={20} />
             </button>
-            <div className={`block absolute ml-[235px] z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-300 ease-in-out ${
+            <div className={`block absolute ml-[235px] z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-500 ease-in-out ${
               showProfile ? 'max-w-[300px]' : 'max-w-[0px]'}`} 
             >
               <ul className="py-1.5 px-3">

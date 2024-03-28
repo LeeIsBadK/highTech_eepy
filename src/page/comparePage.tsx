@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Sidebar from "../Components/sidebar";
 import SearchBar from "../Components/search";
 import { CirclePlus, X, Search } from "lucide-react";
@@ -191,7 +191,7 @@ const ComparePage: React.FC = () => {
                       <span className="text-[19px] font-semibold px-1 text-[#999999]">vs</span>
                     )}
                     <span className="flex justify-center items-center text-[21px] px-2 font-bold text-[#072C29]">
-                      {fund}<a href={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 ml-1"/></a>
+                      {fund}<Link to={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 ml-1"/></Link>
                     </span>
                   </div>
                 ))}
@@ -265,7 +265,7 @@ const ComparePage: React.FC = () => {
                         </div>
                       </div>
                       <button className="ml-auto flex px-2 pt-1">
-                        <a href={generateAddFundUrl(searchAddFund)}><span className="text-[18px] ml-auto shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-3 py-1.5 hover:bg-[#116564] hover:text-gray-100">Add</span></a>
+                        <Link to={generateAddFundUrl(searchAddFund)}><span className="text-[18px] ml-auto shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-3 py-1.5 hover:bg-[#116564] hover:text-gray-100">Add</span></Link>
                       </button>
                     </div>
                   </div>
