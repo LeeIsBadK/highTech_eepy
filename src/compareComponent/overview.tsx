@@ -1,4 +1,5 @@
 import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface OverviewProps {
   funds: Array<string>;
@@ -8,7 +9,7 @@ interface OverviewProps {
 
 const OverView = ({funds, generateDeleteFundUrl}: OverviewProps) => {
     return (
-        <div className="pb-[60px]">
+        <div className="pb-[50px]">
                   <div className="flex">
                     <div className="pr-10"
                       style={{ whiteSpace: 'nowrap' }}
@@ -23,13 +24,13 @@ const OverView = ({funds, generateDeleteFundUrl}: OverviewProps) => {
                         <p className="p-4">นโยบายการจ่ายปันผล</p>
                       </div>
                     </div>
-                    <div className="flex overflow-x-auto max-w-5xl">
+                    <div className="flex overflow-x-auto sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
                       {funds?.map((fund) => (
                           <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
                             style={{ whiteSpace: 'nowrap'}}
                           >
                             <div className="py-4 px-2 font-bold text-[20px] text-[#072C29]">
-                              <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}>{fund}<a href={generateDeleteFundUrl(fund)}><X className="mt-[3px] ml-1 text-gray-400" /></a></span>
+                              <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}>{fund}<Link to={generateDeleteFundUrl(fund)}><X className="mt-[3px] ml-1 text-gray-400" /></Link></span>
                             </div>
                             <div className={`${funds.indexOf(fund)%2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]' } border border-gray-300 rounded-[10px] text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                               <p className="flex justify-center p-4">-</p>
@@ -58,7 +59,7 @@ const OverView = ({funds, generateDeleteFundUrl}: OverviewProps) => {
                         <p className="p-4">มูลค่าทรัพย์สินสุทธิ</p>
                       </div>
                     </div>
-                    <div className="flex overflow-x-auto max-w-5xl">
+                    <div className="flex overflow-x-auto sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
                       {funds?.map((fund) => (
                           <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
                             style={{ whiteSpace: 'nowrap' }}

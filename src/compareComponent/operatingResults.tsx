@@ -1,4 +1,5 @@
 import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface OperatingResultsProps {
   funds: Array<string>;
@@ -29,7 +30,7 @@ const OperatingResults = ({funds, generateDeleteFundUrl}: OperatingResultsProps)
                             style={{ whiteSpace: 'nowrap'}}
                           >
                             <div className="py-4 px-2 font-bold text-[20px] text-[#072C29]">
-                              <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}>{fund}<a href={generateDeleteFundUrl(fund)}><X className="mt-[3px] ml-1 text-gray-400" /></a></span>
+                              <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}>{fund}<Link to={generateDeleteFundUrl(fund)}><X className="mt-[3px] ml-1 text-gray-400" /></Link></span>
                             </div>
                             <div className={`${funds.indexOf(fund)%2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]' } border border-gray-300 rounded-[10px] text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                               <p className="flex justify-center p-4 py-6">-</p>

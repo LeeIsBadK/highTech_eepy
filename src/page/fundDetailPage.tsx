@@ -3,9 +3,9 @@ import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
 import Fund from '../Components/fund';
 import Favorite from '../fundDetailComponent/favorite';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Detail from '../fundDetailComponent/detail';
-import { Clock, Triangle } from 'lucide-react';
+import { ChevronLeft, Clock, Triangle } from 'lucide-react';
 import Compare from '../fundDetailComponent/compare';
 
 interface Fund {
@@ -122,7 +122,8 @@ interface Fund {
     }
   ]
 
-const FundDetailPage = () => {
+
+const FundDetailPage: React.FC = () => {
   const location = useLocation();
   const [fund, setFund] = useState<string>('');
 
@@ -133,22 +134,22 @@ const FundDetailPage = () => {
 
 
     return (
-        <div className="flex"
+        <div className="flex transition-all duration-500 ease-in-out"
           style={{
             fontFamily: "'Noto Sans Thai', sans-serif",
           }}
         >
           <Sidebar />
-          <div className="w-full pl-2 pt-4 sm:pt-7 lg:pt-11 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100svh] overflow-y-auto">
-            <div className='max-w-4xl px-2 pb-4 mt-1 sm:px-4 sm:pb-8 sm:mt-2 lg:max-w-7xl lg:px-7 lg:pb-12'>
-              <div className="px-6 flex items-center">
-                <h2 className="sm:text-[22px] md:text-[26px] lg:text-[32px] pr-4 font-bold tracking-tight text-[#072C29]">รายละเอียดกองทุน</h2>
-                <div className="ml-auto mr-auto">
+          <div className="w-full sm:px-12 px-16 pt-4 sm:pt-7 lg:pt-11 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100svh] overflow-y-auto">
+            <div className='pb-4 mt-1 sm:pb-8 sm:mt-2 lg:pb-12'>
+              <div className="grid grid-cols-4 gap-x-10 items-center">
+                <h2 className="flex items-center sm:text-[22px] md:text-[26px] lg:text-[32px] font-bold tracking-tight text-[#072C29]"><Link to='/fund'><ChevronLeft size={36} className='mr-4'/></Link>รายละเอียดกองทุน</h2>
+                <div className="col-span-2 ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]}/>
                 </div>
               </div>
             </div>
-            <div className="flex items-center max-w-4xl ml-8 mb-6 py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white shadow-md rounded-[10px]">
+            <div className="flex items-center mb-6 py-6 sm:px-6 lg:px-8 bg-white shadow-md rounded-[10px]">
               <div className='px-2 w-full'>
                 <div className='flex'>
                   <div>
@@ -163,7 +164,7 @@ const FundDetailPage = () => {
                 <div className='flex'>
                   <div className='pb-1 pt-5 flex space-x-6'>
                     <Favorite />
-                    <Compare />
+                    <Compare fund={fund} />
                   </div>
                   <span className='flex ml-auto items-center pt-5 px-2 py-1 text-[16px] text-gray-400'><Clock size={18} className='mr-[6px]'/> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
                 </div>

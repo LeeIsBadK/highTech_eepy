@@ -1,21 +1,16 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import useAuth from "./hook/useAuth";
-import { useEffect } from "react";
+import { useContext } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import AuthContext from "./context/AuthProvider";
+
 
 const CheckLogin: React.FC = () => { //ยังไม่ได้
-    const { auth } = useAuth();
+    const { auth } = useContext(AuthContext);
     const location = useLocation();
-    const navigate = useNavigate();
 
-    console.log(auth);
-
-    useEffect(() => {
-        if (auth.user && auth.accessToken) {
-            navigate('/fund', { state: { from: location }, replace: true });
-        }
-    }, [auth, navigate, location]);
-
-    return <Outlet />;
+    return (
+        auth?.user && auth?.accessToken ? <Navigate to="/fund" state={{ from: location }} replace />
+            : <Outlet />
+    );
 }
 
 export default CheckLogin;
