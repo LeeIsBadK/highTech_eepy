@@ -8,7 +8,6 @@ import LoginPage from './page/loginPage';
 import FundDetailPage from './page/fundDetailPage';
 import Missing from './page/missingPage';
 import RegisterPage from './page/registerPage';
-import Layout from './page/layout';
 import RequireAuth from './loginComponent/RequireAuth';
 import CheckLogin from './loginComponent/checkLogin';
 
@@ -18,7 +17,6 @@ const App: React.FC = () => {
   
   return (
       <Routes>
-        <Route path="/" element={<Layout />}>
           {/* public routes */}
           <Route element={<CheckLogin />}>
             <Route path="/login" element={<LoginPage />} />
@@ -49,7 +47,6 @@ const App: React.FC = () => {
 
           {/* catch all */}
           <Route path="*" element={<Missing />} />
-        </Route>
       </Routes>
   );
 };
