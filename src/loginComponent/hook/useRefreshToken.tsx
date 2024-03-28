@@ -5,9 +5,8 @@ import AuthContext from '../context/AuthProvider';
 type RefreshFunction = () => Promise<string>;
 
 const useRefreshToken: () => RefreshFunction = () => {
-    const { auth, setAuth } = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext);
 
-    console.log(auth)
     const refresh: RefreshFunction = async () => {
             const response = await axios.get('/refresh', {
                 withCredentials: true
