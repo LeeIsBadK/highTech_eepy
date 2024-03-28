@@ -189,7 +189,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                 ))}
               </div>
             </div>
-            {selectedFund.length != 0 &&(
+            {selectedFund.length != 0 && clickCompare &&(
               <div className="p-5 rounded-[15px] bg-white mt-9 shadow-md">
                 <div className="flex sm:text-[14px] md:text-[17px] lg:text-[20px] ">
                   <span className="px-3 font-bold text-[#072C29]">เปรียบเทียบกองทุน:</span>
