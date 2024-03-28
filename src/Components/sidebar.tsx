@@ -13,14 +13,15 @@ const navigation = [
 ];
 
 
-export default function Sidebar() {
+
+const Sidebar: React.FC = () => {
   const [expanded, setExpanded] = useState(true);
   const [active, setActive] = useState<string>('');
   const [showProfile, setShowProfile] = useState<boolean>(false);
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const logout = async () => { //ยังไม่ได้
+  const handleLogout = async () => { //ยังไม่ได้
     setAuth({});
     navigate('/login');
   }
@@ -37,7 +38,7 @@ export default function Sidebar() {
         <div className="p-4 px-2 pb-2 flex justify-between items-center border-b">
           <img
             src={lhfund}
-            className={`overflow-hidden transition-all ${
+            className={`overflow-hidden transition-all duration-500 ease-in-out ${
               expanded ? "w-32 mr-auto ml-auto py-3" : "w-0"
             }`}
             alt=""
@@ -60,7 +61,7 @@ export default function Sidebar() {
                   >
                 {item.icon}
                 <span
-                  className={`overflow-hidden transition-all flex  ${
+                  className={`overflow-hidden transition-all duration-500 ease-in-out flex  ${
                     expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
                   }`}
                 >
@@ -93,7 +94,7 @@ export default function Sidebar() {
           <div
             className={`
               flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
+              overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "w-52 ml-3" : "w-0"}
           `}
           >
             <div className="leading-4">
@@ -107,7 +108,7 @@ export default function Sidebar() {
               showProfile ? 'max-w-[300px]' : 'max-w-[0px]'}`} 
             >
               <ul className="py-1.5 px-3">
-                <button onClick={logout} className="flex items-center h-[40px] w-full px-6 py-1 text-[1rem] text-gray-600 hover:bg-gray-200 rounded-[10px]" style={{ whiteSpace: 'nowrap' }}>
+                <button onClick={handleLogout} className="flex items-center h-[40px] w-full px-6 py-1 text-[1rem] text-gray-600 hover:bg-gray-200 rounded-[10px]" style={{ whiteSpace: 'nowrap' }}>
                   Sign out
                 </button>
               </ul>
@@ -118,3 +119,5 @@ export default function Sidebar() {
     </aside>
   )
 }
+
+export default Sidebar;

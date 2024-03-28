@@ -18,6 +18,7 @@ const LoginPage: React.FC = () => {
     const [user, setUser] = useState<string>('');
     const [pwd, setPwd] = useState<string>('');
     const [errMsg, setErrMsg] = useState<string>('');
+    
 
     useEffect(() => {
         if (userRef.current) {
@@ -31,7 +32,7 @@ const LoginPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        
         try {
             const response = await axios.post(LOGIN_URL,
                 JSON.stringify({ user, pwd }),
@@ -85,7 +86,9 @@ const LoginPage: React.FC = () => {
                                 ref={userRef}
                                 className="appearance-none relative block w-full mt-1 mb-3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-[#1CA59B] focus:z-10 text-[16px] sm:text-[14px] lg:text-[18px]"
                                 autoComplete="off"
-                                onChange={(e) => setUser(e.target.value)}
+                                onChange={(e) => {
+                                    setUser(e.target.value);
+                                }}
                                 value={user}
                                 required
                             />

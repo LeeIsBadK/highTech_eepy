@@ -8,7 +8,7 @@ interface OverviewProps {
 
 const OverView = ({funds, generateDeleteFundUrl}: OverviewProps) => {
     return (
-        <div className="pb-[60px]">
+        <div className="pb-[50px]">
                   <div className="flex">
                     <div className="pr-10"
                       style={{ whiteSpace: 'nowrap' }}
@@ -23,7 +23,7 @@ const OverView = ({funds, generateDeleteFundUrl}: OverviewProps) => {
                         <p className="p-4">นโยบายการจ่ายปันผล</p>
                       </div>
                     </div>
-                    <div className="flex overflow-x-auto max-w-5xl">
+                    <div className="flex overflow-x-auto sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
                       {funds?.map((fund) => (
                           <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
                             style={{ whiteSpace: 'nowrap'}}
@@ -58,7 +58,7 @@ const OverView = ({funds, generateDeleteFundUrl}: OverviewProps) => {
                         <p className="p-4">มูลค่าทรัพย์สินสุทธิ</p>
                       </div>
                     </div>
-                    <div className="flex overflow-x-auto max-w-5xl">
+                    <div className="flex overflow-x-auto sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
                       {funds?.map((fund) => (
                           <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
                             style={{ whiteSpace: 'nowrap' }}

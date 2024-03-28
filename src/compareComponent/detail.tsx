@@ -15,7 +15,7 @@ const Detail = ({selectedFundArray, generateDeleteFundUrl}: DetailProps) => {
 
     return (
       <div>
-        <div className="flex items-center max-w-4xl ml-8 pt-7 sm:px-3 lg:max-w-7xl lg:px-5">
+        <div className="flex items-center pt-7 sm:px-3 lg:px-5">
           <div className="border-b border-b-2 w-full">
             <button className={`${selected === 'ภาพรวม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
                 onClick={() => setSelected('ภาพรวม')}>
@@ -35,7 +35,7 @@ const Detail = ({selectedFundArray, generateDeleteFundUrl}: DetailProps) => {
             </button>
           </div>
         </div>
-        <div className="h-full max-w-2xl ml-8 py-8 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="h-full py-8 sm:px-6 lg:px-8">
           {selected === 'ภาพรวม' && (
             <div>
               <div className="pb-8 pt-2">

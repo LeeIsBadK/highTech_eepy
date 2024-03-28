@@ -116,10 +116,10 @@ export const fundData = [
   }
 ]
 
-const ChartPage = () => {
+const ChartPage: React.FC = () => {
   
     return (
-        <div className="flex"
+        <div className="flex transition-all duration-500 ease-in-out"
         style={{
           fontFamily: "'Noto Sans Thai', sans-serif",
         }}
@@ -127,7 +127,7 @@ const ChartPage = () => {
           <Sidebar />
           <div className="w-full pl-2 pt-4 sm:pt-8 lg:pt-12 pb-4 sm:pb-8 lg:pb-12 items-center bg-gray-100 max-h-[100vh] overflow-y-auto">
             <div className="pl-8">
-              <div className='flex max-w-2xl px-2 pb-4 mt-1 sm:px-6 sm:pb-8 sm:mt-2 lg:max-w-7xl lg:px-8 lg:pb-12'>
+              <div className='flex px-2 pb-4 mt-1 sm:px-6 sm:pb-8 sm:mt-2 lg:px-8 lg:pb-12'>
                 <h2 className="text-4xl font-bold tracking-tight text-[#072C29]">Chart</h2>
                 <div className="ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]} />

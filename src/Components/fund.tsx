@@ -7,11 +7,11 @@ const Fund = ({funds}: { funds: Array<any> }) => {
   const [selectedFavorite, setSelectedFavorite] = useState<string[]>([]);
   const compare = useRef<HTMLDivElement>(document.createElement('div'));
   const [showCompare, setShowCompare] = useState<boolean>(false);
-  const [clickCompare, setClickCompare] = useState<boolean>(true);
+  const [clickCompare, setClickCompare] = useState<boolean>(false);
   const [sort,setSort] = useState<string>('');
   const [showFunds,setShowFunds] = useState<Array<any>>(funds);
   const [sortNum, setSortNum] = useState<number>(0);
-  let check = 0;
+  const [check, setCheck] = useState<number>(0);
   
   useEffect(() => {
     if (compare.current) {
@@ -26,7 +26,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
         observer.disconnect();
       };
     }
-  }, [compare.current]);
+  }, [compare.current, showCompare]);
 
   const handleFundClick = (fund: string): void => {
     if (selectedFund.includes(fund)) {
@@ -34,10 +34,6 @@ const Fund = ({funds}: { funds: Array<any> }) => {
     } else {
       setSelectedFund([...selectedFund, fund]);
     }
-    
-    setTimeout(() => {
-      setClickCompare(false);
-    }, 100);
   };
 
   const handleFavorite = (fund: string): void => {
@@ -94,7 +90,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
             fontFamily: "'Noto Sans Thai', sans-serif",
           }}
         >
-          <div className="sm:px-5 max-w-full lg:px-9">
+          <div className="sm:px-5 lg:px-9">
             <div className="w-full bg-white sm:p-6 lg:p-8 rounded-[15px] shadow-md">
               <div className="w-full h-full flex pt-2 pb-3 sm:text-[10px] md:text-[13px] lg:text-[16px] font-medium text-[#999999]"
                 style={{ whiteSpace: 'nowrap' }}
@@ -103,7 +99,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                   <span className="flex items-center justify-center">
                     เปรียบเทียบ
                   </span>
-                  <span className="flex col-span-3">
+                  <span className="flex col-span-4">
                     ชื่อกองทุน
                     {((sort === 'name' && sortNum !== 2) || sort !== 'name') && (
                       <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} mt-[-0.5px] lg:mt-[4px] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
@@ -112,7 +108,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                       <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
                     )}
                   </span>
-                  <span className="flex col-span-2 justify-center items-center">
+                  <span className="flex col-span-1 justify-center items-center">
                     ความเสี่ยง
                     {((sort === 'risk' && sortNum !== 2) || sort !== 'risk') && (
                       <CircleChevronDown size={17} className={`${sort === 'risk' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px] `} onClick={() => handleSort('risk')}/>
@@ -158,13 +154,13 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                         <div className="w-full h-full flex items-center">
                           <div className="w-full grid grid-cols-12 gap-x-10">
                             <div className='flex items-center justify-center h-full'>
-                              <div className="px-2 h-full flex flex-col justify-between">
+                              <div className="px-2 py-1 h-full flex flex-col justify-between">
                                 <button className={`${selectedFund.includes(fund.name) ? 'bg-[#1CA59B] border border-[#1CA59B]' : 'border border-2 border-gray-400'} 
                                                     flex items-center justify-center sm:h-[14px] sm:w-[14px] md:h-[16px] md:w-[16px] lg:h-[18px] lg:w-[18px] rounded-[5px] transition-all duration-250 ease-in-out transition ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125`}
                                   onClick={() => handleFundClick(fund.name)}>
                                   <Check className={`${selectedFund.includes(fund.name) ? 'scale-100' : ''} text-white transform scale-0 transition-all duration-200 ease-in-out`}/>
                                 </button>
-                                <button className="mt-4 w-[20px] transition duration-250 ease-in-out delay-100 hover:-translate-y-[0px] hover:scale-125" onClick={() => handleFavorite(fund.name)}>
+                                <button className="w-[20px] transition duration-250 ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125" onClick={() => handleFavorite(fund.name)}>
                                   <Star 
                                     size={22} 
                                     fill={selectedFavorite.includes(fund.name) ? "#ffea00" : "none"} 
@@ -173,18 +169,16 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                                 </button>
                               </div>
                             </div>
-                            <div className="flex col-span-3 sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">
-                              <a href={fund.href}>
+                            <a href={fund.href} className="col-span-4 hover:bg-gray-100 p-2 rounded-[10px] sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">
                                 <span className="pt-1">{fund.name}</span>
                                 <span className="sm:text-[9px] md:text-[12px] lg:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.detail}</span>
-                              </a>
-                            </div> 
-                            <div className='flex col-span-2 justify-center items-center'>
+                            </a>
+                            <div className='flex col-span-1 justify-center items-center'>
                               <p className='sm:text-[14px] md:text-[17px] lg:text-[20px] font-semibold px-[11px] py-[2px] border sm:w-[36px] lg:w-[37px] border-2 rounded-md' style={{color:`${riskColor[fund.risk]}`,borderColor:`${riskColor[fund.risk]}`}}>{fund.risk}</p>
                             </div>
-                            <div className="flex col-span-2 justify-center items-center">
-                              <p className="sm:px-3 lg:px-4 py-[2px] items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold">{fund.type}</p>
-                            </div>
+                            <a href={fund.href} className="col-span-2 flex justify-center items-center">
+                                <p className="sm:px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold">{fund.type}</p>
+                            </a>
                             <p className="flex col-span-2 justify-center items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] sm:px-0 lg:px-2">{fund.value}</p>
                             <p className="flex col-span-2 justify-center items-center mr-auto ml-auto sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29] ml-auto sm:px-4 lg:px-8">{fund.returns}</p>
                           </div>
@@ -195,7 +189,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                 ))}
               </div>
             </div>
-            {selectedFund.length != 0 && clickCompare &&(
+            {selectedFund.length != 0 &&(
               <div className="p-5 rounded-[15px] bg-white mt-9 shadow-md">
                 <div className="flex sm:text-[14px] md:text-[17px] lg:text-[20px] ">
                   <span className="px-3 font-bold text-[#072C29]">เปรียบเทียบกองทุน:</span>
@@ -204,7 +198,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                     <span className="font-bold text-[#072C29]">รีเซ็ต</span>
                   </button>
                 </div>
-                <div className="flex flex-wrap pt-3 px-1 max-w-5xl sm:text-[10px] md:text-[13px] lg:text-[16px]" ref={compare}>
+                <div className="flex flex-wrap pt-3 px-1 sm:text-[10px] md:text-[13px] lg:text-[16px]" ref={compare}>
                   {selectedFund.map((fund) => (
                     <div className="px-2 mb-3" key={fund}>
                       <div className="flex px-2 py-1 bg-gray-200 rounded-md shadow-sm">
@@ -223,12 +217,14 @@ const Fund = ({funds}: { funds: Array<any> }) => {
             )}
             {showCompare && selectedFund.length !== 0 && (
               <button
-                onClick={() => { setTimeout(() => {compare.current?.scrollIntoView({ behavior: 'smooth' })}, 100);
-                  if (check === 0) {
-                    setShowCompare(false);
-                    check++;
-                  }
+                onClick={() => { 
                   setClickCompare(true);
+                  setTimeout(() => {compare.current?.scrollIntoView({ behavior: 'smooth' })}, 100);
+                  if (check === 0) {
+                    console.log('in');
+                    setShowCompare(false);
+                    setCheck(1);
+                  }
                 }}
                 className="fixed bottom-9 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-gray-300 font-bold text-gray-600 rounded-md focus:outline-none"
               >

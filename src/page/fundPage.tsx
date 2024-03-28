@@ -117,7 +117,8 @@ interface Fund {
     }
   ]
 
-const FundPage = () => {
+
+const FundPage: React.FC = () => {
   /*const [fundData2, setFundData2] = useState<string[]>([]);
 
   useEffect(() => {
@@ -135,7 +136,7 @@ const FundPage = () => {
   console.log(fundData2);*/
 
     return (
-        <div className="flex"
+        <div className="flex transition-all duration-500 ease-in-out"
           style={{
             fontFamily: "'Noto Sans Thai', sans-serif",
           }}
@@ -143,12 +144,12 @@ const FundPage = () => {
           <Sidebar />
           <div className="w-full pl-2 pt-4 sm:pt-7 lg:pt-11 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100svh] overflow-y-auto">
             <div className='px-2 pb-4 mt-1 sm:px-4 sm:pb-8 sm:mt-2 lg:px-7 lg:pb-12'>
-              <div className="px-6 flex items-center">
+              <div className="px-8 grid grid-cols-4 gap-x-10 items-center">
                 <h2 className="sm:text-[22px] md:text-[26px] lg:text-[32px] pr-4 font-bold tracking-tight text-[#072C29]">รายละเอียดกองทุน</h2>
-                <div className="ml-auto mr-auto">
+                <div className="col-span-2 ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]}/>
                 </div>
-                <div className="ml-auto px-4">
+                <div className="ml-auto">
                   <Favorite />
                 </div>
               </div>
