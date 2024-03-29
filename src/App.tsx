@@ -8,9 +8,6 @@ import LoginPage from './page/loginPage';
 import FundDetailPage from './page/fundDetailPage';
 import Missing from './page/missingPage';
 import RegisterPage from './page/registerPage';
-import RequireAuth from './loginComponent/RequireAuth';
-import CheckLogin from './loginComponent/checkLogin';
-
 
 
 const App: React.FC = () => {
@@ -18,32 +15,32 @@ const App: React.FC = () => {
   return (
       <Routes>
           {/* public routes */}
-          <Route element={<CheckLogin />}>
+          {/*<Route element={<CheckLogin />}>*/}
             <Route path="/login" element={<LoginPage />} />
-          </Route>
-          <Route element={<CheckLogin />}>
+          {/*</Route>*/}
+          {/*<Route element={<CheckLogin />}>*/}
             <Route path="/register" element={<RegisterPage />} />
-          </Route>
+          {/*</Route>*/}
         
           {/* protect routes */}
-          <Route element={<RequireAuth />}>
+          {/*<Route element={<RequireAuth />}>*/}
             <Route path="/" element={<FundPage />} />
-          </Route>
-          <Route element={<RequireAuth />}>
+          {/*</Route>*/}
+          {/*<Route element={<RequireAuth />}>*/}
             <Route path="/fund" element={<FundPage />} />
-          </Route>
-          <Route element={<RequireAuth />}>
+          {/*</Route>*/}
+          {/*<Route element={<RequireAuth />}>*/}
             <Route path="/fund/*" element={<FundDetailPage />} />
-          </Route>
-          <Route element={<RequireAuth />}>
+          {/*</Route>*/}
+          {/*<Route element={<RequireAuth />}>*/}
             <Route path="/compare" element={<ComparePage />} />
-          </Route>
-          <Route element={<RequireAuth />}>
+          {/*</Route>*/}
+          {/*<Route element={<RequireAuth />}>*/}
             <Route path="/dashboard" element={<DashboardPage />} />
-          </Route>
-          <Route element={<RequireAuth />}>
+          {/*</Route>*/}
+          {/*<Route element={<RequireAuth />}>*/}
             <Route path="/chart" element={<ChartPage />} />
-          </Route>
+          {/*</Route>*/}
 
           {/* catch all */}
           <Route path="*" element={<Missing />} />

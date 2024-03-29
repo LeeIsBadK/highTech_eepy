@@ -49,7 +49,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
               placeholder="Search Mutual Funds"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="ml-3 sm:w-[180px] md:w-[240px] lg:w-[350px] sm:h-[22px] md:h-[25px] lg:h-[28px] outline-none placeholder-[#1CA59B] md:text-[16px] sm:text-[14px] lg:text-[18px]"
+              className="ml-3 sm:w-[175px] md:w-[225px] lg:w-[275px] xl:w-[325px] 2xl:w-[375px] sm:h-[22px] md:h-[25px] lg:h-[28px] outline-none placeholder-[#1CA59B] sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px]"
               onClick={() => {
                 setShowSearch(true);
                 handleSearch();

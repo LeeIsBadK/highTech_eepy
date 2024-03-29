@@ -4,6 +4,7 @@ import ChartComponent from "./lineChart"
 import OperatingResults from "./operatingResults"
 import OverView from "./overview"
 import { useState } from "react"
+import Fee from "./fee"
 
 interface DetailProps {
   selectedFundArray: Array<string>;
@@ -50,6 +51,9 @@ const Detail = ({selectedFundArray, generateDeleteFundUrl}: DetailProps) => {
           {selected === 'พอร์ตการลงทุน' && (
             <Investment funds={selectedFundArray}  generateDeleteFundUrl={generateDeleteFundUrl} />
           )}
+          {selected === 'ค่าธรรมเนียม' && (
+            <Fee funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
+        )}
         </div>
       </div>
     )

@@ -93,56 +93,56 @@ const Fund = ({funds}: { funds: Array<any> }) => {
         >
           <div className="sm:px-5 lg:px-9">
             <div className="w-full bg-white sm:p-6 lg:p-8 rounded-[15px] shadow-md">
-              <div className="w-full h-full flex pt-2 pb-3 sm:text-[10px] md:text-[13px] lg:text-[16px] font-medium text-[#999999]"
+              <div className="w-full h-full flex pt-2 pb-3 sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] font-medium text-[#999999]"
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <div className="w-full grid grid-cols-12 gap-x-10">
+                <div className="w-full grid grid-cols-12 gap-x-4">
                   <span className="flex items-center justify-center">
                     เปรียบเทียบ
                   </span>
-                  <span className="flex col-span-4">
+                  <span className="flex col-span-3">
                     ชื่อกองทุน
                     {((sort === 'name' && sortNum !== 2) || sort !== 'name') && (
-                      <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} mt-[-0.5px] lg:mt-[4px] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
+                      <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} mt-[-0.5px] lg:mt-[4px] ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('name')}/>
                     )}
                     {sort === 'name' && sortNum === 2 && (
-                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('name')}/>
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('name')}/>
                     )}
                   </span>
-                  <span className="flex col-span-1 justify-center items-center">
+                  <span className="flex col-span-2 justify-center items-center">
                     ความเสี่ยง
                     {((sort === 'risk' && sortNum !== 2) || sort !== 'risk') && (
-                      <CircleChevronDown size={17} className={`${sort === 'risk' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px] `} onClick={() => handleSort('risk')}/>
+                      <CircleChevronDown size={17} className={`${sort === 'risk' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px] `} onClick={() => handleSort('risk')}/>
                     )}
                     {sort === 'risk' && sortNum === 2 && (
-                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('risk')}/>
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('risk')}/>
                     )}
                   </span>
                   <span className="flex col-span-2 justify-center items-center">
                     ประเภทกองทุน
                     {((sort === 'type' && sortNum !== 2) || sort !== 'type') && (
-                      <CircleChevronDown size={17} className={`${sort === 'type' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('type')}/>
+                      <CircleChevronDown size={17} className={`${sort === 'type' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('type')}/>
                     )}
                     {sort === 'type' && sortNum === 2 && (
-                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('type')}/>
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('type')}/>
                     )}
                   </span>
                   <span className="flex col-span-2 justify-center items-center">
                     NAV
                     {((sort === 'value' && sortNum !== 2) || sort !== 'value') && (
-                      <CircleChevronDown size={17} className={`${sort === 'value' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('value')}/>
+                      <CircleChevronDown size={17} className={`${sort === 'value' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('value')}/>
                     )}
                     {sort === 'value' && sortNum === 2 && (
-                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('value')}/>
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('value')}/>
                     )}
                   </span>
                   <span className="flex col-span-2 justify-center items-center">
                     ผลตอบแทน (%)
                     {((sort === 'returns' && sortNum !== 2) || sort !== 'returns') && (
-                      <CircleChevronDown size={17} className={`${sort === 'returns' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('returns')}/>
+                      <CircleChevronDown size={17} className={`${sort === 'returns' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('returns')}/>
                     )}
                     {sort === 'returns' && sortNum === 2 && (
-                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 sm:w-[13px] sm:w-[13px] md:w-[15px] md:w-[15px] lg:w-[17px] lg:h-[17px]`} onClick={() => handleSort('returns')}/>
+                      <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] xl:w-[15px] xl:h-[15px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] sm:w-[9px] sm:h-[9px]`} onClick={() => handleSort('returns')}/>
                     )}
                   </span>
                 </div>
@@ -153,7 +153,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                     <div className="h-full w-full flex justify-between">
                       <div className="w-full">
                         <div className="w-full h-full flex items-center">
-                          <div className="w-full grid grid-cols-12 gap-x-10">
+                          <div className="w-full grid grid-cols-12 gap-x-4">
                             <div className='flex items-center justify-center h-full'>
                               <div className="px-2 py-1 h-full flex flex-col justify-between">
                                 <button className={`${selectedFund.includes(fund.name) ? 'bg-[#1CA59B] border border-[#1CA59B]' : 'border border-2 border-gray-400'} 
@@ -170,18 +170,18 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                                 </button>
                               </div>
                             </div>
-                            <Link to={fund.href} className="col-span-4 hover:bg-gray-100 p-2 rounded-[10px] sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">
+                            <Link to={fund.href} className="col-span-3 hover:bg-gray-100 p-2 rounded-[10px] sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] font-semibold text-[#072C29]">
                                 <span className="pt-1">{fund.name}</span>
-                                <span className="sm:text-[9px] md:text-[12px] lg:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.detail}</span>
+                                <span className="sm:text-[7px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.detail}</span>
                             </Link>
-                            <div className='flex col-span-1 justify-center items-center'>
-                              <p className='sm:text-[14px] md:text-[17px] lg:text-[20px] font-semibold px-[11px] py-[2px] border sm:w-[36px] lg:w-[37px] border-2 rounded-md' style={{color:`${riskColor[fund.risk]}`,borderColor:`${riskColor[fund.risk]}`}}>{fund.risk}</p>
+                            <div className='flex col-span-2 justify-center items-center'>
+                              <p className='sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold sm:px-[8px] sm:py-[2px] lg:px-[10px] lg:py-[3px] 2xl:px-[12px] 2xl:py-[4px] border border-2 rounded-md' style={{color:`${riskColor[fund.risk]}`,borderColor:`${riskColor[fund.risk]}`}}>{fund.risk}</p>
                             </div>
                             <Link to={fund.href} className="col-span-2 flex justify-center items-center">
-                                <p className="sm:px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold">{fund.type}</p>
+                                <p className="sm:px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] font-semibold">{fund.type}</p>
                             </Link>
-                            <p className="flex col-span-2 justify-center items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">{fund.value}</p>
-                            <p className="flex col-span-2 justify-center items-center sm:text-[11px] md:text-[14px] lg:text-[17px] font-semibold text-[#072C29]">{fund.returns}</p>
+                            <p className="flex col-span-2 justify-center items-center sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.value}</p>
+                            <p className="flex col-span-2 justify-center items-center sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.returns}</p>
                           </div>
                         </div>
                       </div>
@@ -192,14 +192,14 @@ const Fund = ({funds}: { funds: Array<any> }) => {
             </div>
             {selectedFund.length != 0 && clickCompare &&(
               <div className="p-5 rounded-[15px] bg-white mt-9 shadow-md">
-                <div className="flex sm:text-[14px] md:text-[17px] lg:text-[20px] ">
+                <div className="flex sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] ">
                   <span className="px-3 font-bold text-[#072C29]">เปรียบเทียบกองทุน:</span>
                   <button className="ml-auto flex" onClick={() => setSelectedFund([])}>
                     <X className="mt-[2px] mr-1"/>
                     <span className="font-bold text-[#072C29]">รีเซ็ต</span>
                   </button>
                 </div>
-                <div className="flex flex-wrap pt-3 px-1 sm:text-[10px] md:text-[13px] lg:text-[16px]" ref={compare}>
+                <div className="flex flex-wrap pt-3 px-1 sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]" ref={compare}>
                   {selectedFund.map((fund) => (
                     <div className="px-2 mb-3" key={fund}>
                       <div className="flex px-2 py-1 bg-gray-200 rounded-md shadow-sm">
@@ -211,7 +211,7 @@ const Fund = ({funds}: { funds: Array<any> }) => {
                 </div>
                 <button className="ml-auto flex">
                   <Link to={generateCompareUrl()} className="py-2">
-                  <span className="sm:text-[12px] md:text-[15px] lg:text-[18px] text-white font-bold bg-[#072C29] rounded-[5px] px-2 py-1.5 hover:bg-[#116564] hover:text-gray-100">เปรียบเทียบ</span>
+                  <span className="sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-white font-bold bg-[#072C29] rounded-[5px] px-2 py-1.5 hover:bg-[#116564] hover:text-gray-100">เปรียบเทียบ</span>
                   </Link>
                 </button>
               </div>

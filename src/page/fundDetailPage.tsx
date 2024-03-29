@@ -142,8 +142,13 @@ const FundDetailPage: React.FC = () => {
           <Sidebar />
           <div className="w-full sm:px-12 px-16 pt-4 sm:pt-7 lg:pt-11 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100svh] overflow-y-auto">
             <div className='pb-4 mt-1 sm:pb-8 sm:mt-2 lg:pb-12'>
-              <div className="grid grid-cols-4 gap-x-10 items-center">
-                <h2 className="flex items-center sm:text-[22px] md:text-[26px] lg:text-[32px] font-bold tracking-tight text-[#072C29]"><Link to='/fund'><ChevronLeft size={36} className='mr-4'/></Link>รายละเอียดกองทุน</h2>
+              <div className="grid grid-cols-4 gap-x-8 items-center">
+                <h2 className="flex items-center sm:text-[16px] md:text-[20px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight text-[#072C29]">
+                  <Link to='/fund'>
+                    <ChevronLeft size={36} className='mr-4 2xl:w-9 2xl:h-9 xl:w-8 xl:h-8 lg:w-7 lg:h-7 md:w-6 md:h-6 sm:w-5 sm:h-5'/>
+                  </Link>
+                  รายละเอียดกองทุน
+                </h2>
                 <div className="col-span-2 ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]}/>
                 </div>
@@ -153,12 +158,15 @@ const FundDetailPage: React.FC = () => {
               <div className='px-2 w-full'>
                 <div className='flex'>
                   <div>
-                    <h2 className="text-[23px] py-1 font-bold text-[#072C29]">{fund}</h2>
-                    <span className='py-1 text-gray-400 text-[18px]'>กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม</span>
+                    <h2 className="sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[21px] 2xl:text-[23px] py-1 font-bold text-[#072C29]">{fund}</h2>
+                    <span className='py-1 text-gray-400 sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px]'>กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม</span>
                   </div>
                   <div className='flex flex-col items-end ml-auto'>
-                    <span className='flex items-center px-2 text-[24px] font-bold text-[#072C29]'><Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px]'/>8.4301</span>
-                    <span className='px-2 text-[18px] font-semibold text-[#00bc91]'>+ 0.9027</span>
+                    <span className='flex items-center px-2 sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] font-bold text-[#072C29]'>
+                      <Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] sm:w-[10px] sm:h-[10px]'/>
+                      8.4301
+                    </span>
+                    <span className='px-2 sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-semibold text-[#00bc91]'>+ 0.9027</span>
                   </div>
                 </div>
                 <div className='flex'>
@@ -166,7 +174,7 @@ const FundDetailPage: React.FC = () => {
                     <Favorite />
                     <Compare fund={fund} />
                   </div>
-                  <span className='flex ml-auto items-center pt-5 px-2 py-1 text-[16px] text-gray-400'><Clock size={18} className='mr-[6px]'/> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
+                  <span className='flex ml-auto items-center pt-5 px-2 py-1 sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-gray-400'><Clock size={18} className='mr-[6px]'/> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
                 </div>
               </div>
             </div>

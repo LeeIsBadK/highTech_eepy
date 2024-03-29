@@ -175,7 +175,7 @@ const ComparePage: React.FC = () => {
           <div className="w-full sm:px-8 lg:px-12 pt-4 sm:pt-8 lg:pt-12 pb-4 sm:pb-8 lg:pb-12 items-center bg-[#f9f9f9] max-h-[100svh] overflow-y-auto">
             <div className="px-1">
               <div className='grid grid-cols-3 gap-x-10 px-2 pb-4 mt-1 sm:px-6 sm:pb-8 sm:mt-2 lg:px-8 lg:pb-12'>
-                <h2 className="text-4xl font-bold tracking-tight text-[#072C29]">เปรียบเทียบกองทุน</h2>
+                <h2 className="sm:text-[16px] md:text-[20px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight text-[#072C29]">เปรียบเทียบกองทุน</h2>
                 <div className="ml-auto mr-auto">
                   <SearchBar funds={fundData as Fund[]} />
                 </div>
@@ -188,10 +188,10 @@ const ComparePage: React.FC = () => {
                 {selectedFundArray?.map((fund) => (
                   <div key={fund} className="flex justify-center items-center mb-[1px]">
                     {selectedFundArray[0] !== fund && (
-                      <span className="text-[19px] font-semibold px-1 text-[#999999]">vs</span>
+                      <span className="sm:text-[11px] md:text-[13px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px] font-semibold px-1 text-[#999999]">vs</span>
                     )}
-                    <span className="flex justify-center items-center text-[21px] px-2 font-bold text-[#072C29]">
-                      {fund}<Link to={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 ml-1"/></Link>
+                    <span className="flex justify-center items-center sm:text-[13px] md:text-[15px] lg:text-[17px] xl:text-[19px] 2xl:text-[21px] px-2 font-bold text-[#072C29]">
+                      {fund}<Link to={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 ml-1 2xl:w-[22px] 2xl:h-[22px] xl:w-[20px] xl:h-[20px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px]"/></Link>
                     </span>
                   </div>
                 ))}
@@ -200,8 +200,8 @@ const ComparePage: React.FC = () => {
                 style={{ whiteSpace: 'nowrap' }}
                 onClick={() => setShowAddFund(true)}
               >
-                <CirclePlus size={18} className="mt-[2px] ml-1"/>
-                <span className="text-[17px] px-1 font-bold text-[#072C29]">Add Fund</span>
+                <CirclePlus size={18} className="mt-[2px] ml-1 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] sm:w-[10px] sm:h-[10px]"/>
+                <span className="sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] px-1 font-bold text-[#072C29]">Add Fund</span>
               </button>
               {showAddFund && (
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center z-50">
@@ -209,8 +209,8 @@ const ComparePage: React.FC = () => {
                     style={{ whiteSpace: 'nowrap' }}
                   >
                     <div className="flex">
-                      <span className="font-semibold text-[20px]">เลือกกองทุนที่คุณต้องการ</span>
-                      <X size={24} className="text-gray-600 ml-auto mt-[2px]" onClick={() => setShowAddFund(false)}/>
+                      <span className="font-semibold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">เลือกกองทุนที่คุณต้องการ</span>
+                      <X size={24} className="text-gray-600 ml-auto mt-[2px] 2xl:w-[24px] 2xl:h-[24px] xl:w-[22px] xl:h-[22px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] sm:w-[16px] sm:h-[16px]" onClick={() => setShowAddFund(false)}/>
                     </div>
                     <div className="flex justify-center py-6">
                       <button className="relative flex outline-none rounded-[5px] px-4 py-1 border border-[#A3BFB4] shadow-md mr-2 bg-white">
@@ -220,7 +220,7 @@ const ComparePage: React.FC = () => {
                           placeholder="Search Mutual Funds"
                           value={searchAddFund}
                           onChange={(e) => setSearchAddFund(e.target.value)}
-                          className="ml-3 outline-none min-w-[200px] min-h-[24px] placeholder-[#A3BFB4] mt-[2px] w-[14vw] h-[3vh] text-[17px]"
+                          className="ml-3 outline-none min-w-[200px] min-h-[24px] placeholder-[#A3BFB4] mt-[2px] w-[14vw] h-[3vh] sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px]"
                           onClick={() => {
                             setShowAddSearch(true);
                           }}
@@ -238,7 +238,7 @@ const ComparePage: React.FC = () => {
                         }`}>
                         <ul className="py-2 pr-6 min-w-[175px] w-[12.5vw]">
                           {filteredFunds.map((fund) => (
-                            <button key={fund.id} className="flex items-center min-h-[44px] h-[4.6vh] w-full px-4 py-2 text-[1rem] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
+                            <button key={fund.id} className="flex items-center min-h-[44px] h-[4.6vh] w-full px-4 py-2 sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
                               onClick={() => {
                                 setSearchAddFund(fund.name)
                                 setShowAddSearch(false)
@@ -251,9 +251,9 @@ const ComparePage: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex py-2">
-                      <div className="flex">
-                        <span className="mr-1 text-[14px]">ตอนนี้มี:</span>
-                        <div className="flex flex-wrap text-[14px]">
+                      <div className="flex sm:text-[6px] md:text-[8px] lg:text-[10px] xl:text-[12px] 2xl:text-[14px]">
+                        <span className="mr-1">ตอนนี้มี:</span>
+                        <div className="flex flex-wrap">
                           {selectedFundArray.map((fund) => (
                             <span key={fund}>
                               {selectedFundArray.indexOf(fund) !== 0 && (
@@ -265,7 +265,7 @@ const ComparePage: React.FC = () => {
                         </div>
                       </div>
                       <button className="ml-auto flex px-2 pt-1">
-                        <Link to={generateAddFundUrl(searchAddFund)}><span className="text-[18px] ml-auto shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-3 py-1.5 hover:bg-[#116564] hover:text-gray-100">Add</span></Link>
+                        <Link to={generateAddFundUrl(searchAddFund)}><span className="sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] ml-auto shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-3 py-1.5 hover:bg-[#116564] hover:text-gray-100">Add</span></Link>
                       </button>
                     </div>
                   </div>
