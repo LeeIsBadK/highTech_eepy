@@ -2,7 +2,7 @@
 import { ChevronLast, ChevronFirst, LayoutDashboard, LineChart, Scale, MoreVertical, List } from "lucide-react"
 import { useState, useEffect, useContext } from "react"
 import lhfund from '../assets/lhFund.png';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../loginComponent/context/AuthProvider";
 
 const navigation = [
@@ -21,8 +21,12 @@ const Sidebar: React.FC = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = async () => { 
-    setAuth({});
+  const handleLogout = () => { 
+    setAuth({
+      user: '',
+      pwd: '',
+      accessToken: ''
+    });
     navigate('/login');
   }
 
@@ -39,7 +43,7 @@ const Sidebar: React.FC = () => {
           <img
             src={lhfund}
             className={`overflow-hidden transition-all duration-500 ease-in-out ${
-              expanded ? "w-32 mr-auto ml-auto py-3" : "w-0"
+              expanded ? "2xl:w-[128px] xl:w-[120px] lg:w-[112px] md:w-[104px] sm:w-[96px] mr-auto ml-auto py-3" : "w-0"
             }`}
             alt=""
           />
@@ -52,7 +56,7 @@ const Sidebar: React.FC = () => {
         </div>
         <div className="">
           {navigation.map((item) => (
-            <Link to={item.href} key={item.text}>
+            <a href={item.href} key={item.text}>
               <button
                 className={`relative flex items-center py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
                   ${ active === item.text ? "bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}
@@ -62,7 +66,7 @@ const Sidebar: React.FC = () => {
                 {item.icon}
                 <span
                   className={`overflow-hidden transition-all duration-500 ease-in-out flex  ${
-                    expanded ? "w-52 ml-3 text-[1.1rem]" : "w-0"
+                    expanded ? "2xl:w-[208px] xl:w-[184px] lg:w-[160px] md:w-[136px] sm:w-[112px] ml-3 2xl:text-[18px] xl:text-[17px] lg:text-[16px] md:text-[15px] sm:text-[14px]" : "w-0"
                   }`}
                 >
                   {item.text}
@@ -81,7 +85,7 @@ const Sidebar: React.FC = () => {
                   </div>
                 )}
               </button>
-            </Link>
+            </a>
           ))}
         </div>      
         <div className="flex-grow" /> {/* This will push the user profile section to the bottom */}
@@ -94,11 +98,11 @@ const Sidebar: React.FC = () => {
           <div
             className={`
               flex justify-between items-center
-              overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "w-52 ml-3" : "w-0"}
+              overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "2xl:w-[208px] xl:w-[184px] lg:w-[160px] md:w-[136px] sm:w-[112px] ml-3" : "w-0"}
           `}
           >
             <div className="px-2 w-full">
-              <h4 className="flex items-center font-semibold text-[18px] text-[#072C29]">{auth.user}</h4>
+              <h4 className="flex items-center font-semibold 2xl:text-[18px] xl:text-[17px] lg:text-[16px] md:text-[15px] sm:text-[14px] text-[#072C29]">{auth.user}</h4>
             </div>
             <button onClick={() => setShowProfile(!showProfile)}>
               <MoreVertical size={20} />

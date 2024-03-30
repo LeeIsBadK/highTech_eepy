@@ -1,4 +1,5 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, ReactNode, useMemo } from "react";
+import { useLocalStorage } from '../hook/useLocalStorage'; // Assuming you've implemented the useLocalStorage hook
 
 export type Auth = {
     user: string;
@@ -8,7 +9,7 @@ export type Auth = {
 
 export interface AuthContextType {
     auth: Auth;
-    setAuth: React.Dispatch<React.SetStateAction<any>>;
+    setAuth: React.Dispatch<React.SetStateAction<Auth>>;
 }
 
 const defaultState = {
@@ -17,7 +18,7 @@ const defaultState = {
         pwd: '',
         accessToken: ''
     },
-    setAuth: () => {}
+    setAuth: () => { }
 } as AuthContextType
 
 const AuthContext = createContext(defaultState);
@@ -27,18 +28,25 @@ type AuthProviderProps = {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [auth, setAuth] = useState<Auth>({
+    const [auth, setAuth] = useLocalStorage<Auth>('auth', {
         user: '',
         pwd: '',
         accessToken: ''
     });
 
+    const value = useMemo(
+        () => ({
+            auth,
+            setAuth
+        }),
+        [auth]
+    );
+
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     )
 }
 
 export default AuthContext;
-

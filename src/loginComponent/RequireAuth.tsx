@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "./hook/useAxiosPrivate";
+import AuthContext from "./context/AuthProvider";
 
 const RequireAuth: React.FC = () => {
     const axiosPrivate = useAxiosPrivate();
     const [show, setShow] = useState<JSX.Element>(<Outlet />);
+    const { auth } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
+        if (auth.user === '' && auth.accessToken === '') {
+            navigate('/login', { state: { from: location }, replace: true });
+        }
         const checkAuthentication = async () => {
             try {
                 await axiosPrivate.get('/check', {

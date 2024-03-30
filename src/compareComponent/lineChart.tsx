@@ -140,7 +140,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
 
       chartInitializedRef.current = true;
     }
-  }, [fundsFetched, chartInitializedRef.current]);
+  }, [fundsFetched, chartInitializedRef.current, funds]);
 
   console.log(legendData);
 

@@ -5,9 +5,9 @@ import { useState } from "react";
 interface OperatingResultsProps {
     fund: string;
 }
-const first = <button className="px-[10px] py-1 bg-[#00853e] text-white sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] rounded-[15px]">ดีที่สุด</button>
-const second = <button className="px-[10px] py-1 bg-[#00e76b] text-white sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] rounded-[15px]">ดีมาก</button>
-const third = <button className="px-[10px] py-1 bg-[#74ffb4] text-white sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] rounded-[15px]">ดี</button>
+const first = <button className="w-[54px] py-1 bg-[#00853e] text-white sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] rounded-[15px]">ดีที่สุด</button>
+const second = <button className="w-[54px] py-1 bg-[#00e76b] text-white sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] rounded-[15px]">ดีมาก</button>
+const third = <button className="w-[54px] py-1 bg-[#74ffb4] text-white sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] rounded-[15px]">ดี</button>
 
 const OperatingResults = ({fund}: OperatingResultsProps) => {
     const [stat, setStat] = useState<string>('SD');

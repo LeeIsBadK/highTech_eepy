@@ -1,5 +1,4 @@
 import { Scale } from "lucide-react";
-import { Link } from "react-router-dom";
 
 interface CompareProps {
     fund: string;
@@ -8,7 +7,7 @@ interface CompareProps {
 const Compare = ({fund}: CompareProps) => {
     const url = `/compare?selectedFund=${fund}`;
     return(
-        <Link to={url}>
+        <a href={url}>
             <button className={`flex px-4 py-[7px] bg-gradient-to-tr from-[#00f2e1] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] rounded-[5px] text-white sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-medium shadow-md transition duration-250 ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-110`} 
                 style={{ whiteSpace: 'nowrap' }}
             >
@@ -18,7 +17,7 @@ const Compare = ({fund}: CompareProps) => {
                     />
                 เปรียบเทียบ
             </button>
-        </Link>
+        </a>
     );
 }
 

@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import lhFund from '../assets/lhFund.png';
 
 import axios from '../loginComponent/api/axios';
@@ -19,7 +19,6 @@ const LoginPage: React.FC = () => {
     const [errMsg, setErrMsg] = useState<string>('');
 
     const [clickButton, setClickButton] = useState<boolean>(false);
-
 
     useEffect(() => {
         if (userRef.current) {
@@ -133,7 +132,7 @@ const LoginPage: React.FC = () => {
                 <p>
                     ยังไม่ได้เป็นสมาชิก?<br />
                     <span className="underline font-bold mb-2">
-                        <Link to="/register">สมัครสมาชิก</Link>
+                        <a href="/register">สมัครสมาชิก</a>
                     </span>
                 </p>
             </div>

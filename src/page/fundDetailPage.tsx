@@ -3,7 +3,7 @@ import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
 import Fund from '../Components/fund';
 import Favorite from '../fundDetailComponent/favorite';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Detail from '../fundDetailComponent/detail';
 import { ChevronLeft, Clock, Triangle } from 'lucide-react';
 import Compare from '../fundDetailComponent/compare';
@@ -122,6 +122,8 @@ interface Fund {
     }
   ]
 
+  const goUp = <Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] sm:w-[10px] sm:h-[10px]'/>
+  const goDown = <Triangle fill='#ef5350' size={18} className='text-[#ef5350] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] sm:w-[10px] sm:h-[10px] rotate-180'/>
 
 const FundDetailPage: React.FC = () => {
   const location = useLocation();
@@ -144,9 +146,9 @@ const FundDetailPage: React.FC = () => {
             <div className='pb-4 mt-1 sm:pb-8 sm:mt-2 lg:pb-12'>
               <div className="grid grid-cols-4 gap-x-8 items-center">
                 <h2 className="flex items-center sm:text-[16px] md:text-[20px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight text-[#072C29]">
-                  <Link to='/fund'>
+                  <a href='/fund'>
                     <ChevronLeft size={36} className='mr-4 2xl:w-9 2xl:h-9 xl:w-8 xl:h-8 lg:w-7 lg:h-7 md:w-6 md:h-6 sm:w-5 sm:h-5'/>
-                  </Link>
+                  </a>
                   รายละเอียดกองทุน
                 </h2>
                 <div className="col-span-2 ml-auto mr-auto">
@@ -163,7 +165,7 @@ const FundDetailPage: React.FC = () => {
                   </div>
                   <div className='flex flex-col items-end ml-auto'>
                     <span className='flex items-center px-2 sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] font-bold text-[#072C29]'>
-                      <Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] sm:w-[10px] sm:h-[10px]'/>
+                      {goUp}
                       8.4301
                     </span>
                     <span className='px-2 sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-semibold text-[#00bc91]'>+ 0.9027</span>

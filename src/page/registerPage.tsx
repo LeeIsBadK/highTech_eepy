@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import axios from '../loginComponent/api/axios';
-import { Link } from "react-router-dom";
 import lhFund from '../assets/lhFund.png';
 import { Check, Info } from "lucide-react";
 
@@ -55,6 +54,7 @@ const RegisterPage: React.FC = () => {
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
             setErrMsg("Invalid Entry");
+            setClickButton(false);
             return;
         }
         try {
@@ -65,11 +65,9 @@ const RegisterPage: React.FC = () => {
                     withCredentials: true
                 }
             );
-            // TODO: remove console.logs before deployment
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response))
             setSuccess(true);
-            //clear state and controlled inputs
             setUser('');
             setPwd('');
             setMatchPwd('');
@@ -100,14 +98,14 @@ const RegisterPage: React.FC = () => {
                     <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">สมัครสมาชิกสำเร็จ</h2>
                     <Check size={120} className="flex w-full items-center text-[#00bc91]" />
                     <div className="py-1">
-                        <Link to="/login">
+                        <a href="/login">
                             <button
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-[16px] sm:text-[14px] lg:text-[18px] font-medium rounded-md shadow-md text-white bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 เข้าสู่ระบบ
                             </button>
-                        </Link>
+                        </a>
                     </div>
                 </div>
 
@@ -183,7 +181,6 @@ const RegisterPage: React.FC = () => {
                             <button
                                 type="submit"
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-[16px] sm:text-[14px] lg:text-[18px] font-medium rounded-md shadow-md text-white bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                disabled={!validName || !validPwd || !validMatch ? true : false}
                                 onClick={(e:any) => {
                                     e.preventDefault();
                                     setClickButton(true);
@@ -206,7 +203,7 @@ const RegisterPage: React.FC = () => {
                     <p>
                         เป็นสมาชิกอยู่แล้ว?<br />
                         <span className="underline font-bold mb-2">
-                            <Link to="/login">ลงชื่อเข้า</Link>
+                            <a href="/login">ลงชื่อเข้า</a>
                         </span>
                     </p>
                 </div>
