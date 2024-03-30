@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-const BASE_URL = 'https://crowded-cowboy-boots-slug.cyclic.app';
+const BASE_URL = 'https://backend-fund.vercel.app';
 
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: BASE_URL
