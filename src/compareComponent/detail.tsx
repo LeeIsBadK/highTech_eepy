@@ -3,8 +3,9 @@ import Investment from "./investment"
 import ChartComponent from "./lineChart"
 import OperatingResults from "./operatingResults"
 import OverView from "./overview"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Fee from "./fee"
+import { useLocation, useNavigate } from "react-router-dom"
 
 interface DetailProps {
   selectedFundArray: Array<string>;
@@ -12,32 +13,45 @@ interface DetailProps {
 }
 
 const Detail = ({selectedFundArray, generateDeleteFundUrl}: DetailProps) => {
-  const [selected,setSelected] = useState<string>('ภาพรวม');
+  const [current, setCurrent] = useState<string>('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const url = location.pathname;
+    const current = url.split('/compare/')[1]
+    console.log(current)
+    if (current && (current.includes('performance') || current.includes('port') || current.includes('fee'))) {
+      setCurrent(current.split('/')[0]);
+    }
+    else
+      setCurrent(''); 
+  }, [location.pathname]);
 
     return (
       <div>
         <div className="flex items-center pt-7 sm:px-3 lg:px-5">
           <div className="border-b border-b-2 w-full">
-            <button className={`${selected === 'ภาพรวม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-                onClick={() => setSelected('ภาพรวม')}>
+            <button className={`${current === '' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+                onClick={() => navigate('/compare?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
               <span className="flex items-center"><ReceiptText size={19} className="mr-[5px]" />ภาพรวม</span>
             </button>
-            <button className={`${selected === 'ผลการดำเนินงานและปันผล' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-              onClick={() => setSelected('ผลการดำเนินงานและปันผล')}>
+            <button className={`${current === 'performance' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+              onClick={() => navigate('/compare/performance?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
               <span className="flex items-center"><HandCoins size={19} className="mr-[5px]" />ผลการดำเนินงานและปันผล</span>
             </button>
-            <button className={`${selected === 'พอร์ตการลงทุน' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-              onClick={() => setSelected('พอร์ตการลงทุน')}>
+            <button className={`${current === 'port' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+              onClick={() => navigate('/compare/port?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
               <span className="flex items-center"><PieChart size={19} className="mr-[5px]" />พอร์ตการลงทุน</span>
             </button>
-            <button className={`${selected === 'ค่าธรรมเนียม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
-                  onClick={() => setSelected('ค่าธรรมเนียม')}>
+            <button className={`${current === 'fee' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+                  onClick={() => navigate('/compare/fee?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
                   <span className="flex items-center"><Coins size={19} className="mr-[5px]" />ค่าธรรมเนียม</span>
             </button>
           </div>
         </div>
         <div className="h-full py-8 sm:px-6 lg:px-8">
-          {selected === 'ภาพรวม' && (
+          {current === '' && (
             <div>
               <div className="pb-8 pt-2">
                 <ChartComponent funds={selectedFundArray}/>
@@ -45,13 +59,13 @@ const Detail = ({selectedFundArray, generateDeleteFundUrl}: DetailProps) => {
               <OverView funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
             </div>
           )}
-          {selected === 'ผลการดำเนินงานและปันผล' && (
+          {current === 'performance' && (
             <OperatingResults funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
           )}
-          {selected === 'พอร์ตการลงทุน' && (
+          {current === 'port' && (
             <Investment funds={selectedFundArray}  generateDeleteFundUrl={generateDeleteFundUrl} />
           )}
-          {selected === 'ค่าธรรมเนียม' && (
+          {current === 'fee' && (
             <Fee funds={selectedFundArray} generateDeleteFundUrl={generateDeleteFundUrl} />
         )}
         </div>

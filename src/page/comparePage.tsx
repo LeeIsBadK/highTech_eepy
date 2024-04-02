@@ -1,20 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../Components/sidebar";
 import SearchBar from "../Components/search";
 import { CirclePlus, X, Search } from "lucide-react";
 import Detail from "../compareComponent/detail";
-
-interface Fund {
-  id: number;
-  name: string;
-  detail: string;
-  href: string;
-  risk: number;
-  type: string;
-  value: number;
-  returns: number;
-}
+import { useLocalStorage } from "../loginComponent/hook/useLocalStorage";
+import axios from "axios";
 
 export const fundData = [
   {
@@ -119,32 +110,59 @@ export const fundData = [
   }
 ]
 
+const apiClient = axios.create({
+  baseURL: 'https://backend-ruby-eight.vercel.app',
+});
+
 
 const ComparePage: React.FC = () => {
   const location = useLocation();
+  const [allFunds, setAllFunds] = useState<Array<any> | null>(null);
   const [selectedFundArray, setSelectedFundArray] = useState<string[]>([]);
   const [showAddFund, setShowAddFund] = useState<boolean>(false);
   const [showAddSearch, setShowAddSearch] = useState<boolean>(false);
   const [searchAddFund, setSearchAddFund] = useState<string>('');
-  const [filteredFunds, setFilteredFunds] = useState<Fund[]>([]);
+  const [filteredFunds, setFilteredFunds] = useState<any[]>([]);
   const [checkFunds, setCheckFunds] = useState<boolean>(false);
+  const [storedCompare, setStoredCompare] = useLocalStorage<string[]>("compare", []);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiClient.get('/allpro');
+        setAllFunds(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const selectedFund = searchParams.get("selectedFund");
-    console.log(selectedFund);
     if (!selectedFund) {
-      setCheckFunds(true);
+      if (storedCompare.length !== 0) {
+        const fundsQuery = storedCompare.join(",");
+        navigate(`/compare?selectedFund=${fundsQuery}`, { state: { from: location }, replace: true });
+        setSelectedFundArray(storedCompare);
+      } else {
+        setCheckFunds(true);
+      }
+    } else {
+      setSelectedFundArray(selectedFund ? selectedFund.split(",") : []);
+      setStoredCompare(selectedFund ? selectedFund.split(",") : []);
     }
-    setSelectedFundArray(selectedFund ? selectedFund.split(",") : []);
-    console.log(selectedFundArray);
   }, [location.search, checkFunds]);
 
   useEffect(() => {
-    // Filter out the funds that are already in selectedFundArray
-    const filtered = fundData.filter(fund => !selectedFundArray.includes(fund.name));
-    setFilteredFunds(filtered);
-  }, [selectedFundArray]);
+    if (allFunds) {
+      const filtered = allFunds.filter(fund => !selectedFundArray.includes(fund.name));
+      setFilteredFunds(filtered);
+    }
+  }, [allFunds, selectedFundArray]);
 
   const generateDeleteFundUrl = (fund: string) => {
     const fundArrayCopy = selectedFundArray.filter((f) => f !== fund);
@@ -174,7 +192,7 @@ const ComparePage: React.FC = () => {
           <div className='grid grid-cols-3 gap-x-10 px-2 pb-4 mt-1 sm:px-6 sm:pb-8 sm:mt-2 lg:px-8 lg:pb-12'>
             <h2 className="sm:text-[16px] md:text-[20px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px] font-bold tracking-tight text-[#072C29]">เปรียบเทียบกองทุน</h2>
             <div className="ml-auto mr-auto">
-              <SearchBar funds={fundData as Fund[]} />
+              <SearchBar funds={allFunds} />
             </div>
           </div>
         </div>
@@ -188,7 +206,7 @@ const ComparePage: React.FC = () => {
                   <span className="sm:text-[11px] md:text-[13px] lg:text-[15px] xl:text-[17px] 2xl:text-[19px] font-semibold px-1 text-[#999999]">vs</span>
                 )}
                 <span className="flex justify-center items-center sm:text-[13px] md:text-[15px] lg:text-[17px] xl:text-[19px] 2xl:text-[21px] px-2 font-bold text-[#072C29]">
-                  {fund}<a href={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 ml-1 2xl:w-[22px] 2xl:h-[22px] xl:w-[20px] xl:h-[20px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px]" /></a>
+                  <a href={`/fund/${fund}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund}</a><a href={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 2xl:w-[22px] 2xl:h-[22px] xl:w-[20px] xl:h-[20px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] sm:w-[14px] sm:h-[14px]" /></a>
                 </span>
               </div>
             ))}
@@ -236,11 +254,11 @@ const ComparePage: React.FC = () => {
                       {filteredFunds.map((fund) => (
                         <button key={fund.id} className="flex items-center min-h-[44px] h-[4.6vh] w-full px-4 py-2 sm:text-[8px] md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
                           onClick={() => {
-                            setSearchAddFund(fund.name)
+                            setSearchAddFund(fund.proj_abbr_name)
                             setShowAddSearch(false)
                           }}
                         >
-                          {fund.name}
+                          {fund.proj_abbr_name}
                         </button>
                       ))}
                     </ul>

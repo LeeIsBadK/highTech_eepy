@@ -1,6 +1,12 @@
 import { riskColor } from "../assets/color";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { Check, X, CornerRightDown, Star, CircleChevronDown, CircleChevronUp } from 'lucide-react';
+import axios from "axios";
+import AuthContext from "../loginComponent/context/AuthProvider";
+
+const apiClient = axios.create({
+  baseURL: 'https://backend-ruby-eight.vercel.app',
+});
 
 const Fund = ({ funds }: { funds: Array<any> | null }) => {
   const [selectedFund, setSelectedFund] = useState<string[]>([]);
@@ -11,10 +17,24 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
   const [showFunds, setShowFunds] = useState<Array<any> | null>(funds);
   const [sortNum, setSortNum] = useState<number>(0);
   const [check, setCheck] = useState<number>(0);
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     setShowFunds(funds);
   }, [funds]);
+
+  useEffect(() => {
+    const fetchFav = async () => {
+      try {
+        const response = await apiClient.get(`/fav/${auth.user}`);
+        setSelectedFavorite(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchFav();
+  }, [selectedFavorite]);
 
   useEffect(() => {
     if (compare.current) {
@@ -39,11 +59,29 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
     }
   };
 
-  const handleFavorite = (fund: string): void => {
+  const handleFavorite = async (fund: string): Promise<void> => {
     if (selectedFavorite.includes(fund)) {
       setSelectedFavorite(selectedFavorite.filter((f) => f !== fund));
+      try {
+        await apiClient.delete(`/fav/delete/${auth.user}/${fund}`, {
+          withCredentials: true
+      });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     } else {
       setSelectedFavorite([...selectedFavorite, fund]);
+      try {
+        await apiClient.post(`/fav/add/${auth.user}`,
+          JSON.stringify({ "proj_abbr_name" : fund }),
+          {
+              headers: { 'Content-Type': 'application/json' },
+              withCredentials: true
+          }
+      );
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     }
   };
 
@@ -90,8 +128,6 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
       setSortNum(updatedSortNum);
     }
   };
-
-  console.log(funds, showFunds);
 
   return (
     <div className=""
@@ -176,7 +212,7 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
                         </button>
                       </div>
                     </div>
-                    <a href={`/fund/${fund.proj_abbr_name}`} className="col-span-3 hover:bg-gray-100 p-2 rounded-[10px] sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] font-semibold text-[#072C29]">
+                    <a href={`/detail/${fund.proj_abbr_name}`} className="col-span-3 hover:bg-gray-100 p-2 rounded-[10px] sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] font-semibold text-[#072C29]">
                       <span className="pt-1">{fund.proj_abbr_name}</span>
                       <span className="sm:text-[7px] md:text-[9px] lg:text-[11px] xl:text-[13px] 2xl:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.Allinfo.fundName}</span>
                     </a>
@@ -184,7 +220,7 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
                       <p className='sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold sm:px-[8px] sm:py-[2px] lg:px-[10px] lg:py-[3px] 2xl:px-[12px] 2xl:py-[4px] border border-2 rounded-md' style={{ color: `${riskColor[fund.risk]}`, borderColor: `${riskColor[fund.risk]}` }}>{fund.risk}</p>
                     </div>
                     <div className="col-span-2 flex justify-center items-center">
-                      <a href={`/fund/${fund.proj_abbr_name}`}>
+                      <a href={`/detail/${fund.proj_abbr_name}`}>
                         <p className="sm:px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] font-semibold">{fund.type}</p>
                       </a>
                     </div>

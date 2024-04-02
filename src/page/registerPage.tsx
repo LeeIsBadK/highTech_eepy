@@ -1,11 +1,18 @@
 import { useRef, useState, useEffect } from "react";
-import axios from '../loginComponent/api/axios';
+import loginAxios from '../loginComponent/api/loginAxios';
+import axios from "axios";
 import lhFund from '../assets/lhFund.png';
 import { Check, Info } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const REGISTER_URL = '/register';
+
+const apiClient = axios.create({
+    baseURL: 'https://backend-ruby-eight.vercel.app',
+});
+  
 
 const RegisterPage: React.FC = () => {
     const userRef = useRef<HTMLInputElement>(null);
@@ -58,8 +65,15 @@ const RegisterPage: React.FC = () => {
             return;
         }
         try {
-            const response = await axios.post(REGISTER_URL,
+            const response = await loginAxios.post(REGISTER_URL,
                 JSON.stringify({ user, pwd }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            await apiClient.post(`/fav/add/${user}`,
+                JSON.stringify({ user, "proj_abbr_name": '-' }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -203,7 +217,7 @@ const RegisterPage: React.FC = () => {
                     <p>
                         เป็นสมาชิกอยู่แล้ว?<br />
                         <span className="underline font-bold mb-2">
-                            <a href="/login">ลงชื่อเข้า</a>
+                            <Link to="/login">ลงชื่อเข้า</Link>
                         </span>
                     </p>
                 </div>

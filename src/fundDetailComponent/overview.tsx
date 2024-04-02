@@ -1,12 +1,15 @@
 import { ChevronRight, ClipboardCheck, ClipboardPenLine } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface OverviewProps {
   fund: string;
-  setSelected: (selected: string) => void;
 }
 
 
-const OverView = ({ fund, setSelected }: OverviewProps) => {
+const OverView = ({ fund }: OverviewProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div className="pb-[50px] pt-[45px]">
       <p className="text-[0px]">{fund}</p>
@@ -14,24 +17,24 @@ const OverView = ({ fund, setSelected }: OverviewProps) => {
         <span className="flex items-center font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]">ผลตอบแทน</span>
         <span className="col-start-3 flex flex-col ssm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-[#00bc91] font-bold items-center">
           9.44%
-          <span className="pt-2 sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-[#072C29] font-normal">3M</span>
+          <p className="pt-2 sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-[#072C29] font-normal">3M</p>
         </span>
         <span className="flex flex-col sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-[#00bc91] font-bold items-center border-x border-gray-400">
           100.73%
-          <span className="pt-2 sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-[#072C29] font-normal">6M</span>
+          <p className="pt-2 sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-[#072C29] font-normal">6M</p>
         </span>
         <span className="flex flex-col sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-[#00bc91] font-bold items-center">
           136.02%
-          <span className="pt-2 sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-[#072C29] font-normal">1Y</span>
+          <p className="pt-2 sm:text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-[#072C29] font-normal">1Y</p>
         </span>
-        <button className="col-start-7 flex items-center ml-auto font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]" onClick={() => setSelected('ผลการดำเนินงานและปันผล')}>
+        <button className="col-start-7 flex items-center ml-auto font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]" onClick={() => navigate('/detail/performance/' + fund, { state: { from: location }, replace: true })}>
           ดูทั้งหมด
           <ChevronRight className="mt-[1px] 2xl:w-[24px] 2xl:h-[24px] xl:w-[22px] xl:h-[22px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] sm:w-[16px] sm:h-[16px]" />
         </button>
       </div>
       <div className="px-4 pt-14 pb-4">
         <span className="flex font-bold sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-[#072C29]">
-          <ClipboardCheck size={26} className="mr-2 mt-[2px] 2xl:w-[26px] 2xl:h-[26px] xl:w-[24px] xl:h-[24px] lg:w-[22px] lg:h-[22px] md:w-[20px] md:h-[20px] sm:w-[18px] sm:h-[18px]"/>
+          <ClipboardCheck size={26} className="mr-2 mt-[2px] 2xl:w-[26px] 2xl:h-[26px] xl:w-[24px] xl:h-[24px] lg:w-[22px] lg:h-[22px] md:w-[20px] md:h-[20px] sm:w-[18px] sm:h-[18px]" />
           กลยุทธ์การลงทุน
         </span>
       </div>
@@ -40,7 +43,7 @@ const OverView = ({ fund, setSelected }: OverviewProps) => {
       </div>
       <div className="px-4 pt-14 pb-4">
         <span className="flex font-bold sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text-[#072C29]">
-          <ClipboardPenLine size={26} className="mr-2 mt-[2px] 2xl:w-[26px] 2xl:h-[26px] xl:w-[24px] xl:h-[24px] lg:w-[22px] lg:h-[22px] md:w-[20px] md:h-[20px] sm:w-[18px] sm:h-[18px]"/>
+          <ClipboardPenLine size={26} className="mr-2 mt-[2px] 2xl:w-[26px] 2xl:h-[26px] xl:w-[24px] xl:h-[24px] lg:w-[22px] lg:h-[22px] md:w-[20px] md:h-[20px] sm:w-[18px] sm:h-[18px]" />
           รายละเอียดกองทุน
         </span>
       </div>

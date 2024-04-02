@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import lhFund from '../assets/lhFund.png';
 
-import axios from '../loginComponent/api/axios';
+import axios from '../loginComponent/api/loginAxios';
 import AuthContext from '../loginComponent/context/AuthProvider';
+import { useLocalStorage } from '../loginComponent/hook/useLocalStorage';
 const LOGIN_URL = '/auth';
 
 const LoginPage: React.FC = () => {
@@ -19,6 +20,9 @@ const LoginPage: React.FC = () => {
     const [errMsg, setErrMsg] = useState<string>('');
 
     const [clickButton, setClickButton] = useState<boolean>(false);
+
+    const [ storedCompare, setStoredCompare ] = useLocalStorage<string[]>("compare", []);
+    const [ storedDetail, setStoredDetail ] = useLocalStorage("detail", "");
 
     useEffect(() => {
         if (userRef.current) {
@@ -44,6 +48,10 @@ const LoginPage: React.FC = () => {
             //console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
             setAuth({ user, pwd, accessToken });
+            if (storedDetail)
+                setStoredDetail("");
+            if (storedCompare)
+                setStoredCompare([]);
             setUser('');
             setPwd('');
             navigate(from, { replace: true });
@@ -132,7 +140,7 @@ const LoginPage: React.FC = () => {
                 <p>
                     ยังไม่ได้เป็นสมาชิก?<br />
                     <span className="underline font-bold mb-2">
-                        <a href="/register">สมัครสมาชิก</a>
+                        <Link to="/register">สมัครสมาชิก</Link>
                     </span>
                 </p>
             </div>

@@ -31,7 +31,7 @@ const Fee = ({funds, generateDeleteFundUrl}: OperatingResultsProps) => {
                             style={{ whiteSpace: 'nowrap'}}
                           >
                             <div className="py-4 px-2 font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]">
-                              <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}>{fund}<a href={generateDeleteFundUrl(fund)}><X className="mt-[3px] ml-1 text-gray-400" /></a></span>
+                              <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px]`}><a href={`/detail/${fund}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund}</a><a href={generateDeleteFundUrl(fund)}><X className="text-gray-400" /></a></span>
                             </div>
                             <div className={`${funds.indexOf(fund)%2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]' } grid grid-cols-2 border border-gray-300 rounded-[10px] sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                               <div>

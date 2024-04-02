@@ -10,17 +10,27 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
   const [legendData, setLegendData] = useState<{ name: string; color: any }[]>([]);
   const Themecolors: am5.Color[] = [
     am5.color(0x095256),
-    am5.color(0x087f8c),
-    am5.color(0x5aaa95),
-    am5.color(0x86a873),
-    am5.color(0xbb9f06)
+    am5.color(0xf5c06e),
+    am5.color(0x9adcec),
+    am5.color(0xe52a85),
+    am5.color(0xbb9f06),
+    am5.color(0xff2a0a),
+    am5.color(0x20b37f),
+    am5.color(0x6564f1),
+    am5.color(0xcf5f64),
+    am5.color(0x0240b1)
   ];
   const colors: string[] = [
     '#095256',
-    '#087f8c',
-    '#5aaa95',
-    '#86a873',
-    '#bb9f06'
+    '#f5c06e',
+    '#9adcec',
+    '#e52a85',
+    '#bb9f06',
+    '#ff2a0a',
+    '#20b37f',
+    '#6564f1',
+    '#cf5f64',
+    '#0240b1'
   ]
 
   useEffect(() => {
@@ -29,7 +39,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
     }
   }, [funds, fundsFetched]);
 
-  console.log(funds)
   useEffect(() => {
     if (chartDivRef.current && fundsFetched && !chartInitializedRef.current) {
       const root = am5.Root.new(chartDivRef.current);
@@ -104,7 +113,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
         })
       }));
 
-      console.log(funds);
       const updatedLegendData: { name: string; color: any }[] = [];
 
       funds.forEach((fund, index) => {
@@ -142,7 +150,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
     }
   }, [fundsFetched, chartInitializedRef.current, funds]);
 
-  console.log(legendData);
 
   return (
     <>
