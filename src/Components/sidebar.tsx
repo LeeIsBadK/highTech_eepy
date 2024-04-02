@@ -128,22 +128,22 @@ const Sidebar: React.FC = () => {
               {item.text === "Detail" && (
                 <div className={`${expanded ? 'max-w-full' : 'w-0 h-0'} transition-w duration-1000 ease-in-out`}>
                   <div className={`block bg-white text-gray-600 rounded-[5px] shadow-md overflow-hidden transition-max-h duration-1000 ease-in-out ${detail ? 'max-h-[250px]' : 'max-h-0'}`}>
-                    <ul className="pl-[48px] flex flex-col py-2">
-                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                    <ul className="pl-[48px] flex flex-col py-2 2xl:text-[16px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px]">
+                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/' + storedDetail, { state: { from: location }, replace: true })}>
                         <span className="flex items-center"><ReceiptText size={19} className={`${active === item.text && current === '' ? 'size-[20px]' : ''} mr-[8px]`} />ภาพรวม</span>
                       </button>
-                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/performance/' + storedDetail, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px]" />ผลการดำเนินงานและปันผล</span>
+                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ผลการดำเนินงานและปันผล</span>
                       </button>
-                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/port/' + storedDetail, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><PieChart size={19} className="mr-[8px]" />พอร์ตการลงทุน</span>
+                        <span className="flex items-center"><PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />พอร์ตการลงทุน</span>
                       </button>
-                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/fee/' + storedDetail, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><Coins size={19} className="mr-[8px]" />ค่าธรรมเนียม</span>
+                        <span className="flex items-center"><Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ค่าธรรมเนียม</span>
                       </button>
                     </ul>
                   </div>
@@ -152,22 +152,22 @@ const Sidebar: React.FC = () => {
               {item.text === "Compare" && (
                 <div className={`${expanded ? 'max-w-full' : 'w-0 h-0'} transition-w duration-1000 ease-in-out`}>
                   <div className={`block bg-white text-gray-600 rounded-[5px] shadow-md overflow-hidden transition-max-h duration-1000 ease-in-out ${compare ? 'max-h-[250px]' : 'max-h-0'}`}>
-                    <ul className="pl-[48px] flex flex-col py-2">
+                    <ul className="pl-[48px] flex flex-col py-2 2xl:text-[16px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px]">
                       <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><ReceiptText size={19} className={`${active === item.text && current === '' ? 'size-[20px]' : ''} mr-[8px]`} />ภาพรวม</span>
+                        <span className="flex items-center"><ReceiptText size={19} className={`${active === item.text && current === '' ? 'size-[20px]' : ''} mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]`} />ภาพรวม</span>
                       </button>
                       <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare/performance?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px]" />ผลการดำเนินงานและปันผล</span>
+                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ผลการดำเนินงานและปันผล</span>
                       </button>
                       <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare/port?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><PieChart size={19} className="mr-[8px]" />พอร์ตการลงทุน</span>
+                        <span className="flex items-center"><PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />พอร์ตการลงทุน</span>
                       </button>
                       <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare/fee?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><Coins size={19} className="mr-[8px]" />ค่าธรรมเนียม</span>
+                        <span className="flex items-center"><Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ค่าธรรมเนียม</span>
                       </button>
                     </ul>
                   </div>
