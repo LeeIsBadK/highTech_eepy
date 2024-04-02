@@ -1,55 +1,68 @@
 import { Coins, HandCoins, PieChart, ReceiptText } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ChartComponent from "../compareComponent/lineChart";
 import OverView from "./overview";
 import OperatingResults from "./opearatingResults";
 import Investment from "./investment";
 import Fee from "./fee";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface DetailProps {
-  selectedFundArray: Array<string>;
+  fund: string;
 }
 
-const Detail = ({ selectedFundArray }: DetailProps) => {
-  const [selected, setSelected] = useState<string>('ภาพรวม');
+const Detail = ({ fund }: DetailProps) => {
+  const [current, setCurrent] = useState<string>('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const url = location.pathname; // Get the current pathname from the location object
+    const current = url.split('/detail/')[1]
+    console.log(current)
+    if (current && (current.includes('performance') || current.includes('port') || current.includes('fee')))
+      setCurrent(current.split('/')[0]);
+    else
+      setCurrent(''); 
+  }, [location.pathname]);
 
   return (
     <div>
       <div className="flex items-center pt-7 sm:px-3 lg:px-5">
         <div className="border-b border-b-2 w-full">
-          <button className={`${selected === 'ภาพรวม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
-            onClick={() => setSelected('ภาพรวม')}>
+          <button className={`${current === '' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
+            onClick={() => navigate('/detail/'+ fund, { state: { from: location }, replace: true })}>
             <span className="flex items-center"><ReceiptText size={19} className="mr-[5px]" />ภาพรวม</span>
           </button>
-          <button className={`${selected === 'ผลการดำเนินงานและปันผล' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
-            onClick={() => setSelected('ผลการดำเนินงานและปันผล')}>
+          <button className={`${current === 'performance' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
+            onClick={() => navigate('/detail/performance/'+ fund, { state: { from: location }, replace: true })}>
             <span className="flex items-center"><HandCoins size={19} className="mr-[5px]" />ผลการดำเนินงานและปันผล</span>
           </button>
-          <button className={`${selected === 'พอร์ตการลงทุน' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
-            onClick={() => setSelected('พอร์ตการลงทุน')}>
+          <button className={`${current === 'port' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
+            onClick={() => navigate('/detail/port/'+ fund, { state: { from: location }, replace: true })}>
             <span className="flex items-center"><PieChart size={19} className="mr-[5px]" />พอร์ตการลงทุน</span>
           </button>
-          <button className={`${selected === 'ค่าธรรมเนียม' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
-            onClick={() => setSelected('ค่าธรรมเนียม')}>
+          <button className={`${current === 'fee' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`}
+            onClick={() => navigate('/detail/fee/'+ fund, { state: { from: location }, replace: true })}>
             <span className="flex items-center"><Coins size={19} className="mr-[5px]" />ค่าธรรมเนียม</span>
           </button>
         </div>
       </div>
       <div className="h-full py-8 sm:px-6 lg:px-8">
-        {selected === 'ภาพรวม' && (
+        {current === '' && fund !== 'detail' && (
           <div className="pb-8 pt-2">
-            <ChartComponent funds={selectedFundArray} />
-            <OverView fund={selectedFundArray[0]} setSelected={setSelected} />
+            <ChartComponent funds={[fund]} />
+            <OverView fund={fund} />
           </div>
         )}
-        {selected === 'ผลการดำเนินงานและปันผล' && (
-          <OperatingResults fund={selectedFundArray[0]} />
+        {current === 'performance' && fund !== 'detail' && (
+          <OperatingResults fund={fund} />
         )}
-        {selected === 'พอร์ตการลงทุน' && (
-            <Investment fund={selectedFundArray[0]} />
+        {current === 'port' && fund !== 'detail' && (
+            <Investment fund={fund} />
         )}
-        {selected === 'ค่าธรรมเนียม' && (
-            <Fee fund={selectedFundArray[0]} />
+        {current === 'fee' && fund !== 'detail' && (
+            <Fee fund={fund} />
         )}
       </div>
     </div>

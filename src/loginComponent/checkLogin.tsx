@@ -1,16 +1,32 @@
-import { useContext } from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "./context/AuthProvider";
+import useAxiosPrivate from "./hook/useAxiosPrivate";
 
-
-const CheckLogin: React.FC = () => { //ยังไม่ได้
+const CheckLogin: React.FC = () => {
+    const axiosPrivate = useAxiosPrivate();
     const { auth } = useContext(AuthContext);
+    const navigate = useNavigate();
     const location = useLocation();
 
-    return (
-        auth?.user && auth?.accessToken ? <Navigate to="/fund" state={{ from: location }} replace />
-            : <Outlet />
-    );
-}
+    useEffect(() => {
+        const checkAuthentication = async () => {
+            try {
+                if (auth.user && auth.accessToken) {
+                    await axiosPrivate.get('/check', {
+                        withCredentials: true
+                    });
+                    navigate('/fund', { state: { from: location }, replace: true });
+                }
+            } catch (error) {
+                console.error("Authentication check failed:", error);
+            }
+        };
+
+        checkAuthentication();
+    }, []);
+
+    return <Outlet />;
+};
 
 export default CheckLogin;
