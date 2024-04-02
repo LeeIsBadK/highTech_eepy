@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
   }, []); // Run this effect only once when the component mounts
 
   return (
-    <aside className="max-h-[100svh]">
+    <aside className="min-h-[100svh]">
       <nav className="h-full flex flex-col bg-white border-r shadow-lg pl-1 pr-1">
         <div className="p-4 px-2 pb-2 flex justify-between items-center border-b">
           <img
