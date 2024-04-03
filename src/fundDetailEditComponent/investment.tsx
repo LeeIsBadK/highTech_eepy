@@ -1,4 +1,4 @@
-import { Clock } from "lucide-react";
+import { Clock, PencilLine } from "lucide-react";
 import DoughNutChart from "./doughnutChart";
 
 interface OverviewProps {
@@ -10,7 +10,10 @@ const Investment = ({ fund }: OverviewProps) => {
       <div className="py-2 px-8">
         <p className="text-[0px]">{fund}</p>
         <div className="py-4 px-4 text-[12px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-          <span className={`w-full py-4 rounded-[10px] font-bold`}>TOP 5 Holding</span>
+          <span className={`flex w-full py-4 rounded-[10px] font-bold`}>
+            TOP 5 Holding
+            <PencilLine size={26} className="text-[#ef5350] ml-3 mt-[1px] 2xl:w-[24px] 2xl:h-[24px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] w-[16px] h-[16px]" />
+          </span>
           <span className='flex items-center py-2 text-[6px] lg:text-[10px] 2xl:text-[14px] text-[#7c8594]'>
             <Clock size={16} className='mr-[6px] 2xl:w-[16px] 2xl:h-[16px] lg:w-[12px] lg:h-[12px] w-[8px] sh-[8px]' /> 
             ข้อมูล ณ วันที่ 20 มี.ค. 2567
@@ -27,7 +30,10 @@ const Investment = ({ fund }: OverviewProps) => {
           </div>
         </div>
         <div className="py-4 px-4 pt-14 text-[12px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-          <span className={`w-full py-4 rounded-[10px] font-bold`}>สัดส่วนการลงทุน</span>
+          <span className={`flex w-full py-4 rounded-[10px] font-bold`}>
+            สัดส่วนการลงทุน
+            <PencilLine size={26} className="text-[#ef5350] ml-3 mt-[1px] 2xl:w-[24px] 2xl:h-[24px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] w-[16px] h-[16px]" />
+          </span>
           <span className='flex items-center py-2 text-[6px] lg:text-[10px] 2xl:text-[14px] text-[#7c8594]'>
             <Clock size={16} className='mr-[6px] 2xl:w-[16px] 2xl:h-[16px] lg:w-[12px] lg:h-[12px] w-[8px] h-[8px]' /> 
             ข้อมูล ณ วันที่ 20 มี.ค. 2567
@@ -44,7 +50,10 @@ const Investment = ({ fund }: OverviewProps) => {
           </div>
         </div>
         <div className="py-4 px-4 pt-14 text-[12px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-          <span className={`w-full py-4 rounded-[10px] font-bold`}>กลุ่มประเภทตราสารทุน/ตราสารหนี้ที่ลงทุน</span>
+          <span className={`flex w-full py-4 rounded-[10px] font-bold`}>
+            กลุ่มประเภทตราสารทุน/ตราสารหนี้ที่ลงทุน
+            <PencilLine size={26} className="text-[#ef5350] ml-3 mt-[1px] 2xl:w-[24px] 2xl:h-[24px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] w-[16px] h-[16px]" />
+          </span>
           <span className='flex items-center py-2 text-[6px] lg:text-[10px] 2xl:text-[14px] text-[#7c8594]'>
             <Clock size={16} className='mr-[6px] 2xl:w-[16px] 2xl:h-[16px] lg:w-[12px] lg:h-[12px] md:w-[10px] md:h-[10px] w-[8px] h-[8px]' /> 
             ข้อมูล ณ วันที่ 20 มี.ค. 2567

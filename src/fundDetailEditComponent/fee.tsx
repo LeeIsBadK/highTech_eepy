@@ -1,4 +1,4 @@
-import { Coins, NotebookPen } from "lucide-react";
+import { Coins, NotebookPen, PencilLine } from "lucide-react";
 
 
 interface OverviewProps {
@@ -13,6 +13,7 @@ const Fee = ({ fund }: OverviewProps) => {
                     <span className={`flex items-center w-full rounded-[10px]`}>
                         <NotebookPen className="mr-2 2xl:w-[24px] 2xl:h-[24px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] sw-[16px] h-[16px]"/>
                         รายละเอียดการซื้อ
+                        <PencilLine size={26} className="text-[#ef5350] ml-3 mt-[1px] 2xl:w-[24px] 2xl:h-[24px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] w-[16px] h-[16px]" />
                     </span>
                 </div>
                 <div className={`py-4 bg-white rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-700 px-5 shadow-md w-full`}>
@@ -29,6 +30,7 @@ const Fee = ({ fund }: OverviewProps) => {
                     <span className={`flex items-center w-full rounded-[10px]`}>
                         <Coins className="mr-2 2xl:w-[24px] 2xl:h-[24px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] w-[16px] h-[16px]"/>
                         ค่าธรรมเนียม
+                        <PencilLine size={26} className="text-[#ef5350] ml-3 mt-[1px] 2xl:w-[24px] 2xl:h-[24px] lg:w-[20px] lg:h-[20px] md:w-[18px] md:h-[18px] w-[16px] h-[16px]" />
                     </span>
                 </div>
                 <div className={`grid grid-cols-3 py-5 bg-white rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-700 px-5 shadow-md w-full`}>

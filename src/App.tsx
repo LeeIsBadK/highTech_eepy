@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import FundPage from './page/fundPage';
 import ComparePage from './page/comparePage';
-import DashboardPage from './page/dashboardPage';
 import LoginPage from './page/loginPage';
 import FundDetailPage from './page/fundDetailPage';
 import Missing from './page/missingPage';
 import RegisterPage from './page/registerPage';
 import CheckLogin from './loginComponent/checkLogin';
 import RequireAuth from './loginComponent/RequireAuth';
+import FundDetailEditPage from './page/fundDetailEdit';
 
 
 const App: React.FC = () => {
@@ -34,6 +34,18 @@ const App: React.FC = () => {
             <Route path="/detail/*" element={<FundDetailPage />} />
           </Route>
           <Route element={<RequireAuth />}>
+            <Route path="/detail/edit/*" element={<FundDetailEditPage />} />
+          </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/detail/edit/performance/*" element={<FundDetailEditPage  />} />
+          </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/detail/edit/port/*" element={<FundDetailEditPage  />} />
+          </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/detail/edit/fee/*" element={<FundDetailEditPage  />} />
+          </Route>
+          <Route element={<RequireAuth />}>
             <Route path="/detail/performance/*" element={<FundDetailPage />} />
           </Route>
           <Route element={<RequireAuth />}>
@@ -54,10 +66,6 @@ const App: React.FC = () => {
           <Route element={<RequireAuth />}>
             <Route path="/compare/fee" element={<ComparePage />} />
           </Route>
-          <Route element={<RequireAuth />}>
-            <Route path="/dashboard" element={<DashboardPage />} />
-          </Route>
-          
 
           {/* catch all */}
           <Route path="*" element={<Missing />} />

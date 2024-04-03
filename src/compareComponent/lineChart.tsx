@@ -153,9 +153,9 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
 
   return (
     <>
-      <div className='max-w-2xl lg:max-w-7xl flex flex-wrap pb-4'>
+      <div className='flex flex-wrap pb-4'>
         {legendData.map((value) => (
-          <span key={value.name} className='px-[24px] py-2 flex items-center'><div className={`w-[16px] h-[16px] flex items-center mt-[-2px] mr-3`} style={{ backgroundColor: value.color, borderRadius: '50%' }}></div>{value.name}</span>
+          <span key={value.name} className='px-[24px] 2xl:text-[16px] lg:text-[14px] md:text-[13px] text-[12px] py-2 flex items-center'><div className={`w-[14px] h-[14px] md:w-[16px] md:h-[16px] flex items-center mt-[-2px] mr-2 md:mr-3`} style={{ backgroundColor: value.color, borderRadius: '50%' }}></div>{value.name}</span>
         ))}
       </div>
       <div ref={chartDivRef} className='w-full h-[500px]' />

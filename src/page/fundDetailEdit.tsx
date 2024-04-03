@@ -3,14 +3,116 @@ import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
 import Favorite from '../fundDetailComponent/favorite';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Detail from '../fundDetailComponent/detail';
+import Detail from '../fundDetailEditComponent/detail';
 import { ChevronLeft, Clock, Triangle } from 'lucide-react';
-import Compare from '../fundDetailComponent/compare';
+import Compare from '../fundDetailEditComponent/compare';
 import { useLocalStorage } from '../loginComponent/hook/useLocalStorage';
 import axios from 'axios';
 import Navbar from '../Components/Navbar';
 
 
+export const fundData = [
+  {
+    id: 1,
+    name: 'ASP-DIGIBLOC-SSF',
+    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม',
+    href: '#',
+    risk: 6,
+    type: 'SSFEQ',
+    value: 8.4301,
+    returns: 138.70
+  },
+  {
+    id: 2,
+    name: 'ASP-DIGIBLOCRMF',
+    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการเลี้ยงชีพ',
+    href: '#',
+    risk: 1,
+    type: 'RMFEQ',
+    value: 7.7214,
+    returns: 130.12
+  },
+  {
+    id: 3,
+    name: 'ASP-DIGIBLOC',
+    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน',
+    href: '#',
+    risk: 3,
+    type: 'FIFEQ',
+    value: 7.4037,
+    returns: 125.88
+  },
+  {
+    id: 4,
+    name: 'LHBLOCKCHAIN',
+    detail: 'กองทุนเปิด แอล เอช บล็อกเชน',
+    href: '#',
+    risk: 2,
+    type: 'MIXFLEX',
+    value: 9.8522,
+    returns: 81.36
+  },
+  {
+    id: 5,
+    name: 'SCBSEMI(SSFE)',
+    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดเพื่อการออมผ่านช่องทางอิเล็กทรอนิกส์)',
+    href: '#',
+    risk: 4,
+    type: 'SSFEQ',
+    value: 15.5487,
+    returns: 77.20
+  },
+  {
+    id: 6,
+    name: 'SCBSEMI(E)',
+    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดช่องทางอิเล็กทรอนิกส์)',
+    href: '#',
+    risk: 5,
+    type: 'RMFEQ',
+    value: 15.7053,
+    returns: 77.17
+  },
+  {
+    id: 7,
+    name: 'SCBSEMI(P)',
+    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดผู้ลงทุนกลุ่ม/บุคคล)',
+    href: '#',
+    risk: 7,
+    type: 'FIFEQ',
+    value: 15.2816,
+    returns: 75.52
+  },
+  {
+    id: 8,
+    name: 'KT-BLOCKCHAIN-A',
+    detail: 'กองทุนเปิดเคแทม Blockchain Economy (ชนิดสะสมมูลค่า)',
+    href: '#',
+    risk: 6,
+    type: 'FIFEQ',
+    value: 10.7280,
+    returns: 73.10
+  },
+  {
+    id: 9,
+    name: 'TNEXTGEN-SSF',
+    detail: 'กองทุนเปิด ทิสโก้ Next Generation Internet ชนิดหน่วยลงทุนเพื่อการออม',
+    href: '#',
+    risk: 8,
+    type: 'SSFEQ',
+    value: 6.5763,
+    returns: 64.94
+  },
+  {
+    id: 10,
+    name: 'KKP TECH-H-SSF',
+    detail: 'กองทุนเปิดเคเคพี EXPANDED TECH - HEDGED ชนิดเพื่อการออม',
+    href: '#',
+    risk: 1,
+    type: 'SSFEQ',
+    value: 15.1590,
+    returns: 63.65
+  }
+]
 const status = {
   "goUp": <Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px]' />,
   "goDown": <Triangle fill='#ef5350' size={18} className='text-[#ef5350] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px] rotate-180' />
@@ -20,13 +122,13 @@ const apiClient = axios.create({
   baseURL: 'https://backend-ruby-eight.vercel.app',
 });
 
-const FundDetailPage: React.FC = () => {
+const FundDetailEditPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [allFunds, setAllFunds] = useState<Array<any> | null>(null);
   const [fund, setFund] = useState<string>('');
   const [checkFunds, setCheckFunds] = useState<boolean>(false);
-  const [storedDetail, setStoredDetail] = useLocalStorage("detail", "");
+  const [storedEdit, setStoredEdit] = useLocalStorage("detail", "");
 
   const goBack = () => navigate(-1);
 
@@ -48,23 +150,23 @@ const FundDetailPage: React.FC = () => {
     const parts = url.split("/");
     const fund = parts[parts.length - 1];
     if (fund && (fund === 'performance' || fund === 'port' || fund === 'fee')) {
-      if (storedDetail) {
+      if (storedEdit) {
         if (fund === 'performance')
-          navigate('/detail/performance/' + storedDetail, { state: { from: location }, replace: true });
+          navigate('/detail/edit/performance/' + storedEdit, { state: { from: location }, replace: true });
         if (fund === 'port')
-          navigate('/detail/port/' + storedDetail, { state: { from: location }, replace: true });
+          navigate('/detail/edit/port/' + storedEdit, { state: { from: location }, replace: true });
         if (fund === 'fee')
-          navigate('/detail/fee/' + storedDetail, { state: { from: location }, replace: true });
-        setFund(storedDetail);
+          navigate('/detail/edit/fee/' + storedEdit, { state: { from: location }, replace: true });
+        setFund(storedEdit);
       } else {
         setFund('');
         setCheckFunds(true);
       }
     } else {
-      if (fund && fund === 'detail') {
-        if (storedDetail) {
-          navigate('/detail/' + storedDetail, { state: { from: location }, replace: true });
-          setFund(storedDetail);
+      if (fund && fund === 'edit') {
+        if (storedEdit) {
+          navigate('/detail/edit/' + storedEdit, { state: { from: location }, replace: true });
+          setFund(storedEdit);
         }
         else {
           setFund('');
@@ -72,10 +174,10 @@ const FundDetailPage: React.FC = () => {
         }
       } else {
         setFund(fund);
-        setStoredDetail(fund);
+        setStoredEdit(fund);
       }
     }
-  }, [location.pathname]);
+  }, [location.pathname]); // Run the effect whenever the pathname changes
 
 
   return (
@@ -85,7 +187,6 @@ const FundDetailPage: React.FC = () => {
       }}
     >
       <Sidebar />
-      
       <div className="w-full px-2 lg:px-16 pt-0 lg:pt-11 pb-4 lg:pb-12 items-center bg-[#f9f9f9] min-h-[100svh] max-h-[100svh] overflow-y-auto">
         <div className='pb-10 pt-40 lg:pt-0 lg:pb-12'>
           <Navbar />
@@ -150,4 +251,4 @@ const FundDetailPage: React.FC = () => {
   );
 }
 
-export default FundDetailPage;
+export default FundDetailEditPage;

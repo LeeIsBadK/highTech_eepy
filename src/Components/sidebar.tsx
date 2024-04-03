@@ -1,5 +1,5 @@
 
-import { ChevronLast, ChevronFirst, LayoutDashboard, Scale, MoreVertical, List, NotebookText, ChevronDown, ChevronUp, Coins, HandCoins, PieChart, ReceiptText } from "lucide-react"
+import { ChevronLast, ChevronFirst, Scale, MoreVertical, List, NotebookText, ChevronDown, ChevronUp, Coins, HandCoins, PieChart, ReceiptText, PencilLine } from "lucide-react"
 import { useState, useEffect, useContext } from "react"
 import lhfund from '../assets/lhFund.png';
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -7,10 +7,10 @@ import AuthContext from "../loginComponent/context/AuthProvider";
 import { useLocalStorage } from "../loginComponent/hook/useLocalStorage";
 
 const navigation = [
-  { icon: <LayoutDashboard size={30} className="m-1" />, text: "Dashboard", href: "/dashboard" },
-  { icon: <List size={30} className="m-1" />, text: "Funds", href: "/fund" },
-  { icon: <NotebookText size={30} className="m-1" />, text: "Detail", href: "/detail" },
-  { icon: <Scale size={30} className="m-1" />, text: "Compare", href: "/compare" },
+  { icon: <List size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Funds", href: "/fund" },
+  { icon: <NotebookText size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Detail", href: "/detail" },
+  { icon: <PencilLine size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Edit", href: "/detail/edit" },
+  { icon: <Scale size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Compare", href: "/compare" },
 ];
 
 
@@ -24,9 +24,26 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
   const [current, setCurrent] = useState<string>('');
   const [detail, setDetail] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [compare, setCompare] = useState<boolean>(false);
   const [ storedCompare ] = useLocalStorage<string[]>("compare", []);
   const [ storedDetail ] = useLocalStorage("detail", "");
+  const [ storedEdit ] = useLocalStorage("edit", "");
+
+  useEffect(() => {
+    const url = location.pathname; // Get the current pathname from the location object
+    const parts = url.split("/");
+    if (parts.includes('fund'))
+      setActive('Funds')
+    if (parts.includes('detail')) {
+      if (parts.includes('edit'))
+        setActive('Edit')
+      else
+        setActive('Detail')
+    }
+    if (parts.includes('compare'))
+      setActive('Compare')
+  }, [active]);
 
   useEffect(() => {
     const url = location.pathname; // Get the current pathname from the location object
@@ -36,6 +53,10 @@ const Sidebar: React.FC = () => {
     current = url.split('/compare/')[1];
     if (parts.includes('detail'))
       setDetail(true);
+    if (parts.includes('edit')) {
+      setDetail(false);
+      setEdit(true);
+    }
     if (parts.includes('compare')) {
       current = url.split('/compare/')[1];
       setCompare(true);
@@ -55,38 +76,32 @@ const Sidebar: React.FC = () => {
     navigate('/login');
   }
 
-  useEffect(() => {
-    // Set the active state based on the current URL path
-    const currentPath = window.location.pathname;
-    setActive(navigation.find(item => currentPath.startsWith(item.href))?.text ?? '');
-  }, []); // Run this effect only once when the component mounts
-
   return (
-    <aside className="min-h-[100svh]">
+    <aside className="lg:min-h-[100svh] lg:max-w-full max-w-0 min-h-0">
       <nav className="h-full flex flex-col bg-white border-r shadow-lg pl-1 pr-1">
-        <div className="p-4 px-2 pb-2 flex justify-between items-center border-b">
+        <div className="lg:p-4 px-2 pb-2 flex justify-between items-center border-b p-0">
           <img
             src={lhfund}
-            className={`overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "2xl:w-[128px] xl:w-[120px] lg:w-[112px] md:w-[104px] sm:w-[96px] mr-auto ml-auto py-3" : "w-0"
+            className={`overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "2xl:w-[128px] lg:w-[112px] w-0 mr-auto ml-auto py-3" : "w-0"
               }`}
             alt=""
           />
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 my-5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="lg:p-1.5 lg:my-5 rounded-lg bg-gray-50 hover:bg-gray-100 p-0 my-0"
           >
-            {expanded ? <ChevronFirst /> : <ChevronLast />}
+            {expanded ? <ChevronFirst className="lg:w-6 w-0"/> : <ChevronLast className="lg:w-6 w-0"/>}
           </button>
         </div>
         <div>
           {navigation.map((item) => (
             <div key={item.text}>
-              <div className={`relative flex py-3 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
+              <div className={`relative flex lg:py-3 lg:px-3 my-1 py-0 px-0 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
                   ${active === item.text ? "bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}`}>
-                <Link to={item.href} className="flex items-center" onClick={() => setActive(item.text)}>
+                <Link to={item.href} className="flex items-center">
                   {item.icon}
                   <span
-                    className={`overflow-hidden transition-all duration-500 ease-in-out flex  ${expanded ? "2xl:w-[208px] xl:w-[184px] lg:w-[160px] md:w-[136px] sm:w-[112px] ml-3 2xl:text-[18px] xl:text-[17px] lg:text-[16px] md:text-[15px] sm:text-[14px]" : "w-0"
+                    className={`overflow-hidden lg:transition-all transition-none duration-500 ease-in-out flex  ${expanded ? "2xl:w-[208px] lg:w-[160px] w-0 ml-3 2xl:text-[18px] lg:text-[16px]" : "w-0"
                       }`}
                   >
                     {item.text}
@@ -104,46 +119,92 @@ const Sidebar: React.FC = () => {
                     </div>
                   )}
                 </Link>
-                {item.text === "Detail" && detail && (
-                  <button className="absolute top-1/4 right-0 z-50" onClick={() => setDetail(!detail)}>
-                    <ChevronDown className={`${active === 'Detail' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px]`} />
+                {item.text === "Detail" && detail && expanded && (
+                  <button className="absolute top-1/4 right-0 z-50" onClick={() => {setDetail(!detail); setCompare(false); setEdit(false);}}>
+                    <ChevronDown className={`${active === 'Detail' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
-                {item.text === "Detail" && !detail && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => setDetail(!detail)}>
-                    <ChevronUp className={`${active === 'Detail' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px]`} />
+                {item.text === "Detail" && !detail && expanded && (
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setDetail(!detail); setCompare(false); setEdit(false);}}>
+                    <ChevronUp className={`${active === 'Detail' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
-                {item.text === "Compare" && compare && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => setCompare(!compare)}>
-                    <ChevronDown className={`${active === 'Compare' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px]`} />
+                {item.text === "Edit" && edit && expanded && (
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setEdit(!edit); setCompare(false); setDetail(false);}}>
+                    <ChevronDown className={`${active === 'Edit' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
-                {item.text === "Compare" && !compare && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => setCompare(!compare)}>
-                    <ChevronUp className={`${active === 'Compare' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px]`} />
+                {item.text === "Edit" && !edit && expanded && (
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setEdit(!edit); setCompare(false); setDetail(false);}}>
+                    <ChevronUp className={`${active === 'Edit' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
+                  </button>
+                )}
+                {item.text === "Compare" && compare && expanded && (
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setCompare(!compare); setDetail(false); setEdit(false);}}>
+                    <ChevronDown className={`${active === 'Compare' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
+                  </button>
+                )}
+                {item.text === "Compare" && !compare && expanded && (
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setCompare(!compare); setDetail(false); setEdit(false);}}>
+                    <ChevronUp className={`${active === 'Compare' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
               </div>
               {item.text === "Detail" && (
                 <div className={`${expanded ? 'max-w-full' : 'w-0 h-0'} transition-w duration-1000 ease-in-out`}>
                   <div className={`block bg-white text-gray-600 rounded-[5px] shadow-md overflow-hidden transition-max-h duration-1000 ease-in-out ${detail ? 'max-h-[250px]' : 'max-h-0'}`}>
-                    <ul className="pl-[48px] flex flex-col py-2 2xl:text-[16px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px]">
-                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
+                    <ul className="2xl:pl-[48px] lg:pl-[40px] pl-0 flex flex-col py-2 2xl:text-[16px] lg:text-[14px]">
+                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/' + storedDetail, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><ReceiptText size={19} className={`${active === item.text && current === '' ? 'size-[20px]' : ''} mr-[8px]`} />ภาพรวม</span>
+                        <span className="flex items-center">
+                          <ReceiptText size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />
+                          ภาพรวม
+                        </span>
                       </button>
-                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/performance/' + storedDetail, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ผลการดำเนินงานและปันผล</span>
+                        <span className="flex items-center">
+                          <HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />
+                          ผลการดำเนินงานและปันผล
+                        </span>
                       </button>
-                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/port/' + storedDetail, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />พอร์ตการลงทุน</span>
+                        <span className="flex items-center">
+                          <PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />
+                          พอร์ตการลงทุน
+                        </span>
                       </button>
-                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/detail/fee/' + storedDetail, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ค่าธรรมเนียม</span>
+                        <span className="flex items-center">
+                          <Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />
+                          ค่าธรรมเนียม
+                        </span>
+                      </button>
+                    </ul>
+                  </div>
+                </div>
+              )}
+              {item.text === "Edit" && (
+                <div className={`${expanded ? 'max-w-full' : 'w-0 h-0'} transition-w duration-1000 ease-in-out`}>
+                  <div className={`block bg-white text-gray-600 rounded-[5px] shadow-md overflow-hidden transition-max-h duration-1000 ease-in-out ${edit ? 'max-h-[250px]' : 'max-h-0'}`}>
+                    <ul className="2xl:pl-[48px] lg:pl-[40px] pl-0 flex flex-col py-2 2xl:text-[16px] lg:text-[14px]">
+                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
+                        onClick={() => navigate('/detail/edit' + storedEdit, { state: { from: location }, replace: true })}>
+                        <span className="flex items-center"><ReceiptText size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ภาพรวม</span>
+                      </button>
+                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
+                        onClick={() => navigate('/detail/edit/performance' + storedEdit, { state: { from: location }, replace: true })}>
+                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ผลการดำเนินงานและปันผล</span>
+                      </button>
+                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
+                        onClick={() => navigate('/detail/edit/port' + storedEdit, { state: { from: location }, replace: true })}>
+                        <span className="flex items-center"><PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />พอร์ตการลงทุน</span>
+                      </button>
+                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
+                        onClick={() => navigate('/detail/edit/fee' + storedEdit, { state: { from: location }, replace: true })}>
+                        <span className="flex items-center"><Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ค่าธรรมเนียม</span>
                       </button>
                     </ul>
                   </div>
@@ -152,22 +213,22 @@ const Sidebar: React.FC = () => {
               {item.text === "Compare" && (
                 <div className={`${expanded ? 'max-w-full' : 'w-0 h-0'} transition-w duration-1000 ease-in-out`}>
                   <div className={`block bg-white text-gray-600 rounded-[5px] shadow-md overflow-hidden transition-max-h duration-1000 ease-in-out ${compare ? 'max-h-[250px]' : 'max-h-0'}`}>
-                    <ul className="pl-[48px] flex flex-col py-2 2xl:text-[16px] xl:text-[15px] lg:text-[14px] md:text-[13px] sm:text-[12px]">
-                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                    <ul className="2xl:pl-[48px] lg:pl-[40px] pl-0 flex flex-col py-2 2xl:text-[16px] lg:text-[14px]">
+                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><ReceiptText size={19} className={`${active === item.text && current === '' ? 'size-[20px]' : ''} mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]`} />ภาพรวม</span>
+                        <span className="flex items-center"><ReceiptText size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ภาพรวม</span>
                       </button>
-                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare/performance?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ผลการดำเนินงานและปันผล</span>
+                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ผลการดำเนินงานและปันผล</span>
                       </button>
-                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare/port?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />พอร์ตการลงทุน</span>
+                        <span className="flex items-center"><PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />พอร์ตการลงทุน</span>
                       </button>
-                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} px-2 py-3 text-[16px] rounded-[10px] hover:bg-gray-200`}
+                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
                         onClick={() => navigate('/compare/fee?selectedFund=' + storedCompare.join(','), { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] xl:w-[18px] xl:h-[18px] lg:w-[17px] lg:h-[17px] md:w-[16px] md:h-[16px] sm:w-[15px] sm:h-[15px]" />ค่าธรรมเนียม</span>
+                        <span className="flex items-center"><Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ค่าธรรมเนียม</span>
                       </button>
                     </ul>
                   </div>
@@ -181,19 +242,19 @@ const Sidebar: React.FC = () => {
           <img
             src=""
             alt=""
-            className="w-10 h-10 rounded-md bg-[#cdfaf6]"
+            className="lg:w-10 lg:h-10 w-0 h-0 rounded-md bg-[#cdfaf6]"
           />
           <div
             className={`
               flex justify-between items-center
-              overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "2xl:w-[208px] xl:w-[184px] lg:w-[160px] md:w-[136px] sm:w-[112px] ml-3" : "w-0"}
+              overflow-hidden transition-all duration-500 ease-in-out ${expanded ? "2xl:w-[208px] lg:w-[160px] w-0 ml-3" : "w-0"}
           `}
           >
             <div className="px-2 w-full">
-              <h4 className="flex items-center font-semibold 2xl:text-[18px] xl:text-[17px] lg:text-[16px] md:text-[15px] sm:text-[14px] text-[#072C29]">{auth.user}</h4>
+              <h4 className="flex items-center font-semibold 2xl:text-[18px] lg:text-[16px] text-[#072C29]">{auth.user}</h4>
             </div>
             <button onClick={() => setShowProfile(!showProfile)}>
-              <MoreVertical size={20} />
+              <MoreVertical size={20} className="lg:w-[19px] w-0"/>
             </button>
             <div className={`block absolute ml-[235px] z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-500 ease-in-out ${showProfile ? 'max-w-[300px]' : 'max-w-[0px]'}`}
             >
