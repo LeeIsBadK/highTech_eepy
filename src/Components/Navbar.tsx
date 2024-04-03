@@ -1,36 +1,63 @@
+import { List, NotebookText, PencilLine, Scale } from 'lucide-react';
+import lhfund from '../assets/lhFund.png';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const navigation = [
+  { icon: <List size={20} className="mr-1.5 w-5 lg:w-0" />, text: "Funds", href: "/fund" },
+  { icon: <NotebookText size={20} className="mr-1.5 lg:w-0" />, text: "Detail", href: "/detail" },
+  { icon: <PencilLine size={20} className="mr-1.5 lg:w-0" />, text: "Edit", href: "/detail/edit" },
+  { icon: <Scale size={20} className="mr-1.5 w-5 lg:w-0" />, text: "Compare", href: "/compare" },
+];
+
 const Navbar = () => {
-    return (
-            <div className="flex justify-between items-center min-w-120 h-20 pt-4 sm:h-20 sm:pt-0 bg-main" style={{ width: "100%" }}>
-                <div className="flex justify-between items-center" style={{ width: "100%" }}>
-                    <div className="flex items-center" style={{ width: "100%" }}  >
-                        <a className="hidden sm:flex mx-10">
-                            <img src={"./src/assets/react.svg"}
-                                alt="parcel"
-                                width={80}
-                                height={80}
-                            />
-                        </a>
+  const [active, setActive] = useState<string>('');
+
+  useEffect(() => {
+    const url = location.pathname; // Get the current pathname from the location object
+    const parts = url.split("/");
+    if (parts.includes('fund'))
+      setActive('Funds')
+    if (parts.includes('detail')) {
+      if (parts.includes('edit'))
+        setActive('Edit')
+      else
+        setActive('Detail')
+    }
+    if (parts.includes('compare'))
+      setActive('Compare')
+  }, [active]);
 
 
-                        <form action="#" className="flex items-center space-x-3 ml-5" style={{ width: "100%"}}>
-                            <div className="relative w-4/5 sm:w-3/5" style={{minWidth: "200px", maxWidth: "600px" }}>
-                                <input className="border-gray-300 bg-white h-8 px-2 py-1 text-sm focus:outline-none font-noto-sans" style={{ borderRadius: "50px", width: "100%" }}
-                                    type="text" name="search" placeholder="Search" />
-                                <button type="submit" className="absolute right-0 top-0 mt-1.5 mr-5">
-                                    <a>
-                                        <img src={"./src/assets/react.svg"}
-                                            alt="react"
-                                            width={20}
-                                            height={20}
-                                        />
-                                    </a>
-                                </button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-    );
+  return (
+    <div className="fixed top-0 left-0 w-full z-10 bg-white shadow-md lg:h-0">
+      <div className="px-2 py-8 sm:px-6 lg:px-0 lg:w-0 lg:h-0">
+        <div className="flex flex-1 sm:items-stretch sm:justify-start">
+          <div className="flex flex-shrink-0 items-center">
+            <img
+              src={lhfund}
+              className={`overflow-hidden transition-all duration-500 ease-in-out w-20 md:w-24 lg:w-0 mx-4 mr-8`}
+              alt=""
+            />
+          </div>
+          <div className="flex space-x-6">
+            {navigation.map((item) => (
+              <div key={item.text} className={`relative flex lg:w-0 lg:py-0 lg:px-0 py-1.5 md:py-2 px-2.5 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
+                    ${active === item.text ? "bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}`}>
+                <Link to={item.href} className="flex items-center" onClick={() => setActive(item.text)}>
+                  {item.icon}
+                  <span
+                    className={`overflow-hidden lg:transition-all transition-none duration-500 ease-in-out flex text-[12px] md:text-[14px] lg:w-0`}
+                  >
+                    {item.text}
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 export default Navbar;

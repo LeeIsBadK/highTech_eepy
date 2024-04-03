@@ -13,8 +13,8 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="pr-10"
           style={{ whiteSpace: 'nowrap' }}
         >
-          <div className="px-4 py-8 font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]">Funds</div>
-          <div className="sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-gray-600">
+          <div className="px-4 py-8 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">Funds</div>
+          <div className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
             <p className="p-4">บลจ</p>
             <p className="p-4">ประเภทกอง</p>
             <p className="p-4">ค่าความเสี่ยง</p>
@@ -28,10 +28,10 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
             <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
               style={{ whiteSpace: 'nowrap' }}
             >
-              <div className="py-4 px-2 font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]">
+              <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px]`}><a href={`/detail/${fund}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund}</a><a href={generateDeleteFundUrl(fund)}><X className="text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                 <p className="flex justify-center p-4">-</p>
                 <p className="flex justify-center p-4">-</p>
                 <p className="flex justify-center p-4">-</p>
@@ -47,8 +47,8 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="pr-10"
           style={{ whiteSpace: 'nowrap' }}
         >
-          <div className="px-4 py-8 font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]">Funds</div>
-          <div className="sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-gray-600">
+          <div className="px-4 py-8 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">Funds</div>
+          <div className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
             <p className="p-4">ค่าธรรมเนียมขาย</p>
             <p className="p-4">ค่าธรรมเนียมรับซื้อคืน</p>
             <p className="p-4">ค่าใช้จ่ายกองทุนรวม</p>
@@ -63,10 +63,10 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
             <div key={fund} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
               style={{ whiteSpace: 'nowrap' }}
             >
-              <div className="py-4 px-2 font-bold sm:text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#072C29]">
+              <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px]`}><a href={`/detail/${fund}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund}</a><a href={generateDeleteFundUrl(fund)}><X className="text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                 <p className="flex justify-center p-4">-</p>
                 <p className="flex justify-center p-4">-</p>
                 <p className="flex justify-center p-4">-</p>

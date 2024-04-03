@@ -20,7 +20,6 @@ const Detail = ({selectedFundArray, generateDeleteFundUrl}: DetailProps) => {
   useEffect(() => {
     const url = location.pathname;
     const current = url.split('/compare/')[1]
-    console.log(current)
     if (current && (current.includes('performance') || current.includes('port') || current.includes('fee'))) {
       setCurrent(current.split('/')[0]);
     }
@@ -30,27 +29,27 @@ const Detail = ({selectedFundArray, generateDeleteFundUrl}: DetailProps) => {
 
     return (
       <div>
-        <div className="flex items-center pt-7 sm:px-3 lg:px-5">
-          <div className="border-b border-b-2 w-full">
-            <button className={`${current === '' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+        <div className="flex items-center pt-7 px-3 lg:px-5">
+          <div className="border-b border-b-2 w-full 2xl:text-[16px] lg:text-[14px] md:text-[13px] text-[12px]">
+            <button className={`${current === '' ? 'font-bold bg-gray-300' : ''} px-5 py-1 rounded-[10px]`} 
                 onClick={() => navigate('/compare?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
               <span className="flex items-center"><ReceiptText size={19} className="mr-[5px]" />ภาพรวม</span>
             </button>
-            <button className={`${current === 'performance' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+            <button className={`${current === 'performance' ? 'font-bold bg-gray-300' : ''} px-5 py-1 rounded-[10px]`} 
               onClick={() => navigate('/compare/performance?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
               <span className="flex items-center"><HandCoins size={19} className="mr-[5px]" />ผลการดำเนินงานและปันผล</span>
             </button>
-            <button className={`${current === 'port' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+            <button className={`${current === 'port' ? 'font-bold bg-gray-300' : ''} px-5 py-1 rounded-[10px]`} 
               onClick={() => navigate('/compare/port?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
               <span className="flex items-center"><PieChart size={19} className="mr-[5px]" />พอร์ตการลงทุน</span>
             </button>
-            <button className={`${current === 'fee' ? 'font-bold bg-gray-300' : ''} px-5 py-1 text-[16px] rounded-[10px]`} 
+            <button className={`${current === 'fee' ? 'font-bold bg-gray-300' : ''} px-5 py-1 rounded-[10px]`} 
                   onClick={() => navigate('/compare/fee?selectedFund='+ selectedFundArray.join(","), { state: { from: location }, replace: true })}>
                   <span className="flex items-center"><Coins size={19} className="mr-[5px]" />ค่าธรรมเนียม</span>
             </button>
           </div>
         </div>
-        <div className="h-full py-8 sm:px-6 lg:px-8">
+        <div className="h-full py-8 px-6 lg:px-8">
           {current === '' && (
             <div>
               <div className="pb-8 pt-2">
