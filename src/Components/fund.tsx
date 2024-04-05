@@ -136,11 +136,14 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
         if (data === 'name') {
           return updatedSortNum === 1 ? a.proj_abbr_name.localeCompare(b.proj_abbr_name) : b.proj_abbr_name.localeCompare(a.proj_abbr_name);
         } else if (data === 'type') {
-          return updatedSortNum === 1 ? a.proj_abbr_name.localeCompare(b.proj_abbr_name) : b.proj_abbr_name.localeCompare(a.proj_abbr_name);
+          if (a.Allinfo.fundType[0] === undefined) return '-';
+          if (b.Allinfo.fundType[0] === undefined) return '-';
+          
+          return updatedSortNum === 1 ? a.Allinfo.fundType[0].localeCompare(b.Allinfo.fundType[0]) : b.Allinfo.fundType[0].localeCompare(a.Allinfo.fundType[0]);
         } else if (data === 'risk') {
             const order = ["-", "1", "2", "3", "4", "5", "6", "7", "8", "81"];
-            const indexA = order.indexOf(a.risk_spectrum.replace(/\D/g, '')); // Assuming the returns field is a string
-            const indexB = order.indexOf(b.risk_spectrum.replace(/\D/g, '')); // Assuming the returns field is a string
+            const indexA = order.indexOf(a.risk_spectrum.replace(/\D/g, ''));
+            const indexB = order.indexOf(b.risk_spectrum.replace(/\D/g, ''));
             if (updatedSortNum === 1) 
               return indexA - indexB;
             else 
