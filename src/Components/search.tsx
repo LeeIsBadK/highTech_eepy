@@ -20,7 +20,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
       setFundData(funds);
   }, [funds, fundData]);
 
-  const handleSearch = async (e:any) => {
+  const handleSearch = async (e: any) => {
     setSearchTerm(e);
     try {
       const response = await apiClient.get(`/filter/product?searchString=${e}&take=20&skip=&orderBy=asc`);
@@ -30,10 +30,6 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
     }
   };
 
-  const handleFilter = () => {
-    // Implement your filter logic here
-    console.log('Filter button clicked');
-  };
 
   return (
     <div
@@ -52,7 +48,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
               type="text"
               placeholder="Search Mutual Funds"
               value={searchTerm}
-              onChange={(e) =>handleSearch(e.target.value)}
+              onChange={(e) => handleSearch(e.target.value)}
               className="ml-3 w-[175px] md:w-[225px] lg:w-[275px] 2xl:w-[375px] h-[18px] md:h-[20px] lg:h-[24px] 2xl:h-[28px] outline-none placeholder-[#1CA59B] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]"
               onClick={() => {
                 setShowSearch(true);
@@ -95,11 +91,12 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
             </ul>
           </div>
         </div>
-        <button
-          onClick={handleFilter}
-          className="items-center justify-center ml-4 text-white font-medium py-[6px] px-6 rounded-[5px] shadow-md bg-gradient-to-tr from-[#00f2e1] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] text-[12px] md:text-[14px] lg:text-[16px]">
-          ค้นหา
-        </button>
+        <a href={'/fund?search=' + searchTerm}>
+          <button
+            className="items-center justify-center ml-4 text-white font-medium py-[6px] px-6 rounded-[5px] shadow-md bg-gradient-to-tr from-[#00f2e1] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] text-[12px] md:text-[14px] lg:text-[16px]">
+            ค้นหา
+          </button>
+        </a>
       </div>
     </div>
   );

@@ -26,6 +26,13 @@ const FundPage: React.FC = () => {
   }, [location.pathname]);
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const search = searchParams.get("search");
+    if (search)
+      setSearchTerm(search);
+  }, [location.search]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await apiClient.get('/filter/product?searchString=&take=20&skip=&orderBy=asc');
