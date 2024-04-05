@@ -1,4 +1,4 @@
-import { List, NotebookText, PencilLine, Scale } from 'lucide-react';
+import { List, NotebookText, Scale } from 'lucide-react';
 import lhfund from '../assets/lhFund.png';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';

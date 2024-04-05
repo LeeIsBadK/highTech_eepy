@@ -1,4 +1,3 @@
-import { Clock } from "lucide-react";
 import DoughNutChart from "./doughnutChart";
 import { useEffect, useState } from "react";
 import axios from "axios";
