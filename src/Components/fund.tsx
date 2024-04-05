@@ -1,9 +1,8 @@
 import { riskColor } from "../assets/color";
 import { useState, useRef, useEffect, useContext } from "react";
-import { Check, X, CornerRightDown, Star, CircleChevronDown, CircleChevronUp, EllipsisVertical, PencilLine } from 'lucide-react';
+import { Check, X, CornerRightDown, Star, CircleChevronDown, CircleChevronUp } from 'lucide-react';
 import axios from "axios";
 import AuthContext from "../loginComponent/context/AuthProvider";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const apiClient = axios.create({
   baseURL: 'https://backend-ruby-eight.vercel.app',
@@ -24,9 +23,6 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
   const [showFunds, setShowFunds] = useState<Array<any> | null>(funds);
   const [sortNum, setSortNum] = useState<number>(0);
   const { auth } = useContext(AuthContext);
-  const [showEdit, setShowEdit] = useState<string>('');
-  const navigate = useNavigate();
-  const location = useLocation();
   const [maxArray, setMaxArray] = useState<boolean>(false);
 
   useEffect(() => {
@@ -190,14 +186,6 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
     }
   };
 
-  const handleEdit = (fund: string) => {
-    console.log(fund);
-    if (!showEdit || showEdit !== fund)
-      setShowEdit(fund);
-    else
-      setShowEdit('');
-  }
-
   return (
     <div className=""
       style={{
@@ -259,7 +247,6 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                 )}
               </span>
             </div>
-            <span className={`${funds && funds.length > 6 ? 'w-[54px]' : 'w-[48px]'}`}></span>
           </div>
           {showFunds ? (
             <div className="max-h-[69svh] overflow-y-auto">
@@ -319,18 +306,6 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                         <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
                       )
                     )}
-                  </div>
-                  <div className="relative flex items-center">
-                    <button onClick={() => handleEdit(fund.proj_abbr_name)} className="w-[48px]">
-                      <EllipsisVertical className="text-gray-400 mx-4 2xl:w-[22px] 2xl:h-[22px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] w-[14px] h-[14px]" />
-                    </button>
-                    <div className={`block absolute right-12 z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-500 ease-in-out ${showEdit === fund.proj_abbr_name ? 'max-w-[200px]' : 'max-w-[0px]'}`}>
-                      <ul className="py-1.5 px-1.5 text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-600">
-                        <button onClick={() => navigate('/detail/edit/' + fund.proj_abbr_name, { state: { from: location }, replace: true })} className="flex items-center h-[40px] w-full px-4 py-1 hover:bg-gray-200 rounded-[10px]" style={{ whiteSpace: 'nowrap' }}>
-                          <PencilLine size={18} className="mr-2" />Edit
-                        </button>
-                      </ul>
-                    </div>
                   </div>
                 </div>
               ))}
