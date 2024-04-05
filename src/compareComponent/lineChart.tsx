@@ -192,7 +192,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
           )}
         </div>
       ) : (
-        <div className='flex justify-center items-cewnter w-full 2xl:h-[500px] lg:h-[425px] md:h-[400px] h-[375px] font-semibont 2xl:text-[18px] lg:text-[16px] md:text-[14px] text-[12px]'>ไม่มีข้อมูลกราฟ</div>
+        <div className='flex justify-center items-center w-full 2xl:h-[500px] lg:h-[425px] md:h-[400px] h-[375px] font-semibont 2xl:text-[18px] lg:text-[16px] md:text-[14px] text-[12px]'>ไม่มีข้อมูลกราฟ</div>
       )}
     </>
   );
