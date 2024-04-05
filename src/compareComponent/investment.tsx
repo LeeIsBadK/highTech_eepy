@@ -62,7 +62,7 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
 
   return (
     <div className="pb-[60px] px-2">
-      <div className="flex py-4 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">
+      <div className="flex py-4 text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">
         <button className={`${status === 'TOP 5 Holding' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-200 rounded-[10px]`} onClick={() => setStatus('TOP 5 Holding')}>TOP 5 Holding</button>
         <button className={`${status === 'กลุ่มประเภทของหุ้นที่ลงทุน' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-200 rounded-[10px]`} onClick={() => setStatus('กลุ่มประเภทของหุ้นที่ลงทุน')}>กลุ่มประเภทของหุ้นที่ลงทุน</button>
         <button className={`${status === 'สัดส่วนการลงทุน' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-200 rounded-[10px]`} onClick={() => setStatus('สัดส่วนการลงทุน')}>สัดส่วนการลงทุน</button>
@@ -82,10 +82,10 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="flex overflow-x-auto px-4 pt-4">
           {topFiveData?.map((fund) => (
             <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px]">
-              <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+              <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
                 {Object.keys(fund.top_five_holding).length !== 0 ? (
                   <div>
                     <div className="flex justify-center p-4"><DoughNutChart allData={fund.top_five_holding} /></div>
@@ -111,10 +111,10 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="flex overflow-x-auto px-4 pt-4">
           {typeData?.map((fund) => (
             <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px]">
-              <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+              <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
                 {Object.keys(fund.type_data).length !== 0 ? (
                   <div>
                     <div className="flex justify-center p-4"><DoughNutChart allData={fund.type_data} /></div>
@@ -140,10 +140,10 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="flex overflow-x-auto px-4 pt-4">
           {investmentData?.map((fund) => (
             <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px]">
-              <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+              <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
                 {Object.keys(fund.Investment_proportion_data).length !== 0 ? (
                   <div>
                     <div className="flex justify-center p-4"><DoughNutChart allData={fund.Investment_proportion_data} /></div>

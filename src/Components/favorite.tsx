@@ -7,7 +7,7 @@ interface FavoriteProps {
   const Favorite: React.FC<FavoriteProps> = ({ showFavorite }) => {
     return (
       <span
-        className={`flex px-3 py-[7px] bg-gradient-to-tr from-[#00f2e1] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] rounded-[5px] text-white text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] font-medium shadow-md `}
+        className={`flex px-3 py-[6px] md:py-[7px] bg-gradient-to-tr from-[#00f2e1] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] rounded-[5px] text-white text-[9px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] font-medium shadow-md `}
         style={{ whiteSpace: 'nowrap' }}
       >
         <Star

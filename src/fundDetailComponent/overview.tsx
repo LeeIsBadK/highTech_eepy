@@ -77,7 +77,7 @@ const OverView = ({ fund }: OverviewProps) => {
       </div>
       {fundData ? (
         <div className="grid grid-cols-1 md:grid-cols-2 w-full px-3 py-5 bg-white rounded-[10px] shadow-md">
-          <div className="py-1 px-8 w-full text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] border-hidden lg:border-r lg:border-dashed lg:border-gray-400">
+          <div className="py-1 px-8 w-full text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] border-hidden lg:border-r lg:border-dashed lg:border-gray-400">
             <div className="grid grid-cols-2"><p className="p-4">หนังสือชี้ชวน</p>
               {fundData.Allinfo.feeHolders.fund_fact_url ? (
                 <a href={fundData.Allinfo.feeHolders.fund_fact_url} target="_blank" rel="noopener noreferrer" className="ml-auto flex p-4"><p className="flex items-center py-1.5 px-3 rounded-[15px] bg-gray-200"><BookText className="w-[10px] md:w-[12px] lg:w-[14px] 2xl:w-[18px]" />หนังสือชี้ชวน</p></a>

@@ -8,109 +8,6 @@ import { useLocalStorage } from "../loginComponent/hook/useLocalStorage";
 import axios from "axios";
 import Navbar from "../Components/Navbar";
 
-export const fundData = [
-  {
-    id: 1,
-    name: 'ASP-DIGIBLOC-SSF',
-    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม',
-    href: '#',
-    risk: 6,
-    type: 'SSFEQ',
-    value: 8.4301,
-    returns: 138.70
-  },
-  {
-    id: 2,
-    name: 'ASP-DIGIBLOCRMF',
-    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการเลี้ยงชีพ',
-    href: '#',
-    risk: 6,
-    type: 'RMFEQ',
-    value: 7.7214,
-    returns: 130.12
-  },
-  {
-    id: 3,
-    name: 'ASP-DIGIBLOC',
-    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน',
-    href: '#',
-    risk: 6,
-    type: 'FIFEQ',
-    value: 7.4037,
-    returns: 125.88
-  },
-  {
-    id: 4,
-    name: 'LHBLOCKCHAIN',
-    detail: 'กองทุนเปิด แอล เอช บล็อกเชน',
-    href: '#',
-    risk: 6,
-    type: 'MIXFLEX',
-    value: 9.8522,
-    returns: 81.36
-  },
-  {
-    id: 5,
-    name: 'SCBSEMI(SSFE)',
-    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดเพื่อการออมผ่านช่องทางอิเล็กทรอนิกส์)',
-    href: '#',
-    risk: 7,
-    type: 'SSFEQ',
-    value: 15.5487,
-    returns: 77.20
-  },
-  {
-    id: 6,
-    name: 'SCBSEMI(E)',
-    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดช่องทางอิเล็กทรอนิกส์)',
-    href: '#',
-    risk: 7,
-    type: 'RMFEQ',
-    value: 15.7053,
-    returns: 77.17
-  },
-  {
-    id: 7,
-    name: 'SCBSEMI(P)',
-    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดผู้ลงทุนกลุ่ม/บุคคล)',
-    href: '#',
-    risk: 7,
-    type: 'FIFEQ',
-    value: 15.2816,
-    returns: 75.52
-  },
-  {
-    id: 8,
-    name: 'KT-BLOCKCHAIN-A',
-    detail: 'กองทุนเปิดเคแทม Blockchain Economy (ชนิดสะสมมูลค่า)',
-    href: '#',
-    risk: 6,
-    type: 'FIFEQ',
-    value: 10.7280,
-    returns: 73.10
-  },
-  {
-    id: 9,
-    name: 'TNEXTGEN-SSF',
-    detail: 'กองทุนเปิด ทิสโก้ Next Generation Internet ชนิดหน่วยลงทุนเพื่อการออม',
-    href: '#',
-    risk: 6,
-    type: 'SSFEQ',
-    value: 6.5763,
-    returns: 64.94
-  },
-  {
-    id: 10,
-    name: 'KKP TECH-H-SSF',
-    detail: 'กองทุนเปิดเคเคพี EXPANDED TECH - HEDGED ชนิดเพื่อการออม',
-    href: '#',
-    risk: 7,
-    type: 'SSFEQ',
-    value: 15.1590,
-    returns: 63.65
-  }
-]
-
 const apiClient = axios.create({
   baseURL: 'https://backend-ruby-eight.vercel.app',
 });
@@ -183,6 +80,16 @@ const ComparePage: React.FC = () => {
     return `/compare?selectedFund=${fundsQuery}`;
   };
 
+  const handleSearch = async (e: any) => {
+    setSearchAddFund(e);
+    try {
+      const response = await apiClient.get(`/filter/product?searchString=${e}&take=20&skip=&orderBy=asc`);
+      setAllFunds(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[640px]"
       style={{
@@ -215,7 +122,7 @@ const ComparePage: React.FC = () => {
                   <span className="text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] font-semibold px-1 text-[#999999]">vs</span>
                 )}
                 <span className="flex justify-center items-center text-[13px] md:text-[15px] lg:text-[17px] 2xl:text-[21px] px-2 font-bold text-[#072C29]">
-                  <a href={`/fund/${fund}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund}</a><a href={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 2xl:w-[22px] 2xl:h-[22px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] w-[14px] h-[14px]" /></a>
+                  <a href={`/detail/${fund}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund}</a><a href={generateDeleteFundUrl(fund)}><X size={22} className="text-gray-400 2xl:w-[22px] 2xl:h-[22px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] w-[14px] h-[14px]" /></a>
                 </span>
               </div>
             ))}
@@ -225,11 +132,11 @@ const ComparePage: React.FC = () => {
             onClick={() => setShowAddFund(true)}
           >
             <CirclePlus size={18} className="mt-[2px] ml-1 2xl:w-[18px] 2xl:h-[18px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px]" />
-            <span className="text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] px-1 font-bold text-[#072C29]">Add Fund</span>
+            <span className="text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] px-1 font-bold text-[#072C29]">Add Fund</span>
           </button>
           {showAddFund && (
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center z-50">
-              <div className="bg-[#fafafa] p-6 rounded-lg shadow-lg min-w-[400px] w-[24vw] min-h-[225px] lg:h-[25vh]"
+              <div className="bg-[#fafafa] p-6 rounded-lg shadow-lg min-w-[400px] w-[24vw] min-h-[240px] lg:min-h-[265px] lg:h-[25vh]"
                 style={{ whiteSpace: 'nowrap' }}
               >
                 <div className="flex">
@@ -243,7 +150,7 @@ const ComparePage: React.FC = () => {
                       type="text"
                       placeholder="Search Mutual Funds"
                       value={searchAddFund}
-                      onChange={(e) => setSearchAddFund(e.target.value)}
+                      onChange={(e) => handleSearch(e.target.value)}
                       className="ml-3 outline-none min-w-[200px] lg:min-h-[28px] md:min-h-[26px] min-h-[24px] placeholder-[#A3BFB4] mt-[2px] w-[14vw] lg:h-[3vh] text-[13px] md:text-[14px] lg:text-[15px] 2xl:text-[17px]"
                       onClick={() => {
                         setShowAddSearch(true);
@@ -257,24 +164,24 @@ const ComparePage: React.FC = () => {
                         }} />
                     )}
                   </button>
-                  <div className={`block absolute px-12 ml-[-8px] mt-[50px] z-10 bg-white rounded-[5px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out  ${showAddSearch ? 'max-h-[25vh]' : 'max-h-0'
+                  <div className={`block absolute px-12 ml-[-8px] mt-[48px] z-10 bg-white rounded-[5px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out  ${showAddSearch ? 'max-h-[25vh]' : 'max-h-0'
                     }`}>
                     <ul className="py-2 pr-6 min-w-[175px] w-[12.5vw]">
                       {filteredFunds.map((fund) => (
-                        <button key={fund.id} className="flex items-center min-h-[44px] h-[4.6vh] w-full px-4 py-2 text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[16px] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
+                        <li key={fund.id} className="cursor-pointer min-h-[44px] w-full px-4 py-2 text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[16px] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
                           onClick={() => {
                             setSearchAddFund(fund.proj_abbr_name)
                             setShowAddSearch(false)
                           }}
                         >
                           {fund.proj_abbr_name}
-                        </button>
+                          <span className='text-gray-400 font-normal flex flex-wrap text-[10px] md:text-[11px] lg:text-[12px] whitespace-normal'>{fund.proj_name_th}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
                 </div>
-                <div className="flex py-2">
-                  <div className="flex text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[14px]">
+                  <div className="flex py-2 pb-5 text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[14px]">
                     <span className="mr-1">ตอนนี้มี:</span>
                     <div className="flex flex-wrap">
                       {selectedFundArray.map((fund) => (
@@ -287,10 +194,9 @@ const ComparePage: React.FC = () => {
                       ))}
                     </div>
                   </div>
-                  <button className="ml-auto flex px-2 pt-1" onClick={() => setShowAddFund(false)}>
-                    <a href={generateAddFundUrl(searchAddFund)}><span className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] ml-auto shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-3 py-1.5 hover:bg-[#116564] hover:text-gray-100">Add</span></a>
+                  <button className="m-auto flex py-2 px-2" onClick={() => setShowAddFund(false)}>
+                    <a href={generateAddFundUrl(searchAddFund)}><span className="text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-4 py-2 hover:bg-[#116564] hover:text-gray-100">เพิ่มกองทุน</span></a>
                   </button>
-                </div>
               </div>
             </div>
           )}

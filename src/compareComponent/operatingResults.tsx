@@ -39,7 +39,7 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
 
   return (
     <div className="pb-[60px] px-4">
-      <div className="flex pt-4 pb-10 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">
+      <div className="flex pt-4 pb-10 text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">
         <button className={`${status === 'Performance' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-200 rounded-[10px]`} onClick={() => setStatus('Performance')}>Performance</button>
         <button className={`${status === 'Standrad Deviation' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-200 rounded-[10px]`} onClick={() => setStatus('Standrad Deviation')}>Standrad Deviation</button>
       </div>
@@ -48,7 +48,7 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
           style={{ whiteSpace: 'nowrap' }}
         >
           <div className="py-8 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">Funds</div>
-          <div className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
+          <div className="text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
             <p className="py-6">3M</p>
             <p className="py-6">6M</p>
             <p className="py-6">1Y</p>
@@ -64,10 +64,10 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                 <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px] min-h-[450px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+                  <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                     <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
                   </div>
-                  <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
+                  <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ผลตอบแทนกองทุนรวม ? (
                       <div>
                         <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['3_month'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['3_month']).toFixed(2)  + '%' : '-' } </p>
@@ -93,10 +93,10 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                 <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px] min-h-[450px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+                  <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                     <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
                   </div>
-                  <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
+                  <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ความผันผวนของกองทุนรวม ? (
                       <div>
                         <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['3_month'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['3_month']).toFixed(2) + '%' : '-' }</p>
