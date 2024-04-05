@@ -52,10 +52,6 @@ const Investment = ({ fund }: OverviewProps) => {
         <div>
           <div className="py-4 px-4 text-[12px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
             <span className={`w-full py-4 rounded-[10px] font-bold`}>TOP 5 Holding</span>
-            <span className='flex items-center py-2 text-[6px] lg:text-[10px] 2xl:text-[14px] text-[#7c8594]'>
-              <Clock size={16} className='mr-[6px] 2xl:w-[16px] 2xl:h-[16px] lg:w-[12px] lg:h-[12px] w-[8px] sh-[8px]' />
-              ข้อมูล ณ วันที่ 20 มี.ค. 2567
-            </span>
           </div>
           <div className={`py-4 bg-white rounded-[10px] text-[12px] lg:text-[16px] 2xl:text-[20px] text-gray-700 px-5 shadow-md w-full`}>
             {Object.keys(topFiveData.top_five_holding).length !== 0 ? (
@@ -77,10 +73,6 @@ const Investment = ({ fund }: OverviewProps) => {
           </div>
           <div className="py-4 px-4 pt-14 text-[12px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
             <span className={`w-full py-4 rounded-[10px] font-bold`}>สัดส่วนการลงทุน</span>
-            <span className='flex items-center py-2 text-[6px] lg:text-[10px] 2xl:text-[14px] text-[#7c8594]'>
-              <Clock size={16} className='mr-[6px] 2xl:w-[16px] 2xl:h-[16px] lg:w-[12px] lg:h-[12px] w-[8px] h-[8px]' />
-              ข้อมูล ณ วันที่ 20 มี.ค. 2567
-            </span>
           </div>
           <div className={`py-4 bg-white rounded-[10px] text-[12px] lg:text-[16px] 2xl:text-[20px] text-gray-700 px-5 shadow-md w-full`}>
             {Object.keys(typeData.type_data).length !== 0 ? (
@@ -102,10 +94,6 @@ const Investment = ({ fund }: OverviewProps) => {
           </div>
           <div className="py-4 px-4 pt-14 text-[12px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
             <span className={`w-full py-4 rounded-[10px] font-bold`}>กลุ่มประเภทตราสารทุน/ตราสารหนี้ที่ลงทุน</span>
-            <span className='flex items-center py-2 text-[6px] lg:text-[10px] 2xl:text-[14px] text-[#7c8594]'>
-              <Clock size={16} className='mr-[6px] 2xl:w-[16px] 2xl:h-[16px] lg:w-[12px] lg:h-[12px] md:w-[10px] md:h-[10px] w-[8px] h-[8px]' />
-              ข้อมูล ณ วันที่ 20 มี.ค. 2567
-            </span>
           </div>
           <div className={`py-4 bg-white rounded-[10px] text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-gray-700 px-5 shadow-md w-full`}>
             {Object.keys(investmentData.Investment_proportion_data).length !== 0 ? (

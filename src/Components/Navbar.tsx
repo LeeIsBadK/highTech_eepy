@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const navigation = [
   { icon: <List size={20} className="mr-1.5 w-5 lg:w-0" />, text: "Funds", href: "/fund" },
   { icon: <NotebookText size={20} className="mr-1.5 lg:w-0" />, text: "Detail", href: "/detail" },
-  { icon: <PencilLine size={20} className="mr-1.5 lg:w-0" />, text: "Edit", href: "/detail/edit" },
   { icon: <Scale size={20} className="mr-1.5 w-5 lg:w-0" />, text: "Compare", href: "/compare" },
 ];
 
@@ -19,10 +18,7 @@ const Navbar = () => {
     if (parts.includes('fund'))
       setActive('Funds')
     if (parts.includes('detail')) {
-      if (parts.includes('edit'))
-        setActive('Edit')
-      else
-        setActive('Detail')
+      setActive('Detail')
     }
     if (parts.includes('compare'))
       setActive('Compare')

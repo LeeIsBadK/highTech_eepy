@@ -84,7 +84,6 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                 </div>
               ))}
             </div>
-            <span className='flex items-center px-2 py-5 pb-11 text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-[#7c8594]'><Clock size={18} className='mr-[6px]' /> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
           </div>
         )}
         {fundData && status === 'Standrad Deviation' && (

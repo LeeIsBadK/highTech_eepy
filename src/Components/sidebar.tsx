@@ -9,7 +9,6 @@ import { useLocalStorage } from "../loginComponent/hook/useLocalStorage";
 const navigation = [
   { icon: <List size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Funds", href: "/fund" },
   { icon: <NotebookText size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Detail", href: "/detail" },
-  { icon: <PencilLine size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Edit", href: "/detail/edit" },
   { icon: <Scale size={30} className="m-1 2xl:w-[30px] 2xl:h-[30px] lg:w-[28px] lg:w-[28px] w-0" />, text: "Compare", href: "/compare" },
 ];
 
@@ -34,10 +33,7 @@ const Sidebar: React.FC = () => {
     if (parts.includes('fund'))
       setActive('Funds')
     if (parts.includes('detail')) {
-      if (parts.includes('edit'))
-        setActive('Edit')
-      else
-        setActive('Detail')
+      setActive('Detail')
     }
     if (parts.includes('compare'))
       setActive('Compare')
@@ -51,9 +47,6 @@ const Sidebar: React.FC = () => {
     current = url.split('/compare/')[1];
     if (parts.includes('detail'))
       setDetail(true);
-    if (parts.includes('edit')) {
-      setDetail(false);
-    }
     if (parts.includes('compare')) {
       current = url.split('/compare/')[1];
       setCompare(true);

@@ -80,7 +80,7 @@ const Fee = ({ fund }: OverviewProps) => {
                         </div>
                         <div className="px-4 py-1 grid grid-rows-7 border-x border-dashed border-gray-400">
                             <p className="flex justify-center">ตามหนังสือชี้ชวน</p>
-                            {fundData.data_from_sheet.Fund_Sell === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_sheet.Fund_Sell === "ดูหมายเหตุ" || fundData.data_from_sheet.Fund_Sell === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -95,7 +95,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_sheet.Fund_Buy === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_sheet.Fund_Buy === "ดูหมายเหตุ" || fundData.data_from_sheet.Fund_Buy === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -110,7 +110,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_sheet.Fund_switch_In === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_sheet.Fund_switch_In === "ดูหมายเหตุ" || fundData.data_from_sheet.Fund_switch_In=== "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -125,7 +125,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_sheet.Fund_switch_Out === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_sheet.Fund_switch_Out === "ดูหมายเหตุ" || fundData.data_from_sheet.Fund_switch_Out === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -140,7 +140,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_sheet.manage_fee === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_sheet.manage_fee === "ดูหมายเหตุ" || fundData.data_from_sheet.manage_fee  === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -155,7 +155,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_sheet.ttl_fee === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_sheet.ttl_fee === "ดูหมายเหตุ" || fundData.data_from_sheet.ttl_fee === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -173,7 +173,7 @@ const Fee = ({ fund }: OverviewProps) => {
                         </div>
                         <div className="px-4 py-1 grid grid-rows-7">
                             <p className="flex justify-center">เก็บจริง</p>
-                            {fundData.data_from_real.Fund_Sell === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_real.Fund_Sell === "ดูหมายเหตุ" || fundData.data_from_real.Fund_Sell === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -188,7 +188,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_real.Auc_Buy === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_real.Auc_Buy === "ดูหมายเหตุ" || fundData.data_from_real.Auc_switch_In === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -203,7 +203,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_real.Auc_switch_In === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_real.Auc_switch_In === "ดูหมายเหตุ" || fundData.data_from_real.Auc_switch_In === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -218,7 +218,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_real.Auc_switch_Out === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_real.Auc_switch_Out === "ดูหมายเหตุ" || fundData.data_from_real.Auc_switch_Out=== "-"  ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -233,7 +233,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_real.manage_fee === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_real.manage_fee === "ดูหมายเหตุ" || fundData.data_from_real.manage_fee === "-" ? (
                                 <p className="flex justify-center items-center py-5 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
@@ -248,7 +248,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_real.ttl_fee === "ดูหมายเหตุ" ? (
+                            {fundData.data_from_real.ttl_fee === "ดูหมายเหตุ" || fundData.data_from_real.ttl_fee === "-" ? (
                                 <p className="flex justify-center items-center py-5 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>

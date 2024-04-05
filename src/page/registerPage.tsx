@@ -60,7 +60,7 @@ const RegisterPage: React.FC = () => {
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
-            setErrMsg("Invalid Entry");
+            setErrMsg("กรุณาใส่ให้ครบทุกช่อง");
             setClickButton(false);
             return;
         }
@@ -148,9 +148,9 @@ const RegisterPage: React.FC = () => {
                                     className="appearance-none relative block w-full mt-1 mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-[#1CA59B] focus:z-10 text-[16px] text-[14px] lg:text-[18px]"
                                 />
                                 <p id="uidnote" className={userFocus && user && !validName ? "text-[14px] rounded-md bg-gray-300 px-1 py-1 relative" : "hidden"}>
-                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" /> 4 to 24 characters.</span>
-                                    Must begin with a letter.<br />
-                                    Letters, numbers, underscores, hyphens allowed.
+                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" /> 8-24 ตัวอักษร</span>
+                                    เริ่มต้นด้วยตัวอักษร<br />
+                                    ตัวอักษร, ตัวเลข, _ ใช้ได้
                                 </p>
                             </div>
                             <div className="mt-3">
@@ -168,8 +168,8 @@ const RegisterPage: React.FC = () => {
                                     className="appearance-none relative block w-full mt-1 mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-[#1CA59B] focus:z-10 text-[16px] text-[14px] lg:text-[18px]"
                                 />
                                 <p id="pwdnote" className={pwdFocus && !validPwd ? "text-[14px] rounded-md bg-gray-300 px-1 py-1 relative" : "hidden"}>
-                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" />8 to 24 characters.</span>
-                                    Must include uppercase and lowercase letters, a number and a special character.<br />
+                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" />8-24 ตัวอักษร</span>
+                                    ต้องมีตัวอักษรพิมพ์ใหญ่และพิมพ์เล็ก ตัวเลข และอักขระพิเศษ<br />
                                 </p>
                             </div>
                             <div className="mt-3">
@@ -187,7 +187,7 @@ const RegisterPage: React.FC = () => {
                                     className="appearance-none relative block w-full mt-1 mb-2 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md shadow-md focus:outline-none focus:ring-indigo-500 focus:border-[#1CA59B] focus:z-10 text-[16px] text-[14px] lg:text-[18px]"
                                 />
                                 <p id="confirmnote" className={matchFocus && !validMatch ? "text-[14px] rounded-md bg-gray-300 px-1 py-1 relative" : "hidden"}>
-                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" />Must match the first password input field.</span>
+                                    <span className="flex"><Info size={15} className="ml-1 mt-[2px] mr-1" />ต้องตรงกับช่องป้อนรหัสผ่านช่องแรก</span>
                                 </p>
                             </div>
                         </div>
