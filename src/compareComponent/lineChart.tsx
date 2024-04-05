@@ -2,9 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: 'https://backend-ruby-eight.vercel.app',
+});
 
 const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
-  const [fundsFetched, setFundsFetched] = useState(false);
   const chartDivRef = useRef<HTMLDivElement>(null);
   const chartInitializedRef = useRef<boolean>(false);
   const [legendData, setLegendData] = useState<{ name: string; color: any }[]>([]);
@@ -33,14 +37,32 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
     '#0240b1'
   ]
 
-  useEffect(() => {
-    if (!fundsFetched && funds !== null) {
-      setFundsFetched(true);
-    }
-  }, [funds, fundsFetched]);
+  const [fundData, setFundData] = useState<Array<any> | null>(null);
 
   useEffect(() => {
-    if (chartDivRef.current && fundsFetched && !chartInitializedRef.current) {
+    const fetchDataForAllFunds = async () => {
+      try {
+        // Check if fundData is null before fetching the data
+        if (!fundData && funds.length !== 0) {
+          const promises = funds.map(async (fund) => {
+            const response = await apiClient.get(`/page1/${fund}`);
+            return response.data[0];
+          });
+
+          const dataForAllFunds = await Promise.all(promises);
+          setFundData(dataForAllFunds);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchDataForAllFunds();
+  }, [fundData, funds]);
+
+  useEffect(() => {
+    if (chartDivRef.current && fundData && !chartInitializedRef.current) {
+      console.log('in')
       const root = am5.Root.new(chartDivRef.current);
 
       class MyTheme extends am5.Theme {
@@ -73,26 +95,26 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
       }));
       cursor.lineY.set("visible", false);
 
-
       let date = new Date();
-      date.setHours(0, 0, 0, 0);
-      let value = 100;
+      let value = 0;
 
-      function generateData() {
-        value = Math.round((Math.random() * 10 - 5) + value);
-        am5.time.add(date, "day", 1);
-        return {
-          date: date.getTime(),
-          value: value,
-        };
-      }
+      function generateData(NAV: Array<any>) {
+        const generatedData = [];
 
-      function generateDatas(count: number) {
-        const data = [];
-        for (let i = 0; i < count; ++i) {
-          data.push(generateData());
+        for (const navData of NAV) {
+          date = new Date(navData[0]);
+          date.setHours(0, 0, 0, 0);
+          value = navData[1];
+          am5.time.add(date, "day", 1);
+
+          generatedData.push({
+            date: date.getTime(),
+            value: value,
+          });
         }
-        return data;
+
+        console.log(generatedData);
+        return generatedData;
       }
 
       const xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
@@ -115,40 +137,38 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
 
       const updatedLegendData: { name: string; color: any }[] = [];
 
-      funds.forEach((fund, index) => {
-        date.setHours(0, 0, 0, 0);
-        value = 100;
+      fundData?.forEach((fund, index) => {
 
         const series = chart.series.push(am5xy.LineSeries.new(root, {
-          name: fund,
+          name: fund.proj_abbr_name,
           xAxis: xAxis,
           yAxis: yAxis,
-          valueYField: 'value', // Use dynamic value field based on index
+          valueYField: 'value',
           valueXField: "date",
           tooltip: am5.Tooltip.new(root, {
-            labelText: `{name}: {valueY}` // Use dynamic value field for tooltip
+            labelText: `{name}: {valueY}`
           })
         }));
 
-        const data = generateDatas(1200);
-        series.data.setAll(data);
+        console.log(fund.compareinfomation.nav);
 
-        date = new Date();
-        date.setHours(0, 0, 0, 0);
-        value = 100;
+        if (fund.compareinfomation.nav && fund.compareinfomation.nav.NAV.length !== 0) {
+          const data = generateData(fund.compareinfomation.nav.NAV);
+          series.data.setAll(data);
 
-        series.appear(1000);
+          series.appear(1000);
 
-        updatedLegendData.push({
-          name: fund,
-          color: colors[index]
-        });
-        setLegendData(updatedLegendData);
+          updatedLegendData.push({
+            name: fund.proj_abbr_name,
+            color: colors[index]
+          });
+          setLegendData(updatedLegendData);
+        }
       });
 
       chartInitializedRef.current = true;
     }
-  }, [fundsFetched, chartInitializedRef.current, funds]);
+  }, [fundData, chartInitializedRef.current, funds]);
 
 
   return (
@@ -158,7 +178,24 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
           <span key={value.name} className='px-[24px] 2xl:text-[16px] lg:text-[14px] md:text-[13px] text-[12px] py-2 flex items-center'><div className={`w-[14px] h-[14px] md:w-[16px] md:h-[16px] flex items-center mt-[-2px] mr-2 md:mr-3`} style={{ backgroundColor: value.color, borderRadius: '50%' }}></div>{value.name}</span>
         ))}
       </div>
-      <div ref={chartDivRef} className='w-full h-[500px]' />
+      {!chartInitializedRef.current || legendData.length !== 0 ? (
+        <div className='relative'>
+          <div ref={chartDivRef} className='w-full 2xl:h-[500px] lg:h-[425px] md:h-[400px] h-[375px]'></div>
+          {!chartInitializedRef.current && (
+            <div className="absolute inset-0 flex justify-center items-center">
+            <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[15px] lg:text-[17px] font-medium rounded-md shadow-md text-gray-600 bg-gray-200">
+              <svg className="animate-spin -ml-1 mr-[10px] h-[22px] w-[22px] text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path className="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              กำลังโหลดข้อมูล...
+            </div>
+          </div>
+          )}
+        </div>
+      ) : (
+        <div className='flex justify-center items-cewnter w-full 2xl:h-[500px] lg:h-[425px] md:h-[400px] h-[375px] font-semibont 2xl:text-[18px] lg:text-[16px] md:text-[14px] text-[12px]'>ไม่มีข้อมูลกราฟ</div>
+      )}
     </>
   );
 };

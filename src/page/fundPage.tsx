@@ -1,10 +1,9 @@
 import Sidebar from '../Components/sidebar';
 import Fund from '../Components/fund';
 import Favorite from '../Components/favorite';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Search, X } from 'lucide-react';
 import axios from 'axios';
-import AuthContext from '../loginComponent/context/AuthProvider';
 import Navbar from '../Components/Navbar';
 
 const apiClient = axios.create({
@@ -15,12 +14,11 @@ const apiClient = axios.create({
 const FundPage: React.FC = () => {
   const [fundData2, setFundData2] = useState<Array<any> | null>(null);
   const [showFavorite, setShowFavorite] = useState<boolean>(false);
-  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get('/allpro');
+        const response = await apiClient.get('/product');
         setFundData2(response.data); // Assuming the API response is an array of fund objects
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -36,36 +34,12 @@ const FundPage: React.FC = () => {
     setSearchTerm(value);
   };
 
-  const handleFavorite = (favorite:boolean) => {
-    setFundData2(null);
+  const handleFavorite = (favorite: boolean) => {
     setShowFavorite(!favorite);
-    if (!favorite) {
-      const fetchData = async () => {
-        try {
-          const response = await apiClient.get(`/fav/${auth.user}`);
-          setFundData2(response.data[0].proj_abbr_name_list);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-
-      fetchData();
-    } else {
-      const fetchData = async () => {
-        try {
-          const response = await apiClient.get('/allpro');
-          setFundData2(response.data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData();
-    }
   };
 
   return (
-    <div className="flex transition-all duration-500 ease-in-out min-w-[640px]" 
+    <div className="flex transition-all duration-500 ease-in-out min-w-[640px]"
       style={{
         fontFamily: "'Noto Sans Thai', sans-serif",
       }}
@@ -91,13 +65,13 @@ const FundPage: React.FC = () => {
             </div>
             <button className="ml-auto" onClick={() => {
               handleFavorite(showFavorite);
-              }}
+            }}
             >
               <Favorite showFavorite={showFavorite} />
             </button>
           </div>
         </div>
-        <Fund funds={fundData2} />
+        <Fund funds={fundData2} showFavorite={showFavorite}/>
       </div>
     </div>
   );

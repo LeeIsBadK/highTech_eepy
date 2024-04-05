@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
-import Favorite from '../fundDetailComponent/favorite';
+import Favorite from '../fundDetailEditComponent/favorite';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Detail from '../fundDetailEditComponent/detail';
 import { ChevronLeft, Clock, Triangle } from 'lucide-react';
@@ -11,108 +11,6 @@ import axios from 'axios';
 import Navbar from '../Components/Navbar';
 
 
-export const fundData = [
-  {
-    id: 1,
-    name: 'ASP-DIGIBLOC-SSF',
-    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม',
-    href: '#',
-    risk: 6,
-    type: 'SSFEQ',
-    value: 8.4301,
-    returns: 138.70
-  },
-  {
-    id: 2,
-    name: 'ASP-DIGIBLOCRMF',
-    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการเลี้ยงชีพ',
-    href: '#',
-    risk: 1,
-    type: 'RMFEQ',
-    value: 7.7214,
-    returns: 130.12
-  },
-  {
-    id: 3,
-    name: 'ASP-DIGIBLOC',
-    detail: 'กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน',
-    href: '#',
-    risk: 3,
-    type: 'FIFEQ',
-    value: 7.4037,
-    returns: 125.88
-  },
-  {
-    id: 4,
-    name: 'LHBLOCKCHAIN',
-    detail: 'กองทุนเปิด แอล เอช บล็อกเชน',
-    href: '#',
-    risk: 2,
-    type: 'MIXFLEX',
-    value: 9.8522,
-    returns: 81.36
-  },
-  {
-    id: 5,
-    name: 'SCBSEMI(SSFE)',
-    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดเพื่อการออมผ่านช่องทางอิเล็กทรอนิกส์)',
-    href: '#',
-    risk: 4,
-    type: 'SSFEQ',
-    value: 15.5487,
-    returns: 77.20
-  },
-  {
-    id: 6,
-    name: 'SCBSEMI(E)',
-    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดช่องทางอิเล็กทรอนิกส์)',
-    href: '#',
-    risk: 5,
-    type: 'RMFEQ',
-    value: 15.7053,
-    returns: 77.17
-  },
-  {
-    id: 7,
-    name: 'SCBSEMI(P)',
-    detail: 'กองทุนเปิดไทยพาณิชย์ Semiconductor (ชนิดผู้ลงทุนกลุ่ม/บุคคล)',
-    href: '#',
-    risk: 7,
-    type: 'FIFEQ',
-    value: 15.2816,
-    returns: 75.52
-  },
-  {
-    id: 8,
-    name: 'KT-BLOCKCHAIN-A',
-    detail: 'กองทุนเปิดเคแทม Blockchain Economy (ชนิดสะสมมูลค่า)',
-    href: '#',
-    risk: 6,
-    type: 'FIFEQ',
-    value: 10.7280,
-    returns: 73.10
-  },
-  {
-    id: 9,
-    name: 'TNEXTGEN-SSF',
-    detail: 'กองทุนเปิด ทิสโก้ Next Generation Internet ชนิดหน่วยลงทุนเพื่อการออม',
-    href: '#',
-    risk: 8,
-    type: 'SSFEQ',
-    value: 6.5763,
-    returns: 64.94
-  },
-  {
-    id: 10,
-    name: 'KKP TECH-H-SSF',
-    detail: 'กองทุนเปิดเคเคพี EXPANDED TECH - HEDGED ชนิดเพื่อการออม',
-    href: '#',
-    risk: 1,
-    type: 'SSFEQ',
-    value: 15.1590,
-    returns: 63.65
-  }
-]
 const status = {
   "goUp": <Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px]' />,
   "goDown": <Triangle fill='#ef5350' size={18} className='text-[#ef5350] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px] rotate-180' />
@@ -128,9 +26,55 @@ const FundDetailEditPage: React.FC = () => {
   const [allFunds, setAllFunds] = useState<Array<any> | null>(null);
   const [fund, setFund] = useState<string>('');
   const [checkFunds, setCheckFunds] = useState<boolean>(false);
-  const [storedEdit, setStoredEdit] = useLocalStorage("detail", "");
+  const [storedDetail, setStoredDetail] = useLocalStorage("detail", "");
 
   const goBack = () => navigate(-1);
+
+  const [fundData, setFundData] = useState<any | null>(null);
+
+  useEffect(() => {
+    const url = location.pathname; // Get the current pathname from the location object
+    const parts = url.split("/");
+    const fund = parts[parts.length - 1];
+    if (fund) {
+      if (storedDetail) {
+        setFund(storedDetail);
+      } else {
+        setFund('');
+        setCheckFunds(true);
+      }
+    } else {
+      if (fund && fund === 'edit') {
+        if (storedDetail) {
+          navigate('/detail/edit/' + storedDetail, { state: { from: location }, replace: true });
+          setFund(storedDetail);
+        }
+        else {
+          setFund('');
+          setCheckFunds(true);
+        }
+      } else {
+        setFund(fund);
+        setStoredDetail(fund);
+      }
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const fetchDataForAllFunds = async () => {
+      try {
+        // Check if fundData is null before fetching the data
+        if (!fundData && fund) {
+          const response = await apiClient.get('/product/' + fund);
+          setFundData(response.data[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchDataForAllFunds();
+  }, [fundData, fund]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -144,40 +88,6 @@ const FundDetailEditPage: React.FC = () => {
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const url = location.pathname; // Get the current pathname from the location object
-    const parts = url.split("/");
-    const fund = parts[parts.length - 1];
-    if (fund && (fund === 'performance' || fund === 'port' || fund === 'fee')) {
-      if (storedEdit) {
-        if (fund === 'performance')
-          navigate('/detail/edit/performance/' + storedEdit, { state: { from: location }, replace: true });
-        if (fund === 'port')
-          navigate('/detail/edit/port/' + storedEdit, { state: { from: location }, replace: true });
-        if (fund === 'fee')
-          navigate('/detail/edit/fee/' + storedEdit, { state: { from: location }, replace: true });
-        setFund(storedEdit);
-      } else {
-        setFund('');
-        setCheckFunds(true);
-      }
-    } else {
-      if (fund && fund === 'edit') {
-        if (storedEdit) {
-          navigate('/detail/edit/' + storedEdit, { state: { from: location }, replace: true });
-          setFund(storedEdit);
-        }
-        else {
-          setFund('');
-          setCheckFunds(true);
-        }
-      } else {
-        setFund(fund);
-        setStoredEdit(fund);
-      }
-    }
-  }, [location.pathname]); // Run the effect whenever the pathname changes
 
 
   return (
@@ -207,7 +117,7 @@ const FundDetailEditPage: React.FC = () => {
             <div className='flex'>
               <div>
                 <h2 className="text-[15px] md:text-[17px] lg:text-[19px] 2xl:text-[23px] py-1 font-bold text-[#072C29]">{fund}</h2>
-                <span className='py-1 text-gray-400 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]'>กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม</span>
+                <span className='py-1 text-gray-400 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]'>{fundData?.proj_name_th}</span>
               </div>
               <div className='flex flex-col items-end ml-auto'>
                 <span className='flex items-center px-2 text-[16px] md:text-[18px] lg:text-[20px] 2xl:text-[24px] font-bold text-[#072C29]'>

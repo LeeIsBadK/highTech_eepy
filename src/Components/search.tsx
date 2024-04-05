@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X, Search } from 'lucide-react';
 
 interface Props {
-  funds: any[] | null;
+  funds: Array<any> | null;
 }
 
 const SearchBar: React.FC<Props> = ({ funds }) => {
@@ -46,7 +46,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
             />
             {showSearch && (<X className="mt-[-1px] w-5 h-5 lg:w-6 lg:h-6 items-end absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowSearch(false)} />)}
           </div>
-          <div className={`block absolute px-9 w-[240px] md:w-[290px] lg:w-[340px] 2xl:w-[440px] mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearch ? 'max-h-[26.5vh]' : 'max-h-0'
+          <div className={`block absolute px-9 w-[240px] md:w-[290px] lg:w-[340px] 2xl:w-[445px] mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearch ? 'max-h-[26.5vh]' : 'max-h-0'
             }`}>
             <ul className="py-2">
               {funds ? (
@@ -54,7 +54,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
                   <a key={fund.id} href={"/detail/" + fund.proj_abbr_name}>
                     <li className="cursor-pointer items-center w-full px-4 py-3 text-[14px] text-[12px] md:text-[14px] lg:text-[16px] font-semibold text-[#072C29] hover:bg-gray-200 rounded-[10px]">
                       {fund.proj_abbr_name}
-                      <span className='text-gray-400 font-normal flex flex-wrap text-[12px] text-[10px] md:text-[12px] lg:text-[14px] whitespace-normal'>{fund.Allinfo.fundName}</span>
+                      <span className='text-gray-400 font-normal flex flex-wrap text-[12px] text-[10px] md:text-[12px] lg:text-[14px] whitespace-normal'>{fund.proj_name_th}</span>
                     </li>
                   </a>
                 ))

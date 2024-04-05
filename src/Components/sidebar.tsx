@@ -24,11 +24,9 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
   const [current, setCurrent] = useState<string>('');
   const [detail, setDetail] = useState<boolean>(false);
-  const [edit, setEdit] = useState<boolean>(false);
   const [compare, setCompare] = useState<boolean>(false);
   const [ storedCompare ] = useLocalStorage<string[]>("compare", []);
   const [ storedDetail ] = useLocalStorage("detail", "");
-  const [ storedEdit ] = useLocalStorage("edit", "");
 
   useEffect(() => {
     const url = location.pathname; // Get the current pathname from the location object
@@ -55,7 +53,6 @@ const Sidebar: React.FC = () => {
       setDetail(true);
     if (parts.includes('edit')) {
       setDetail(false);
-      setEdit(true);
     }
     if (parts.includes('compare')) {
       current = url.split('/compare/')[1];
@@ -120,32 +117,22 @@ const Sidebar: React.FC = () => {
                   )}
                 </Link>
                 {item.text === "Detail" && detail && expanded && (
-                  <button className="absolute top-1/4 right-0 z-50" onClick={() => {setDetail(!detail); setCompare(false); setEdit(false);}}>
+                  <button className="absolute top-1/4 right-0 z-50" onClick={() => {setDetail(!detail); setCompare(false); }}>
                     <ChevronDown className={`${active === 'Detail' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
                 {item.text === "Detail" && !detail && expanded && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setDetail(!detail); setCompare(false); setEdit(false);}}>
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setDetail(!detail); setCompare(false); }}>
                     <ChevronUp className={`${active === 'Detail' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
-                {item.text === "Edit" && edit && expanded && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setEdit(!edit); setCompare(false); setDetail(false);}}>
-                    <ChevronDown className={`${active === 'Edit' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
-                  </button>
-                )}
-                {item.text === "Edit" && !edit && expanded && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setEdit(!edit); setCompare(false); setDetail(false);}}>
-                    <ChevronUp className={`${active === 'Edit' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
-                  </button>
-                )}
                 {item.text === "Compare" && compare && expanded && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setCompare(!compare); setDetail(false); setEdit(false);}}>
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setCompare(!compare); setDetail(false); }}>
                     <ChevronDown className={`${active === 'Compare' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
                 {item.text === "Compare" && !compare && expanded && (
-                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setCompare(!compare); setDetail(false); setEdit(false);}}>
+                  <button className="absolute top-1/4 right-0  z-50" onClick={() => {setCompare(!compare); setDetail(false); }}>
                     <ChevronUp className={`${active === 'Compare' ? 'text-white' : 'text-gray-600' } mx-4 mt-[2px] lg:w-6 w-0`} />
                   </button>
                 )}
@@ -181,30 +168,6 @@ const Sidebar: React.FC = () => {
                           <Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />
                           ค่าธรรมเนียม
                         </span>
-                      </button>
-                    </ul>
-                  </div>
-                </div>
-              )}
-              {item.text === "Edit" && (
-                <div className={`${expanded ? 'max-w-full' : 'w-0 h-0'} transition-w duration-1000 ease-in-out`}>
-                  <div className={`block bg-white text-gray-600 rounded-[5px] shadow-md overflow-hidden transition-max-h duration-1000 ease-in-out ${edit ? 'max-h-[250px]' : 'max-h-0'}`}>
-                    <ul className="2xl:pl-[48px] lg:pl-[40px] pl-0 flex flex-col py-2 2xl:text-[16px] lg:text-[14px]">
-                      <button className={`${active === item.text && current === '' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
-                        onClick={() => navigate('/detail/edit' + storedEdit, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><ReceiptText size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ภาพรวม</span>
-                      </button>
-                      <button className={`${active === item.text && current === 'performance' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
-                        onClick={() => navigate('/detail/edit/performance' + storedEdit, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><HandCoins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ผลการดำเนินงานและปันผล</span>
-                      </button>
-                      <button className={`${active === item.text && current === 'port' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
-                        onClick={() => navigate('/detail/edit/port' + storedEdit, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><PieChart size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />พอร์ตการลงทุน</span>
-                      </button>
-                      <button className={`${active === item.text && current === 'fee' ? 'text-[#1CA59B] font-semibold' : ''} 2xl:px-2 lg:px-1.5 py-3 rounded-[10px] hover:bg-gray-200`}
-                        onClick={() => navigate('/detail/edit/fee' + storedEdit, { state: { from: location }, replace: true })}>
-                        <span className="flex items-center"><Coins size={19} className="mr-[8px] 2xl:w-[19px] 2xl:h-[19px] lg:w-[17px] lg:h-[17px] w-0 h-0" />ค่าธรรมเนียม</span>
                       </button>
                     </ul>
                   </div>
