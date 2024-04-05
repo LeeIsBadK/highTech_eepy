@@ -36,7 +36,7 @@ const FundDetailEditPage: React.FC = () => {
     const url = location.pathname; // Get the current pathname from the location object
     const parts = url.split("/");
     const fund = parts[parts.length - 1];
-    if (fund) {
+    if (!fund) {
       if (storedDetail) {
         setFund(storedDetail);
       } else {
