@@ -40,8 +40,14 @@ const FundPage: React.FC = () => {
 
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const handleSearch = (value: string) => {
+  const handleSearch = async (value: string) => {
     setSearchTerm(value);
+    try {
+      const response = await apiClient.get(`/filter/product?searchString=${value}&take=20&skip=&orderBy=asc`);
+      setFundData2(response.data); // Assuming the API response is an array of fund objects
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   const handleFavorite = (favorite: boolean) => {

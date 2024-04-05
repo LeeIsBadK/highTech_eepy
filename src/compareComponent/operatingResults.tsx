@@ -58,14 +58,14 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
           </div>
         </div>
         {fundData && status === 'Performance' && (
-          <div>
+          <div className='overflow-x-auto'>
             <div className="flex overflow-x-auto">
               {fundData?.map((fund) => (
-                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]"
+                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px] min-h-[450px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-                    <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="mt-[3px] ml-1 text-gray-400" /></a></span>
+                  <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
+                    <span className={`flex justify-center items-center w-full py-5 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
                   </div>
                   <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ผลตอบแทนกองทุนรวม ? (
@@ -78,7 +78,7 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                         <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['10_year'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['10_year']).toFixed(2) + '%' : '-'}</p>
                       </div>
                     ) : (
-                      <div className="w-full h-[50vh] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>
+                      <div className="w-full min-h-[450px] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>
                     )}
                   </div>
                 </div>
@@ -88,14 +88,14 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
           </div>
         )}
         {fundData && status === 'Standrad Deviation' && (
-          <div>
+          <div className='overflow-x-auto'>
             <div className="flex overflow-x-auto">
               {fundData?.map((fund) => (
-                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]"
+                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px] min-h-[450px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-                    <span className={`flex justify-center w-full py-4 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="mt-[3px] ml-1 text-gray-400" /></a></span>
+                  <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
+                    <span className={`flex justify-center w-full py-5 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
                   </div>
                   <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ความผันผวนของกองทุนรวม ? (
@@ -108,7 +108,7 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                         <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['10_year'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['10_year']).toFixed(2) + '%' : '-' }</p>
                       </div>
                     ) : (
-                      <div className="w-full h-[50vh] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>
+                      <div className="w-full min-h-[450px] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>
                     )}
                   </div>
                 </div>

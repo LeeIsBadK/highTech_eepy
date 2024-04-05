@@ -82,8 +82,8 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="flex overflow-x-auto px-4 pt-4">
           {topFiveData?.map((fund) => (
             <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]">
-              <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-                <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px] whiteSpace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
+              <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
+                <span className={`flex justify-center items-center w-full py-5 px-3 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
               </div>
               <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
                 {Object.keys(fund.top_five_holding).length !== 0 ? (
@@ -111,8 +111,8 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="flex overflow-x-auto px-4 pt-4">
           {typeData?.map((fund) => (
             <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]">
-              <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-                <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px] whiteSpace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
+              <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
+                <span className={`flex justify-center items-center w-full py-5 px-3 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
               </div>
               <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
                 {Object.keys(fund.type_data).length !== 0 ? (
@@ -140,8 +140,8 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         <div className="flex overflow-x-auto px-4 pt-4">
           {investmentData?.map((fund) => (
             <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]">
-              <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-                <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px] whiteSpace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
+              <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
+                <span className={`flex justify-center items-center w-full py-5 px-3 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
               </div>
               <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-gray-600 px-5 shadow-md w-full`}>
                 {Object.keys(fund.Investment_proportion_data).length !== 0 ? (
