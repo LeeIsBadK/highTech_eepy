@@ -1,5 +1,5 @@
 
-import { ChevronLast, ChevronFirst, Scale, MoreVertical, List, NotebookText, ChevronDown, ChevronUp, Coins, HandCoins, PieChart, ReceiptText, PencilLine } from "lucide-react"
+import { ChevronLast, ChevronFirst, Scale, MoreVertical, List, NotebookText, ChevronDown, ChevronUp, Coins, HandCoins, PieChart, ReceiptText } from "lucide-react"
 import { useState, useEffect, useContext } from "react"
 import lhfund from '../assets/lhFund.png';
 import { Link, useLocation, useNavigate } from "react-router-dom";
