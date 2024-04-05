@@ -64,7 +64,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
                   <a key={fund.id} href={"/detail/" + fund.proj_abbr_name}>
                     <li className="cursor-pointer items-center w-full px-4 py-3 text-[14px] text-[12px] md:text-[14px] lg:text-[16px] font-semibold text-[#072C29] hover:bg-gray-200 rounded-[10px]">
                       {fund.proj_abbr_name}
-                      <span className='text-gray-400 font-normal flex flex-wrap text-[12px] text-[10px] md:text-[12px] lg:text-[14px] whitespace-normal'>{fund.proj_name_th}</span>
+                      <span className='text-gray-400 font-normal flex flex-wrap text-[10px] md:text-[12px] lg:text-[14px] whitespace-normal'>{fund.proj_name_th}</span>
                     </li>
                   </a>
                 ))

@@ -40,7 +40,7 @@ const OperatingResults = ({ fund }: OperatingResultsProps) => {
                 <div className="bg-white shadow-md rounded-[10px] px-11 py-1"
                 >
                     <div className="pt-8 pb-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">Performance</div>
-                    <div className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
+                    <div className="text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
                         {fundData ? (
                             fundData.operating_results.length !== 0 && fundData.operating_results.ผลตอบแทนกองทุนรวม && fundData.operating_results.ผลตอบแทนตัวชี้วัด ? (
                                 <div>
@@ -105,7 +105,7 @@ const OperatingResults = ({ fund }: OperatingResultsProps) => {
                 <div className="bg-white shadow-md rounded-[10px] px-11 py-1"
                 >
                     <div className="pt-8 pb-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">Standrad Deviation</div>
-                    <div className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
+                    <div className="text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
                         {fundData ? (
                             fundData.operating_results.length !== 0 && fundData.operating_results.ความผันผวนของกองทุนรวม && fundData.operating_results.ความผันผวนของตัวชี้วัด ? (
                                 <div>

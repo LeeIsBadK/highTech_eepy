@@ -41,7 +41,7 @@ const Fee = ({ fund }: OverviewProps) => {
                             รายละเอียดการซื้อ
                         </span>
                     </div>
-                    <div className={`py-4 bg-white rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-700 px-5 shadow-md w-full`}>
+                    <div className={`py-4 bg-white rounded-[10px] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-700 px-5 shadow-md w-full`}>
                         <div className="px-4 py-1 grid grid-cols-5">
                             <p className="py-1.5">มูลค่าขั้นต่ำของการซื้อครั้งแรก</p>
                             <p className="flex justify-center py-1 col-start-3 font-bold">{fundData.buyInfo.การซื้อครั้งแรกขั้นต่ำ ? fundData.buyInfo.การซื้อครั้งแรกขั้นต่ำ : '-'}</p>
@@ -57,7 +57,7 @@ const Fee = ({ fund }: OverviewProps) => {
                             ค่าธรรมเนียม
                         </span>
                     </div>
-                    <div className={`grid grid-cols-3 py-5 bg-white rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-700 px-5 shadow-md w-full`}>
+                    <div className={`grid grid-cols-3 py-5 bg-white rounded-[10px] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-700 px-5 shadow-md w-full`}>
                         <div className="px-4 py-1 grid grid-rows-7">
                             <p className="py-1.5 row-start-2">ค่าธรรมเนียมเมื่อซื้อ<br />
                                 <span className="text-gray-400 text-[8px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Front-end Fee)</span>
@@ -75,7 +75,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                 <span className="text-gray-400 text-[8px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Management Fee)</span>
                             </p>
                             <p className="py-1.5 row-start-7">ค่าธรรมเนียมและค่าใช้จ่ายรวมทั้งหมด<br />
-                                <span className="text-gray-400 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">(Total Expense Ratio)</span>
+                                <span className="text-gray-400 text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">(Total Expense Ratio)</span>
                             </p>
                         </div>
                         <div className="px-4 py-1 grid grid-rows-7 border-x border-dashed border-gray-400">
