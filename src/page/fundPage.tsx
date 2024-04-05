@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Search, X } from 'lucide-react';
 import axios from 'axios';
 import Navbar from '../Components/Navbar';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const apiClient = axios.create({
   baseURL: 'https://backend-ruby-eight.vercel.app',
@@ -14,6 +15,15 @@ const apiClient = axios.create({
 const FundPage: React.FC = () => {
   const [fundData2, setFundData2] = useState<Array<any> | null>(null);
   const [showFavorite, setShowFavorite] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const url = location.pathname; // Get the current pathname from the location object
+    const parts = url.split("/");
+    if (!parts.includes('fund'))
+      navigate('/fund', { state: { from: location }, replace: true });
+  }, [location.pathname]);
 
   useEffect(() => {
     const fetchData = async () => {
