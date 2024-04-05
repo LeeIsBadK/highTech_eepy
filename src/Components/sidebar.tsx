@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
     }
     if (parts.includes('compare'))
       setActive('Compare')
-  }, [active]);
+  }, [active, location.pathname]);
 
   useEffect(() => {
     const url = location.pathname; // Get the current pathname from the location object
