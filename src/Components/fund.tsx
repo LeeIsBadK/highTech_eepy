@@ -314,7 +314,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
             <div className="max-h-[69svh] overflow-y-auto">
               {Array.from({ length: 6 }, (_, i) => (
                 <div key={i} className="relative border-b py-4">
-                  <div className="animate-pulse grid grid-cols-12 gap-x-4 mr-[48px]">
+                  <div className="animate-pulse grid grid-cols-12 gap-x-4 mr-4">
                     <div className="px-2 py-1 h-full flex flex-col items-center justify-between space-y-3">
                       <div className="rounded-[5px] bg-[#d1d6df] h-[12px] w-[12px] md:h-[16px] md:w-[16px] lg:h-[18px] lg:w-[18px]"></div>
                       <div className="rounded-[5px] bg-[#d1d6df] h-[12px] w-[12px] md:h-[16px] md:w-[16px] lg:h-[18px] lg:w-[18px] mt-auto"></div>
