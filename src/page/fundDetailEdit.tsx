@@ -26,7 +26,7 @@ const FundDetailEditPage: React.FC = () => {
   const [allFunds, setAllFunds] = useState<Array<any> | null>(null);
   const [fund, setFund] = useState<string>('');
   const [checkFunds, setCheckFunds] = useState<boolean>(false);
-  const [storedDetail, setStoredDetail] = useLocalStorage("detail", "");
+  const [storedDetail, setStoredDetail] = useLocalStorage("edit", "");
 
   const goBack = () => navigate(-1);
 

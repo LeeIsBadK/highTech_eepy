@@ -86,20 +86,20 @@ const OverView = ({ fund }: OverviewProps) => {
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">บลจ</p><p className="ml-auto text-end p-4">{fundData.companyTH}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">ประเภทกอง</p><p className="ml-auto p-4">{fundData.fundType[0]}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ประเภทกอง</p><p className="ml-auto text-end p-4">{fundData.fundType[0]}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">ค่าความเสี่ยง</p><p className="flex ml-auto text-end p-4">{fundData.risk_spectrum}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">Feeder Fund</p><p className="ml-auto p-4">{fundData.Allinfo.feeder_fund}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">นโยบายค่าเงิน</p><p className="ml-auto p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4 pb-1">นโยบายการจ่ายปันผล</p><p className="ml-auto p-4 pb-1">{fundData.Allinfo.dividen_policy}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">Feeder Fund</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feeder_fund}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">นโยบายค่าเงิน</p><p className="ml-auto text-end p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4 pb-1">นโยบายการจ่ายปันผล</p><p className="ml-auto text-end p-4 pb-1">{fundData.Allinfo.dividen_policy}</p></div>
           </div>
           <div className="py-1 px-8 w-full text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">
-            <div className="grid grid-cols-2"><p className="p-4">ค่าธรรมเนียมขาย</p><p className="ml-auto p-4">{fundData.Allinfo.feeHolders.front_end_fee[1]}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">ค่าธรรมเนียมรับซื้อคืน</p><p className="ml-auto p-4">{fundData.Allinfo.feeHolders.back_end_fee[1]}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">ค่าใช้จ่ายกองทุนรวม</p><p className="ml-auto p-4">{fundData.Allinfo.feefunds[1]}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งแรกขั้นต่ำ</p><p className="ml-auto p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งแรกขั้นต่ํา}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งต่อไปขั้นต่ำ</p><p className="ml-auto p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งถัดไปขั้นต่ํา}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">วันที่จดทะเบียนกองทุน</p><p className="ml-auto p-4">-</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">มูลค่าทรัพย์สินสุทธิ</p><p className="ml-auto p-4">{fundData.Allinfo.buyInfo.nav && fundData.Allinfo.buyInfo.nav.NAV ? fundData.Allinfo.buyInfo.nav.NAV[10][2] : '-'}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ค่าธรรมเนียมขาย</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feeHolders.front_end_fee[1]}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ค่าธรรมเนียมรับซื้อคืน</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feeHolders.back_end_fee[1]}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ค่าใช้จ่ายกองทุนรวม</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feefunds[1]}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งแรกขั้นต่ำ</p><p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งแรกขั้นต่ํา}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งต่อไปขั้นต่ำ</p><p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งถัดไปขั้นต่ํา}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">วันที่จดทะเบียนกองทุน</p><p className="ml-auto text-end p-4">-</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">มูลค่าทรัพย์สินสุทธิ</p><p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.nav && fundData.Allinfo.buyInfo.nav.NAV ? fundData.Allinfo.buyInfo.nav.NAV[10][2] : '-'}</p></div>
           </div>
         </div>
       ) : (

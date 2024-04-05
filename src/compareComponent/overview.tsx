@@ -55,10 +55,10 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         {fundData ? (
           <div className="flex overflow-x-auto">
             {fundData?.map((fund) => (
-              <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[275px] max-w-[275px]"
+              <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]"
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
+                <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
                   <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
                 </div>
                 <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
@@ -102,10 +102,10 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         </div>
         {fundData ? (<div className="flex overflow-x-auto">
           {fundData?.map((fund) => (
-            <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[275px] max-w-[275px]"
+            <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]"
               style={{ whiteSpace: 'nowrap' }}
             >
-              <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
+              <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-4 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
               </div>
               <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
