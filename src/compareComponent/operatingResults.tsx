@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Clock, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface OperatingResultsProps {
