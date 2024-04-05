@@ -277,7 +277,7 @@ const Fund = ({ funds, showFavorite } : FundProps) => {
                       )}
                     </div>
                     <div className="col-span-2 flex justify-center items-center">
-                      <p className="px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center text-[9px] text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundtype ? fund.Allinfo.fundtype[0] : '-'}</p>
+                      <p className="px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center text-[9px] text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0] : '-'}</p>
                     </div>
                     <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ?  fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length-1][1] : '-'}</p>
                     {fund.Allinfo.fund_resYTD['year_to_date'] && fund.Allinfo.fund_resYTD['year_to_date'].includes('-') ? (

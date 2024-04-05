@@ -61,7 +61,7 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
           <div>
             <div className="flex overflow-x-auto">
               {fundData?.map((fund) => (
-                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
+                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
                   <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
@@ -91,7 +91,7 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
           <div>
             <div className="flex overflow-x-auto">
               {fundData?.map((fund) => (
-                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[250px]"
+                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
                   <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">

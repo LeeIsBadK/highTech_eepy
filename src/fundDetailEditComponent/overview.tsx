@@ -85,7 +85,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.fundType[0]}</p>
+                <p className="ml-auto text-end p-4">{fundData.fundType[0]}</p>
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">ค่าความเสี่ยง</p>
@@ -109,7 +109,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.feeder_fund}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.feeder_fund}</p>
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">นโยบายค่าเงิน</p>
@@ -121,7 +121,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p>
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">นโยบายการจ่ายปันผล</p>
@@ -133,7 +133,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4 pb-1">{fundData.Allinfo.dividen_policy}</p>
+                <p className="ml-auto text-end p-4 pb-1">{fundData.Allinfo.dividen_policy}</p>
               )}
             </div>
           </div>
@@ -147,7 +147,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.feeHolders.front_end_fee[1]}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.feeHolders.front_end_fee[1]}</p>
               )}
               </div>
             <div className="grid grid-cols-2"><p className="p-4">ค่าธรรมเนียมรับซื้อคืน</p>
@@ -159,7 +159,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.feeHolders.back_end_fee[1]}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.feeHolders.back_end_fee[1]}</p>
               )}
            </div>
             <div className="grid grid-cols-2"><p className="p-4">ค่าใช้จ่ายกองทุนรวม</p>
@@ -171,7 +171,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.feefunds[1]}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.feefunds[1]}</p>
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งแรกขั้นต่ำ</p>
@@ -183,7 +183,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งแรกขั้นต่ํา}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งแรกขั้นต่ํา}</p>
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งต่อไปขั้นต่ำ</p>
@@ -195,7 +195,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งถัดไปขั้นต่ํา}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งถัดไปขั้นต่ํา}</p>
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">วันที่จดทะเบียนกองทุน</p>
@@ -209,7 +209,7 @@ const OverView = ({ fund }: OverviewProps) => {
                   className="w-full p-2 border border-gray-300 rounded"
                 />
               ) : (
-                <p className="ml-auto p-4">{fundData.Allinfo.buyInfo.nav && fundData.Allinfo.buyInfo.nav.NAV ? fundData.Allinfo.buyInfo.nav.NAV[10][2] : '-'}</p>
+                <p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.nav && fundData.Allinfo.buyInfo.nav.NAV ? fundData.Allinfo.buyInfo.nav.NAV[10][2] : '-'}</p>
               )}
             </div>
           </div>
