@@ -37,6 +37,14 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
     '#0240b1'
   ]
 
+  const [loadingComplete, setLoadingComplete] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (chartInitializedRef.current && legendData.length !== 0) {
+      setLoadingComplete(true);
+    }
+  }, [chartInitializedRef.current, legendData.length]);
+
   const [fundData, setFundData] = useState<Array<any> | null>(null);
 
   useEffect(() => {
@@ -150,9 +158,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
           })
         }));
 
-        console.log(fund.compareinfomation.nav);
-
-        if (fund.compareinfomation.nav && fund.compareinfomation.nav.NAV.length !== 0) {
+        if (fund.compareinfomation.nav && fund.compareinfomation.nav.length !== 0 && fund.compareinfomation.nav.NAV && fund.compareinfomation.nav.NAV.length !== 0) {
           const data = generateData(fund.compareinfomation.nav.NAV);
           series.data.setAll(data);
 
@@ -178,19 +184,19 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
           <span key={value.name} className='px-[24px] 2xl:text-[16px] lg:text-[14px] md:text-[13px] text-[12px] py-2 flex items-center'><div className={`w-[14px] h-[14px] md:w-[16px] md:h-[16px] flex items-center mt-[-2px] mr-2 md:mr-3`} style={{ backgroundColor: value.color, borderRadius: '50%' }}></div>{value.name}</span>
         ))}
       </div>
-      {!chartInitializedRef.current || legendData.length !== 0 ? (
+      {!chartInitializedRef.current || (legendData.length !== 0 && chartInitializedRef.current) ? (
         <div className='relative'>
           <div ref={chartDivRef} className='w-full 2xl:h-[500px] lg:h-[425px] md:h-[400px] h-[375px]'></div>
           {!chartInitializedRef.current && (
             <div className="absolute inset-0 flex justify-center items-center">
-            <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[15px] lg:text-[17px] font-medium rounded-md shadow-md text-gray-600 bg-gray-200">
-              <svg className="animate-spin -ml-1 mr-[10px] h-[22px] w-[22px] text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path className="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              กำลังโหลดข้อมูล...
+              <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[15px] lg:text-[17px] font-medium rounded-md shadow-md text-gray-600 bg-gray-200">
+                <svg className="animate-spin -ml-1 mr-[10px] h-[22px] w-[22px] text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path className="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                กำลังโหลดข้อมูล...
+              </div>
             </div>
-          </div>
           )}
         </div>
       ) : (
