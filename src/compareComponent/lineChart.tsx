@@ -37,6 +37,8 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
     '#0240b1'
   ]
 
+  const [fundData, setFundData] = useState<Array<any> | null>(null);
+
   useEffect(() => {
     const fetchDataForAllFunds = async () => {
       try {
