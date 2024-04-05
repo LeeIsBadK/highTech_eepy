@@ -37,16 +37,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
     '#0240b1'
   ]
 
-  const [loadingComplete, setLoadingComplete] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (chartInitializedRef.current && legendData.length !== 0) {
-      setLoadingComplete(true);
-    }
-  }, [chartInitializedRef.current, legendData.length]);
-
-  const [fundData, setFundData] = useState<Array<any> | null>(null);
-
   useEffect(() => {
     const fetchDataForAllFunds = async () => {
       try {
