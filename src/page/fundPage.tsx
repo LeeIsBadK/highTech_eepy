@@ -18,7 +18,7 @@ const FundPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get('/product');
+        const response = await apiClient.get('/filter/product?searchString=&take=20&skip=&orderBy=asc');
         setFundData2(response.data); // Assuming the API response is an array of fund objects
       } catch (error) {
         console.error('Error fetching data:', error);

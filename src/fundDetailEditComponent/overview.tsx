@@ -124,7 +124,7 @@ const OverView = ({ fund }: OverviewProps) => {
                 <p className="ml-auto p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p>
               )}
             </div>
-            <div className="grid grid-cols-2"><p className="p-4 pb-1">นโยบายการจ่ายปันผล</p>
+            <div className="grid grid-cols-2"><p className="p-4">นโยบายการจ่ายปันผล</p>
             {edit ? (
                 <input
                   type="text"
