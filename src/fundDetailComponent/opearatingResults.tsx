@@ -1,5 +1,6 @@
+import axios from "axios";
 import { Clock } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 interface OperatingResultsProps {
@@ -9,8 +10,28 @@ const first = <button className="2xl:w-[54px] lg:w-[48px] md:w-[45px] w-[42px] p
 const second = <button className="2xl:w-[54px] lg:w-[48px] md:w-[45px] w-[42px] py-1 bg-[#00e76b] text-white text-[9px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] rounded-[15px]">ดีมาก</button>
 const third = <button className="2xl:w-[54px] lg:w-[48px] md:w-[45px] w-[42px] py-1 bg-[#74ffb4] text-white text-[9px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] rounded-[15px]">ดี</button>
 
-const OperatingResults = ({fund}: OperatingResultsProps) => {
-    const [stat, setStat] = useState<string>('SD');
+const apiClient = axios.create({
+    baseURL: 'https://backend-ruby-eight.vercel.app',
+});
+
+const OperatingResults = ({ fund }: OperatingResultsProps) => {
+    const [fundData, setFundData] = useState<any | null>(null);
+
+    useEffect(() => {
+        const fetchDataForAllFunds = async () => {
+            try {
+                // Check if fundData is null before fetching the data
+                if (!fundData && fund) {
+                    const response = await apiClient.get('/page2/' + fund);
+                    setFundData(response.data[0]);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchDataForAllFunds();
+    }, [fundData, fund]);
 
     return (
         <div className="pb-[50px] p-4 md:p-6">
@@ -20,46 +41,134 @@ const OperatingResults = ({fund}: OperatingResultsProps) => {
                 >
                     <div className="pt-8 pb-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">Performance</div>
                     <div className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
-                        <div className="grid grid-cols-4"><p className="flex justify-center py-2 col-start-3">กองนี้</p><p className="flex justify-center py-2">เฉลี่ยในกลุ่ม</p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>3M</p><p className="flex justify-center col-start-3">9.44%</p><p className="flex justify-center">10.29%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>6M</p><p className="flex justify-center col-start-3">100.73%</p><p className="flex justify-center">32.69%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3">{first}</p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>1Y</p><p className="flex justify-center col-start-3">136.02%</p><p className="flex justify-center">39.66%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3">{first}</p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>3Y</p><p className="flex justify-center col-start-3">-</p><p className="flex justify-center">-3.67%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>5Y</p><p className="flex justify-center col-start-3">-</p><p className="flex justify-center">8.21%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>10Y</p><p className="flex justify-center col-start-3">-</p><p className="flex justify-center">-</p></div>
-                        <div className="grid grid-cols-4 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
+                        {fundData ? (
+                            fundData.operating_results.length !== 0 && fundData.operating_results.ผลตอบแทนกองทุนรวม && fundData.operating_results.ผลตอบแทนตัวชี้วัด ? (
+                                <div>
+                                    <div className="grid grid-cols-4"><p className="flex justify-center py-2 col-start-3">กองนี้</p><p className="flex justify-center py-2">เฉลี่ยในกลุ่ม</p></div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>3M</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ผลตอบแทนกองทุนรวม['3_month'] ? parseInt(fundData.operating_results.ผลตอบแทนกองทุนรวม['3_month']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ผลตอบแทนตัวชี้วัด['3_month'] ? parseInt(fundData.operating_results.ผลตอบแทนตัวชี้วัด['3_month']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>6M</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ผลตอบแทนกองทุนรวม['6_month'] ? parseInt(fundData.operating_results.ผลตอบแทนกองทุนรวม['6_month']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ผลตอบแทนตัวชี้วัด['6_month'] ? parseInt(fundData.operating_results.ผลตอบแทนตัวชี้วัด['6_month']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>1Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ผลตอบแทนกองทุนรวม['1_year'] ? parseInt(fundData.operating_results.ผลตอบแทนกองทุนรวม['1_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ผลตอบแทนตัวชี้วัด['1_year'] ? parseInt(fundData.operating_results.ผลตอบแทนตัวชี้วัด['1_year']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>3Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ผลตอบแทนกองทุนรวม['3_year'] ? parseInt(fundData.operating_results.ผลตอบแทนกองทุนรวม['3_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ผลตอบแทนตัวชี้วัด['3_year'] ? parseInt(fundData.operating_results.ผลตอบแทนตัวชี้วัด['3_year']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>5Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ผลตอบแทนกองทุนรวม['5_year'] ? parseInt(fundData.operating_results.ผลตอบแทนกองทุนรวม['5_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ผลตอบแทนตัวชี้วัด['5_year'] ? parseInt(fundData.operating_results.ผลตอบแทนตัวชี้วัด['5_year']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>10Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ผลตอบแทนกองทุนรวม['10_year'] ? parseInt(fundData.operating_results.ผลตอบแทนกองทุนรวม['10_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ผลตอบแทนตัวชี้วัด['10_year'] ? parseInt(fundData.operating_results.ผลตอบแทนตัวชี้วัด['10_yearh']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
+                                </div>
+                            ) : (
+                                <div className="w-full h-[50vh] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>
+                            )
+                        ) : (
+                            <div className="flex justify-center items-center w-full h-[50vh]">
+                                <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[15px] lg:text-[17px] font-medium rounded-md shadow-md text-gray-600 bg-gray-200">
+                                    <svg className="animate-spin -ml-1 mr-[10px] h-[22px] w-[22px] text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path className="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    กำลังโหลดข้อมูล...
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="bg-white shadow-md rounded-[10px] px-11 py-1"
                 >
-                    <div className="flex pt-8 pb-2 text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px]">
-                        <button className={`${stat === 'SD' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-100 rounded-[10px]`} onClick={() => setStat('SD')}>SD</button>
-                        <button className={`${stat === 'Sharpe Ratio' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-100 rounded-[10px]`} onClick={() => setStat('Sharpe Ratio')}>Sharpe Ratio</button>
-                        <button className={`${stat === 'Max Drawdown' ? "text-[#072C29] font-bold underline" : "text-gray-600 font-semibold"} px-2 xl:px-4 hover:bg-gray-100 rounded-[10px]`} onClick={() => setStat('Max Drawdown')}>Max Drawdown</button>
-                    </div>
+                    <div className="pt-8 pb-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">Standrad Deviation</div>
                     <div className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600">
-                        <div className="grid grid-cols-4"><p className="flex justify-center py-2 col-start-3">กองนี้</p><p className="flex justify-center py-2">เฉลี่ยในกลุ่ม</p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>3M</p><p className="flex justify-center col-start-3">9.44%</p><p className="flex justify-center">10.29%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>6M</p><p className="flex justify-center col-start-3">100.73%</p><p className="flex justify-center">32.69%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>1Y</p><p className="flex justify-center col-start-3">136.02%</p><p className="flex justify-center">39.66%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3">{first}</p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>3Y</p><p className="flex justify-center col-start-3">-</p><p className="flex justify-center">-3.67%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>5Y</p><p className="flex justify-center col-start-3">-</p><p className="flex justify-center">8.21%</p></div>
-                        <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
-                        <div className="grid grid-cols-4 pt-4 pb-1"><p>10Y</p><p className="flex justify-center col-start-3">-</p><p className="flex justify-center">-</p></div>
-                        <div className="grid grid-cols-4 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
+                        {fundData ? (
+                            fundData.operating_results.length !== 0 && fundData.operating_results.ความผันผวนของกองทุนรวม && fundData.operating_results.ความผันผวนของตัวชี้วัด ? (
+                                <div>
+                                    <div className="grid grid-cols-4"><p className="flex justify-center py-2 col-start-3">กองนี้</p><p className="flex justify-center py-2">เฉลี่ยในกลุ่ม</p></div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>3M</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ความผันผวนของกองทุนรวม['3_month'] ? parseInt(fundData.operating_results.ความผันผวนของกองทุนรวม['3_month']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ความผันผวนของตัวชี้วัด['3_month'] ? parseInt(fundData.operating_results.ความผันผวนของตัวชี้วัด['3_month']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>6M</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ความผันผวนของกองทุนรวม['6_month'] ? parseInt(fundData.operating_results.ความผันผวนของกองทุนรวม['6_month']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ความผันผวนของตัวชี้วัด['6_month'] ? parseInt(fundData.operating_results.ความผันผวนของตัวชี้วัด['6_month']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>1Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ความผันผวนของกองทุนรวม['1_year'] ? parseInt(fundData.operating_results.ความผันผวนของกองทุนรวม['1_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ความผันผวนของตัวชี้วัด['1_year'] ? parseInt(fundData.operating_results.ความผันผวนของตัวชี้วัด['1_year']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>3Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ความผันผวนของกองทุนรวม['3_year'] ? parseInt(fundData.operating_results.ความผันผวนของกองทุนรวม['3_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ความผันผวนของตัวชี้วัด['3_year'] ? parseInt(fundData.operating_results.ความผันผวนของตัวชี้วัด['3_year']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>5Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ความผันผวนของกองทุนรวม['5_year'] ? parseInt(fundData.operating_results.ความผันผวนของกองทุนรวม['5_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ความผันผวนของตัวชี้วัด['5_year'] ? parseInt(fundData.operating_results.ความผันผวนของตัวชี้วัด['5_year']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 border-b border-dashed border-gray-400 pt-1 pb-4 h-[53px]">
+                                        <p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-4 pb-1"><p>10Y</p>
+                                        <p className="flex justify-center col-start-3">{fundData.operating_results.ความผันผวนของกองทุนรวม['10_year'] ? parseInt(fundData.operating_results.ความผันผวนของกองทุนรวม['10_year']).toFixed(2) + '%' : '-'}</p>
+                                        <p className="flex justify-center">{fundData.operating_results.ความผันผวนของตัวชี้วัด['10_year'] ? parseInt(fundData.operating_results.ความผันผวนของตัวชี้วัด['10_year']).toFixed(2) + '%' : '-'}</p>
+                                    </div>
+                                    <div className="grid grid-cols-4 pt-1 pb-4 h-[53px]"><p className="flex justify-center col-start-3"></p><p className="flex justify-center"></p></div>
+                                </div>
+                            ) : (
+                                <div className="w-full h-[50vh] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>
+                            )
+                        ) : (
+                            <div className="flex justify-center items-center w-full h-[50vh]">
+                                <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[15px] lg:text-[17px] font-medium rounded-md shadow-md text-gray-600 bg-gray-200">
+                                    <svg className="animate-spin -ml-1 mr-[10px] h-[22px] w-[22px] text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path className="opacity-100" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    กำลังโหลดข้อมูล...
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
-            <span className='flex items-center px-2 py-4 pb-11 text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-[#7c8594]'><Clock size={18} className='mr-[6px]'/> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
+            <span className='flex items-center px-2 py-4 pb-11 text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-[#7c8594]'><Clock size={18} className='mr-[6px]' /> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
             <div className="bg-white px-8 py-6 shadow-md rounded-[10px] space-y-4 text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-gray-700">
                 <p>* ข้อมูลการจัดอันดับ Performance และ Standard Deviation ยึดจากสมาคมบริษัทจัดการลงทุนโดย</p>
                 <div className="flex space-x-3 md:space-x-6">

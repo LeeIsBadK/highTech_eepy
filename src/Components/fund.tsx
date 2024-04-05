@@ -9,36 +9,48 @@ const apiClient = axios.create({
   baseURL: 'https://backend-ruby-eight.vercel.app',
 });
 
-const Fund = ({ funds }: { funds: Array<any> | null }) => {
+interface FundProps {
+  funds: Array<any> | null;
+  showFavorite: boolean;
+}
+
+const Fund = ({ funds, showFavorite } : FundProps) => {
   const [selectedFund, setSelectedFund] = useState<string[]>([]);
-  const [selectedFavorite, setSelectedFavorite] = useState<string[]>([]);
+  const [selectedFavorite, setSelectedFavorite] = useState<Array<any>>([]);
+  const [selectedFavoriteName, setSelectedFavoriteName] = useState<string[]>([]);
   const compare = useRef<HTMLDivElement>(document.createElement('div'));
   const [showCompare, setShowCompare] = useState<boolean>(false);
   const [sort, setSort] = useState<string>('');
   const [showFunds, setShowFunds] = useState<Array<any> | null>(funds);
   const [sortNum, setSortNum] = useState<number>(0);
-  const [check, setCheck] = useState<number>(0);
   const { auth } = useContext(AuthContext);
   const [showEdit, setShowEdit] = useState<string>('');
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    setShowFunds(funds);
-  }, [funds]);
+    console.log(selectedFavorite, selectedFavoriteName)
+    if (showFavorite)
+      setShowFunds(selectedFavorite);
+    else
+      setShowFunds(funds);
+  }, [funds, showFavorite, selectedFavorite]);
+
+
 
   useEffect(() => {
     const fetchFav = async () => {
       try {
         const response = await apiClient.get(`/fav/${auth.user}`);
-        setSelectedFavorite(response.data);
+        setSelectedFavorite(response.data[0].product_json_list);
+        setSelectedFavoriteName(response.data[0].proj_abbr_name_list);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchFav();
-  }, [selectedFavorite]);
+  }, []);
 
   useEffect(() => {
     if (compare.current) {
@@ -63,11 +75,12 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
     }
   };
 
-  const handleFavorite = async (fund: string): Promise<void> => {
-    if (selectedFavorite.includes(fund)) {
-      setSelectedFavorite(selectedFavorite.filter((f) => f !== fund));
+  const handleFavorite = async (fund: any): Promise<void> => {
+    if (selectedFavoriteName.includes(fund.proj_abbr_name)) {
+      setSelectedFavorite(selectedFavorite.filter((f) => f.proj_abbr_name !== fund.proj_abbr_name));
+      setSelectedFavoriteName(selectedFavoriteName.filter((f) => f !== fund.proj_abbr_name));
       try {
-        await apiClient.delete(`/fav/delete/${auth.user}/${fund}`, {
+        await apiClient.delete(`/fav/delete/${auth.user}/${fund.proj_abbr_name}`, {
           withCredentials: true
         });
       } catch (error) {
@@ -75,9 +88,10 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
       }
     } else {
       setSelectedFavorite([...selectedFavorite, fund]);
+      setSelectedFavoriteName([...selectedFavoriteName, fund.proj_abbr_name ]);
       try {
         await apiClient.post(`/fav/add/${auth.user}`,
-          JSON.stringify({ "proj_abbr_name": fund }),
+          JSON.stringify({ "proj_abbr_name": fund.proj_abbr_name }),
           {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true
@@ -122,8 +136,13 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
           return updatedSortNum === 1 ? a.proj_abbr_name.localeCompare(b.proj_abbr_name) : b.proj_abbr_name.localeCompare(a.proj_abbr_name);
         } else if (data === 'type') {
           return updatedSortNum === 1 ? a.proj_abbr_name.localeCompare(b.proj_abbr_name) : b.proj_abbr_name.localeCompare(a.proj_abbr_name);
-        } else {
-          return updatedSortNum === 1 ? a[data] - b[data] : b[data] - a[data];
+        } else if (data === 'risk'){
+          const order = ["-", "1", "2", "3", "4", "5", "6", "7", "8", "81"];
+          const indexA = order.indexOf(a.returns); // Assuming the returns field is a string
+          const indexB = order.indexOf(b.returns); // Assuming the returns field is a string
+          return indexA - indexB;
+        } else if (data === 'returns'){
+          return updatedSortNum === 1 ? parseInt(a.Allinfo.fund_resYTD[0]) - parseInt(b.Allinfo.fund_resYTD[0]) : parseInt(b.Allinfo.fund_resYTD[0]) - parseInt(a.Allinfo.fund_resYTD[0]);
         }
       });
 
@@ -133,11 +152,11 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
     }
   };
 
-  const handleEdit = (fund:string) => {
+  const handleEdit = (fund: string) => {
     console.log(fund);
     if (!showEdit || showEdit !== fund)
       setShowEdit(fund);
-    else 
+    else
       setShowEdit('');
   }
 
@@ -202,6 +221,7 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
                 )}
               </span>
             </div>
+            <span className={`${funds && funds.length > 6 ? 'w-[54px]' : 'w-[48px]'}`}></span>
           </div>
           {showFunds ? (
             <div className="max-h-[69svh] overflow-y-auto">
@@ -215,21 +235,38 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
                           onClick={() => handleFundClick(fund.proj_abbr_name)}>
                           <Check className={`${selectedFund.includes(fund.proj_abbr_name) ? 'scale-100' : ''} text-white transform scale-0 transition-all duration-200 ease-in-out`} />
                         </button>
-                        <button className="w-[20px] transition duration-250 ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125" onClick={() => handleFavorite(fund.proj_abbr_name)}>
+                        <button className="w-[20px] transition duration-250 ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125" onClick={() => handleFavorite(fund)}>
                           <Star
                             size={22}
-                            fill={selectedFavorite.includes(fund.proj_abbr_name) ? "#ffea00" : "none"}
-                            className={`${selectedFavorite.includes(fund.proj_abbr_name) ? "text-[#faea00]" : "text-gray-400"} 2xl:w-[22px] 2xl:h-[22px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] w-[14px] h-[14px] mt-auto ml-[-2px] transition-colors duration-250 ease-in-out`}
+                            fill={selectedFavoriteName && selectedFavoriteName.includes(fund.proj_abbr_name) ? "#ffea00" : "none"}
+                            className={`${selectedFavoriteName && selectedFavoriteName.includes(fund.proj_abbr_name) ? "text-[#faea00]" : "text-gray-400"} 2xl:w-[22px] 2xl:h-[22px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] w-[14px] h-[14px] mt-auto ml-[-2px] transition-colors duration-250 ease-in-out`}
                           />
                         </button>
                       </div>
                     </div>
                     <a href={`/detail/${fund.proj_abbr_name}`} className="col-span-3 hover:bg-gray-100 p-2 rounded-[10px] text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">
                       <span className="pt-1">{fund.proj_abbr_name}</span>
-                      <span className="text-[7px] md:text-[9px] lg:text-[11px] 2xl:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.Allinfo.fundName}</span>
+                      <span className="text-[7px] md:text-[9px] lg:text-[11px] 2xl:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.proj_name_th}</span>
                     </a>
                     <div className='flex col-span-2 justify-center items-center'>
-                      <p className='text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold px-[8px] py-[2px] lg:px-[10px] lg:py-[3px] 2xl:px-[12px] 2xl:py-[4px] border border-2 rounded-md' style={{ color: `${riskColor[fund.risk]}`, borderColor: `${riskColor[fund.risk]}` }}>{fund.risk}</p>
+                      {fund.risk_spectrum && fund.risk_spectrum !== '-' ? (
+                        fund.risk_spectrum.replace(/\D/g, '') === '81' ? (
+                          <p className='relative text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold pl-[7px] pr-[9px] py-[2px] lg:px-[8.5px] lg:pr-[11.5px] lg:py-[3px] 2xl:pl-[10px] 2xl:pr-[14px] 2xl:py-[4px] border border-2 rounded-md'
+                            style={{ color: '#EB7650', borderColor: '#EB7650' }}>
+                            {8}
+                            <span className="absolute top-0 right-1/8 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">+</span>
+                          </p>
+                        ) : (
+                          <p className='text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold px-[8px] py-[2px] lg:px-[10px] lg:py-[3px] 2xl:px-[12px] 2xl:py-[4px] border border-2 rounded-md'
+                            style={{ color: `${riskColor[fund.risk_spectrum.replace(/\D/g, '')]}`, borderColor: `${riskColor[fund.risk_spectrum.replace(/\D/g, '')]}` }}>
+                            {fund.risk_spectrum.replace(/\D/g, '')}
+                          </p>
+                        )
+                      ) : (
+                        <p className='text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-gray-600 font-bold'>
+                          {fund.risk_spectrum}
+                        </p>
+                      )}
                     </div>
                     <div className="col-span-2 flex justify-center items-center">
                       <a href={`/detail/${fund.proj_abbr_name}`}>
@@ -237,16 +274,24 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
                       </a>
                     </div>
                     <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.value}</p>
-                    <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.returns}</p>
+                    {fund.Allinfo.fund_resYTD[0] && fund.Allinfo.fund_resYTD[0].includes('-') ? (
+                      <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD[0]}</p>
+                    ) : (
+                      fund.Allinfo.fund_resYTD[0] === 'N/A' ? (
+                        <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.fund_resYTD[0]}</p>
+                      ) : (
+                        <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD[0]}</p>
+                      )
+                    )}
                   </div>
                   <div className="relative flex items-center">
-                    <button onClick={() => handleEdit(fund.proj_abbr_name)}>
+                    <button onClick={() => handleEdit(fund.proj_abbr_name)} className="w-[48px]">
                       <EllipsisVertical className="text-gray-400 mx-4 2xl:w-[22px] 2xl:h-[22px] lg:w-[18px] lg:h-[18px] md:w-[16px] md:h-[16px] w-[14px] h-[14px]" />
                     </button>
                     <div className={`block absolute right-12 z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-500 ease-in-out ${showEdit === fund.proj_abbr_name ? 'max-w-[200px]' : 'max-w-[0px]'}`}>
-                      <ul className="py-1.5 px-1.5">
-                        <button onClick={() => navigate('/detail/edit/'+ fund.proj_abbr_name, { state: { from: location }, replace: true })} className="flex items-center h-[40px] w-full px-4 py-1 text-[1rem] text-gray-600 hover:bg-gray-200 rounded-[10px]" style={{ whiteSpace: 'nowrap' }}>
-                          <PencilLine size={18} className="mr-2"/>Edit
+                      <ul className="py-1.5 px-1.5 text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-600">
+                        <button onClick={() => navigate('/detail/edit/' + fund.proj_abbr_name, { state: { from: location }, replace: true })} className="flex items-center h-[40px] w-full px-4 py-1 hover:bg-gray-200 rounded-[10px]" style={{ whiteSpace: 'nowrap' }}>
+                          <PencilLine size={18} className="mr-2" />Edit
                         </button>
                       </ul>
                     </div>
@@ -258,7 +303,7 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
             <div className="max-h-[69svh] overflow-y-auto">
               {Array.from({ length: 6 }, (_, i) => (
                 <div key={i} className="relative border-b py-4">
-                  <div className="animate-pulse grid grid-cols-12 gap-x-4">
+                  <div className="animate-pulse grid grid-cols-12 gap-x-4 mr-[48px]">
                     <div className="px-2 py-1 h-full flex flex-col items-center justify-between space-y-3">
                       <div className="rounded-[5px] bg-[#d1d6df] h-[12px] w-[12px] md:h-[16px] md:w-[16px] lg:h-[18px] lg:w-[18px]"></div>
                       <div className="rounded-[5px] bg-[#d1d6df] h-[12px] w-[12px] md:h-[16px] md:w-[16px] lg:h-[18px] lg:w-[18px] mt-auto"></div>
@@ -276,12 +321,10 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
                     <div className="m-auto col-span-2 2xl:h-2 h-1.5 w-16 bg-[#d1d6df] rounded"></div>
                   </div>
                 </div>
-              ))
-              }
+              ))}
             </div>
           )
           }
-          <div ref={compare}></div>
         </div>
         {selectedFund.length != 0 && (
           <div className="p-5 rounded-[15px] bg-white mt-9 shadow-md">
@@ -309,15 +352,11 @@ const Fund = ({ funds }: { funds: Array<any> | null }) => {
             </button>
           </div>
         )}
+        <div ref={compare}></div>
         {showCompare && selectedFund.length !== 0 && (
           <button
             onClick={() => {
               setTimeout(() => { compare.current?.scrollIntoView({ behavior: 'smooth' }) }, 100);
-              if (check === 0) {
-                console.log('in');
-                setShowCompare(false);
-                setCheck(1);
-              }
             }}
             className="fixed bottom-9 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-gray-300 font-bold text-gray-600 rounded-md focus:outline-none"
           >

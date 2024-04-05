@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Sidebar from '../Components/sidebar';
 import SearchBar from '../Components/search';
 import Favorite from '../fundDetailComponent/favorite';
@@ -9,6 +9,7 @@ import Compare from '../fundDetailComponent/compare';
 import { useLocalStorage } from '../loginComponent/hook/useLocalStorage';
 import axios from 'axios';
 import Navbar from '../Components/Navbar';
+import AuthContext from '../loginComponent/context/AuthProvider';
 
 
 const status = {
@@ -27,27 +28,19 @@ const FundDetailPage: React.FC = () => {
   const [fund, setFund] = useState<string>('');
   const [checkFunds, setCheckFunds] = useState<boolean>(false);
   const [storedDetail, setStoredDetail] = useLocalStorage("detail", "");
+  const [favorite, setFavorite] = useState<boolean>(false);
+  const [selectedFavorite, setSelectedFavorite] = useState<any[] | null>(null);
+  const { auth } = useContext(AuthContext);
 
   const goBack = () => navigate(-1);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiClient.get('/allpro');
-        setAllFunds(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const [fundData, setFundData] = useState<any | null>(null);
 
   useEffect(() => {
     const url = location.pathname; // Get the current pathname from the location object
     const parts = url.split("/");
     const fund = parts[parts.length - 1];
-    if (fund && (fund === 'performance' || fund === 'port' || fund === 'fee')) {
+    if (fund && fund !== 'edit' && (fund === 'performance' || fund === 'port' || fund === 'fee')) {
       if (storedDetail) {
         if (fund === 'performance')
           navigate('/detail/performance/' + storedDetail, { state: { from: location }, replace: true });
@@ -77,6 +70,77 @@ const FundDetailPage: React.FC = () => {
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    const fetchDataForAllFunds = async () => {
+      try {
+        // Check if fundData is null before fetching the data
+        if (!fundData && fund) {
+          const response = await apiClient.get('/product/' + fund);
+          setFundData(response.data[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchDataForAllFunds();
+  }, [fundData, fund]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await apiClient.get('/product');
+        setAllFunds(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (fund && !selectedFavorite) {
+        try {
+          const response = await apiClient.get(`/fav/${auth.user}`);
+          const data = response.data[0].proj_abbr_name_list;
+          setSelectedFavorite(data);
+          if (data.includes(fund))
+            setFavorite(true);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+    }
+    fetchData();
+  }, [fund, selectedFavorite]);
+
+  const handleFavorite = async () => {
+    setFavorite(!favorite);
+    if (selectedFavorite?.includes(fund)) {
+      try {
+        await apiClient.delete(`/fav/delete/${auth.user}/${fund}`, {
+          withCredentials: true
+        });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    } else {
+      try {
+        await apiClient.post(`/fav/add/${auth.user}`,
+          JSON.stringify({ "proj_abbr_name": fund }),
+          {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+          }
+        );
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+  }
+
 
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[640px]"
@@ -85,7 +149,7 @@ const FundDetailPage: React.FC = () => {
       }}
     >
       <Sidebar />
-      
+
       <div className="w-full px-2 lg:px-16 pt-0 lg:pt-11 pb-4 lg:pb-12 items-center bg-[#f9f9f9] min-h-[100svh] max-h-[100svh] overflow-y-auto">
         <div className='pb-10 pt-40 lg:pt-0 lg:pb-12'>
           <Navbar />
@@ -106,7 +170,7 @@ const FundDetailPage: React.FC = () => {
             <div className='flex'>
               <div>
                 <h2 className="text-[15px] md:text-[17px] lg:text-[19px] 2xl:text-[23px] py-1 font-bold text-[#072C29]">{fund}</h2>
-                <span className='py-1 text-gray-400 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]'>กองทุนเปิด แอสเซทพลัส ดิจิทัล บล็อกเชน เพื่อการออม</span>
+                <span className='py-1 text-gray-400 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]'>{fundData?.proj_name_th}</span>
               </div>
               <div className='flex flex-col items-end ml-auto'>
                 <span className='flex items-center px-2 text-[16px] md:text-[18px] lg:text-[20px] 2xl:text-[24px] font-bold text-[#072C29]'>
@@ -118,7 +182,7 @@ const FundDetailPage: React.FC = () => {
             </div>
             <div className='flex'>
               <div className='pb-1 pt-5 flex space-x-6'>
-                <Favorite />
+                <button onClick={handleFavorite}><Favorite showFavorite={favorite} /></button>
                 <Compare fund={fund} />
               </div>
               <span className='flex ml-auto items-center pt-5 px-2 py-1 text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-gray-400'><Clock size={18} className='mr-[6px]' /> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>

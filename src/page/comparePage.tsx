@@ -191,7 +191,7 @@ const ComparePage: React.FC = () => {
     >
       <Sidebar />
       <div className="w-full px-2 lg:px-12 pt-0 lg:pt-12 pb-4 lg:pb-12 items-center bg-[#f9f9f9] min-h-[100svh] max-h-[100svh] overflow-y-auto">
-        <div className="pb-10 pt-40 lg:pt-0 lg:pb-12">
+        <div className="pb-10 pt-40 lg:pt-0 lg:pb-5">
           <Navbar />
           <div className='px-3 xl:px-4 grid grid-cols-3 gap-x-3.5 px-2 pb-4 mt-1 px-6 pb-8 mt-2 lg:px-8 lg:pb-12'>
             <h2 className="flex space-x-1.5 items-center text-[15px] md:text-[19px] lg:text-[23px] 2xl:text-[31px] font-bold tracking-tight text-[#072C29]">
@@ -205,7 +205,7 @@ const ComparePage: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-center mb-6 py-6 px-6 lg:px-8 bg-white shadow-md rounded-[10px]">
+        <div className="flex items-center mb-8 py-6 px-6 lg:px-8 bg-white shadow-md rounded-[10px]">
           <div className="flex flex-wrap"
             style={{ whiteSpace: 'nowrap' }}
           >
