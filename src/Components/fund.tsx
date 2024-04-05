@@ -309,14 +309,14 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                     <div className="col-span-2 flex justify-center items-center">
                       <p className="px-3 lg:px-2 py-1 rounded-[10px] items-center text-[9px] text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0] : '-'}</p>
                     </div>
-                    <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ? fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length - 1][1] : '-'}</p>
+                    <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ? parseFloat(fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length - 1][1]).toFixed(4) : '-'}</p>
                     {fund.Allinfo.fund_resYTD['year_to_date'] && fund.Allinfo.fund_resYTD['year_to_date'].includes('-') ? (
-                      <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date && fund.Allinfo.fund_resYTD.year_to_date.length !== 1 ? fund.Allinfo.fund_resYTD.year_to_date : <span className="text-[#072C29]">-</span>}</p>
+                      <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date && fund.Allinfo.fund_resYTD.year_to_date.length !== 1 ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
                     ) : (
                       fund.Allinfo.fund_resYTD['year_to_date'] === 'N/A' ? (
-                        <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? fund.Allinfo.fund_resYTD.year_to_date : <span className="text-[#072C29]">-</span>}</p>
+                        <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
                       ) : (
-                        <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? fund.Allinfo.fund_resYTD.year_to_date : <span className="text-[#072C29]">-</span>}</p>
+                        <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
                       )
                     )}
                   </div>
