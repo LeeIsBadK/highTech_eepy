@@ -61,11 +61,11 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
           <div className='overflow-x-auto'>
             <div className="flex overflow-x-auto">
               {fundData?.map((fund) => (
-                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px] min-h-[450px]"
+                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px] min-h-[450px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
-                    <span className={`flex justify-center items-center w-full py-5 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
+                  <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+                    <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
                   </div>
                   <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ผลตอบแทนกองทุนรวม ? (
@@ -90,11 +90,11 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
           <div className='overflow-x-auto'>
             <div className="flex overflow-x-auto">
               {fundData?.map((fund) => (
-                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[300px] min-h-[450px]"
+                <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px] min-h-[450px]"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  <div className="py-4 px-2 font-bold text-[11px] md:text-[13px] lg:text-[15px] 2xl:text-[19px] text-[#072C29]">
-                    <span className={`flex justify-center w-full py-5 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 py-0.5 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="text-gray-400" /></a></span>
+                  <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+                    <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
                   </div>
                   <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ความผันผวนของกองทุนรวม ? (
@@ -113,7 +113,6 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                 </div>
               ))}
             </div>
-            <span className='flex items-center px-2 py-5 pb-11 text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-[#7c8594]'><Clock size={18} className='mr-[6px]' /> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
           </div>
         )}
         {!fundData && (

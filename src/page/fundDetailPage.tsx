@@ -4,7 +4,7 @@ import SearchBar from '../Components/search';
 import Favorite from '../fundDetailComponent/favorite';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Detail from '../fundDetailComponent/detail';
-import { ChevronLeft, RectangleHorizontal, Triangle } from 'lucide-react';
+import { ChevronLeft, Minus, Triangle } from 'lucide-react';
 import Compare from '../fundDetailComponent/compare';
 import { useLocalStorage } from '../loginComponent/hook/useLocalStorage';
 import axios from 'axios';
@@ -15,7 +15,7 @@ import AuthContext from '../loginComponent/context/AuthProvider';
 const allStatus = {
   "goUp": <Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px]' />,
   "goDown": <Triangle fill='#ef5350' size={18} className='text-[#ef5350] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px] rotate-180' />,
-  "constant": <RectangleHorizontal fill='#999' size={18} className='text-[#999] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px] rotate-180' />
+  "constant": <Minus fill='#6b7280' size={18} className='text-[#6b7280] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px]' />
 }
 
 const apiClient = axios.create({
@@ -145,7 +145,7 @@ const FundDetailPage: React.FC = () => {
   }
 
   useEffect(() => {
-    if (fundData && fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length === 2) {
+    if (fundData && fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 2) {
       const numberDiff = fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][1] - fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 2][1];
       if (numberDiff < 0) {
         setStatus(allStatus.goDown);
@@ -161,6 +161,8 @@ const FundDetailPage: React.FC = () => {
       }
     }
   }, [fundData, number, status]);
+
+  console.log(status, number)
 
 
   return (
@@ -190,16 +192,28 @@ const FundDetailPage: React.FC = () => {
           <div className='px-2 w-full'>
             <div className='flex'>
               <div>
-                <h2 className="text-[15px] md:text-[17px] lg:text-[19px] 2xl:text-[23px] py-1 font-bold text-[#072C29]">{fund}</h2>
+                {fundData? (
+                  <h2 className="text-[15px] md:text-[17px] lg:text-[19px] 2xl:text-[23px] py-1 font-bold text-[#072C29]">{fundData.proj_abbr_name}</h2>
+                ) : (
+                  <div className="animate-pulse space-y-6 py-1 pb-2">
+                    <div className="2xl:h-3 h-2 w-72 bg-[#d1d6df] rounded"></div>
+                    <div className="2xl:h-2 h-1.5 w-96 bg-[#d1d6df] rounded"></div>
+                  </div>
+                )}
                 <span className='py-1 text-gray-400 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]'>{fundData?.proj_name_th}</span>
               </div>
-              {fundData && (
+              {fundData ? (
                 <div className='flex flex-col items-end ml-auto'>
                   <span className='flex items-center px-2 text-[16px] md:text-[18px] lg:text-[20px] 2xl:text-[24px] font-bold text-[#072C29]'>
                     {status}
                     {fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 2 ? parseFloat(fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][1]).toFixed(4) : '-'}
                   </span>
-                  <span className={`px-2 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] font-semibold ${number?.includes('-') ? "text-[#ef5350]" : "text-[#00bc91]"}`}>{number}</span>
+                  <span className={`px-2 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] font-semibold ${number?.includes('-') ? "text-[#ef5350]" : "text-[#00bc91]"}`}>{number === '0' ? <span className='text-gray-500'>+0.00</span> : number}</span>
+                </div>
+              ): (
+                <div className='animate-pulse flex flex-col space-y-4 items-end ml-auto py-2'>
+                  <div className="2xl:h-3 h-2 w-28 bg-[#d1d6df] rounded"></div>
+                  <div className="2xl:h-2 h-1.5 w-20 bg-[#d1d6df] rounded"></div>
                 </div>
               )}
             </div>

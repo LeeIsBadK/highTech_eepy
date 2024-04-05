@@ -173,7 +173,7 @@ const Fee = ({ fund }: OverviewProps) => {
                         </div>
                         <div className="px-4 py-1 grid grid-rows-7">
                             <p className="flex justify-center">เก็บจริง</p>
-                            {fundData.data_from_real.Fund_Sell === "ดูหมายเหตุ" || fundData.data_from_real.Fund_Sell === "-" ? (
+                            {fundData.data_from_real.Auc_Sell === "ดูหมายเหตุ" || fundData.data_from_real.Auc_Sell === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>

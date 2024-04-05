@@ -58,11 +58,11 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
         {fundData ? (
           <div className="flex overflow-x-auto">
             {fundData?.map((fund) => (
-              <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 2xl:min-w-[300px] lg:min-w-[250px] md:min-w-[225px] min-w-[200px]"
+              <div key={fund.proj_abbr_name} className="flex flex-col items-center mr-2 ml-2 min-w-[335px] max-w-[335px]"
                 style={{ whiteSpace: 'nowrap' }}
               >
-                <div className="py-4 px-2 font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
-                  <span className={`flex justify-center items-center w-full py-5 px-3 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund)}><X className="text-gray-400" /></a></span>
+                <div className="py-4 px-2 font-bold text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
+                  <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund)}><X className="text-gray-400" /></a></span>
                 </div>
                 <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} grid grid-cols-2 border border-gray-300 rounded-[10px] text-[10px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                   <div>
