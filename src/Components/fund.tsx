@@ -14,7 +14,7 @@ interface FundProps {
   showFavorite: boolean;
 }
 
-const Fund = ({ funds, showFavorite } : FundProps) => {
+const Fund = ({ funds, showFavorite }: FundProps) => {
   const [selectedFund, setSelectedFund] = useState<string[]>([]);
   const [selectedFavorite, setSelectedFavorite] = useState<Array<any>>([]);
   const [selectedFavoriteName, setSelectedFavoriteName] = useState<string[]>([]);
@@ -27,6 +27,7 @@ const Fund = ({ funds, showFavorite } : FundProps) => {
   const [showEdit, setShowEdit] = useState<string>('');
   const navigate = useNavigate();
   const location = useLocation();
+  const [maxArray, setMaxArray] = useState<boolean>(false);
 
   useEffect(() => {
     console.log(selectedFavorite, selectedFavoriteName)
@@ -68,6 +69,10 @@ const Fund = ({ funds, showFavorite } : FundProps) => {
   }, [compare.current, showCompare]);
 
   const handleFundClick = (fund: string): void => {
+    if (selectedFund.length >= 10) {
+      setMaxArray(true);
+      return;
+    }
     if (selectedFund.includes(fund)) {
       setSelectedFund(selectedFund.filter((f) => f !== fund));
     } else {
@@ -88,7 +93,7 @@ const Fund = ({ funds, showFavorite } : FundProps) => {
       }
     } else {
       setSelectedFavorite([...selectedFavorite, fund]);
-      setSelectedFavoriteName([...selectedFavoriteName, fund.proj_abbr_name ]);
+      setSelectedFavoriteName([...selectedFavoriteName, fund.proj_abbr_name]);
       try {
         await apiClient.post(`/fav/add/${auth.user}`,
           JSON.stringify({ "proj_abbr_name": fund.proj_abbr_name }),
@@ -136,21 +141,46 @@ const Fund = ({ funds, showFavorite } : FundProps) => {
           return updatedSortNum === 1 ? a.proj_abbr_name.localeCompare(b.proj_abbr_name) : b.proj_abbr_name.localeCompare(a.proj_abbr_name);
         } else if (data === 'type') {
           return updatedSortNum === 1 ? a.proj_abbr_name.localeCompare(b.proj_abbr_name) : b.proj_abbr_name.localeCompare(a.proj_abbr_name);
-        } else if (data === 'risk'){
-          const order = ["-", "1", "2", "3", "4", "5", "6", "7", "8", "81"];
-          const indexA = order.indexOf(a.returns); // Assuming the returns field is a string
-          const indexB = order.indexOf(b.returns); // Assuming the returns field is a string
-          return indexA - indexB;
+        } else if (data === 'risk') {
+            const order = ["-", "1", "2", "3", "4", "5", "6", "7", "8", "81"];
+            const indexA = order.indexOf(a.risk_spectrum.replace(/\D/g, '')); // Assuming the returns field is a string
+            const indexB = order.indexOf(b.risk_spectrum.replace(/\D/g, '')); // Assuming the returns field is a string
+            if (updatedSortNum === 1) 
+              return indexA - indexB;
+            else 
+              return indexB - indexA;
         } else if (data === 'returns') {
-          if (a.Allinfo.fund_resYTD[0] === null) return -1;
-          if (b.Allinfo.fund_resYTD[0] === null) return 1;
-          
-          // Sort '-' values after null values
-          if (a.Allinfo.fund_resYTD[0] === '-') return -1;
-          if (b.Allinfo.fund_resYTD[0] === '-') return 1;
-          
-          // Sort numerical values
-          return updatedSortNum === 1 ? parseInt(a.Allinfo.fund_resYTD[0]) - parseInt(b.Allinfo.fund_resYTD[0]) : parseInt(b.Allinfo.fund_resYTD[0]) - parseInt(a.Allinfo.fund_resYTD[0]);
+          if (updatedSortNum === 1) {
+            if (a.Allinfo.fund_resYTD['year_to_date'] === undefined) return -1000;
+            if (b.Allinfo.fund_resYTD['year_to_date'] === undefined) return 1000;
+
+            if (a.Allinfo.fund_resYTD['year_to_date'] === '-') return -1000;
+            if (b.Allinfo.fund_resYTD['year_to_date'] === '-') return 1000;
+          } else {
+            if (a.Allinfo.fund_resYTD['year_to_date'] === undefined) return 1000;
+            if (b.Allinfo.fund_resYTD['year_to_date'] === undefined) return -1000;
+
+            if (a.Allinfo.fund_resYTD['year_to_date'] === '-') return 1000;
+            if (b.Allinfo.fund_resYTD['year_to_date'] === '-') return -1000;
+          }
+
+          return updatedSortNum === 1 ? parseFloat(a.Allinfo.fund_resYTD['year_to_date']) - parseFloat(b.Allinfo.fund_resYTD['year_to_date']) : parseFloat(b.Allinfo.fund_resYTD['year_to_date']) - parseInt(a.Allinfo.fund_resYTD['year_to_date']);
+        } else if (data === 'value') {
+          if (updatedSortNum === 1) {
+            if (!a.Allinfo.nav.NAV || a.Allinfo.nav.NAV.length === 0) return -1000;
+            if (!b.Allinfo.nav.NAV || b.Allinfo.nav.NAV.length === 0) return 1000;
+
+            if (!a.Allinfo.nav.NAV && b.Allinfo.nav.NAV.length !== 0 && a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1] === '-') return -1000;
+            if (!b.Allinfo.nav.NAV && b.Allinfo.nav.NAV.length !== 0 && b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1] === '-') return 1000;
+          } else {
+            if (!a.Allinfo.nav.NAV || a.Allinfo.nav.NAV.length === 0) return 1000;
+            if (!b.Allinfo.nav.NAV || b.Allinfo.nav.NAV.length === 0) return -1000;
+
+            if (!a.Allinfo.nav.NAV && b.Allinfo.nav.NAV.length !== 0 && a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1] === '-') return 1000;
+            if (!b.Allinfo.nav.NAV && b.Allinfo.nav.NAV.length !== 0 && b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1] === '-') return -1000;
+          }
+
+          return updatedSortNum === 1 ? parseFloat(a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1]) - parseFloat(b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1]) : parseFloat(b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1]) - parseInt(a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1]);
         }
       });
 
@@ -277,9 +307,9 @@ const Fund = ({ funds, showFavorite } : FundProps) => {
                       )}
                     </div>
                     <div className="col-span-2 flex justify-center items-center">
-                      <p className="px-3 lg:px-2 py-1 hover:bg-gray-100 rounded-[10px] items-center text-[9px] text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0] : '-'}</p>
+                      <p className="px-3 lg:px-2 py-1 rounded-[10px] items-center text-[9px] text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0] : '-'}</p>
                     </div>
-                    <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ?  fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length-1][1] : '-'}</p>
+                    <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ? fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length - 1][1] : '-'}</p>
                     {fund.Allinfo.fund_resYTD['year_to_date'] && fund.Allinfo.fund_resYTD['year_to_date'].includes('-') ? (
                       <p className="flex col-span-2 justify-center items-center text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date && fund.Allinfo.fund_resYTD.year_to_date.length !== 1 ? fund.Allinfo.fund_resYTD.year_to_date : <span className="text-[#072C29]">-</span>}</p>
                     ) : (
@@ -374,6 +404,23 @@ const Fund = ({ funds, showFavorite } : FundProps) => {
           </button>
         )}
       </div>
+      {maxArray && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 flex items-center justify-center z-50"
+          style={{
+            fontFamily: "'Noto Sans Thai', sans-serif",
+          }}
+        >
+          <div className="bg-white flex flex-col items-center py-8 px-12 space-y-6 rounded-md shadow-md relative">
+            <p className="text-[16px] md:text-[18px] lg:text-[20px] font-bold">เปรียบกองทุนได้สูงสุด 10 กองทุน</p>
+            <p className="pb-1 text-[12px] md:text-[14px] lg:text-[16px]">โปรดเลือกกองทุนใหม่</p>
+            <button className={`px-5 py-[7px] bg-gradient-to-tr from-[#00f2e1] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] rounded-[5px] text-white text-[12px] md:text-[14px] lg:text-[16px] font-semibold shadow-md `}
+              style={{ whiteSpace: 'nowrap' }} onClick={() => setMaxArray(false)}
+            >
+              ตกลง
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

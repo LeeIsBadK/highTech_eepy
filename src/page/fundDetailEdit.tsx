@@ -79,7 +79,7 @@ const FundDetailEditPage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await apiClient.get('/allpro');
+        const response = await apiClient.get('/filter/product?searchString=&take=20&skip=&orderBy=asc');
         setAllFunds(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);

@@ -1,18 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Search } from 'lucide-react';
+import axios from 'axios';
 
 interface Props {
   funds: Array<any> | null;
 }
 
+const apiClient = axios.create({
+  baseURL: 'https://backend-ruby-eight.vercel.app',
+});
+
 const SearchBar: React.FC<Props> = ({ funds }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [showSearch, setShowSearch] = useState<boolean>(false);
+  const [fundData, setFundData] = useState<Array<any> | null>(null);
 
-  const handleSearch = () => {
-    // Implement your search logic here using the 'searchTerm' state
-    console.log('Search term:', searchTerm);
-    console.log(showSearch);
+  useEffect(() => {
+    if (fundData === null)
+      setFundData(funds);
+  }, [funds, fundData]);
+
+  const handleSearch = async (e:any) => {
+    setSearchTerm(e);
+    try {
+      const response = await apiClient.get(`/filter/product?searchString=${e}&take=20&skip=&orderBy=asc`);
+      setFundData(response.data); // Assuming the API response is an array of fund objects
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   const handleFilter = () => {
@@ -37,11 +52,10 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
               type="text"
               placeholder="Search Mutual Funds"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) =>handleSearch(e.target.value)}
               className="ml-3 w-[175px] md:w-[225px] lg:w-[275px] 2xl:w-[375px] h-[18px] md:h-[20px] lg:h-[24px] 2xl:h-[28px] outline-none placeholder-[#1CA59B] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]"
               onClick={() => {
                 setShowSearch(true);
-                handleSearch();
               }}
             />
             {showSearch && (<X className="mt-[-1px] w-5 h-5 lg:w-6 lg:h-6 items-end absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer" onClick={() => setShowSearch(false)} />)}
@@ -49,8 +63,8 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
           <div className={`block absolute px-9 w-[240px] md:w-[290px] lg:w-[340px] 2xl:w-[445px] mt-2 z-10 bg-white rounded-[5px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out ${showSearch ? 'max-h-[26.5vh]' : 'max-h-0'
             }`}>
             <ul className="py-2">
-              {funds ? (
-                funds?.map((fund) => (
+              {fundData ? (
+                fundData?.map((fund) => (
                   <a key={fund.id} href={"/detail/" + fund.proj_abbr_name}>
                     <li className="cursor-pointer items-center w-full px-4 py-3 text-[14px] text-[12px] md:text-[14px] lg:text-[16px] font-semibold text-[#072C29] hover:bg-gray-200 rounded-[10px]">
                       {fund.proj_abbr_name}
