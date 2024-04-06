@@ -349,9 +349,9 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
             <div className="flex flex-wrap pt-3 px-1 text-[11px] lg:text-[12px] 2xl:text-[16px]">
               {selectedFund.map((fund) => (
                 <div className="px-2 mb-3" key={fund}>
-                  <div className="flex px-2 py-1 bg-gray-200 rounded-md shadow-sm">
+                  <div className="flex items-center px-2 py-1 bg-gray-200 rounded-md shadow-sm">
                     <span>{fund}</span>
-                    <X className="ml-1 2xl:w-[18px] 2xl:h-[18px] lg:w-[14px] lg:h-[14px] md:h-[13px] md:w-[13px]" onClick={() => setSelectedFund(selectedFund.filter((f) => f !== fund))} />
+                    <X className="ml-1 2xl:w-[18px] 2xl:h-[18px] lg:w-[14px] lg:h-[14px] h-[13px] w-[13px]" onClick={() => setSelectedFund(selectedFund.filter((f) => f !== fund))} />
                   </div>
                 </div>
               ))}
