@@ -2,7 +2,7 @@ import Sidebar from '../Components/sidebar';
 import Fund from '../Components/fund';
 import Favorite from '../Components/favorite';
 import { useEffect, useState } from 'react';
-import { Search, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search, X } from 'lucide-react';
 import axios from 'axios';
 import Navbar from '../Components/Navbar';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -49,11 +49,13 @@ const FundPage: React.FC = () => {
   const [searchFetch, setSearchFetch] = useState<boolean>(false);
 
   const handleSearch = async (value: string) => {
+    setSkip(0);
+    setPage(1);
     setSearchTerm(value);
     setSearchFetch(true);
     setTimeout(() => {
       setSearchFetch(false);
-    }, 5000);
+    }, 7500);
   };
 
   useEffect(() => {
@@ -72,6 +74,32 @@ const FundPage: React.FC = () => {
   const handleFavorite = (favorite: boolean) => {
     setShowFavorite(!favorite);
   };
+
+  const [skip, setSkip] = useState<number>(0);
+  const [page, setPage] = useState<number>(1);
+  const handleNext = async () => {
+    try {
+      const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=${skip + 20}&orderBy=asc`);
+      setFundData2(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+    setSkip(skip + 20);
+    setPage(page + 1);
+
+  }
+  const handlePrevious = async () => {
+    if (page > 1) {
+      try {
+        const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=${skip - 20}&orderBy=asc`);
+        setFundData2(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+      setSkip(skip - 20);
+      setPage(page - 1);
+    }
+  }
 
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[650px]"
@@ -107,6 +135,17 @@ const FundPage: React.FC = () => {
           </div>
         </div>
         <Fund funds={fundData2} showFavorite={showFavorite} />
+        {fundData2 && (
+          <div className='w-full flex items-center justify-end space-x-6 px-16 py-4'>
+            <button className='px-2 py-1 rounded-[10px] bg-white shadow-md' onClick={handlePrevious}>
+              <ChevronLeft size={30} />
+            </button>
+            <span className='text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]'>Page {page}</span>
+            <button className='px-2 py-1 rounded-[10px] bg-white shadow-md' onClick={handleNext}>
+              <ChevronRight size={30} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

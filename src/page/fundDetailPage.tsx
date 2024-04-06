@@ -4,7 +4,7 @@ import SearchBar from '../Components/search';
 import Favorite from '../fundDetailComponent/favorite';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Detail from '../fundDetailComponent/detail';
-import { ChevronLeft, Minus, Triangle } from 'lucide-react';
+import { ChevronLeft, Clock, Triangle } from 'lucide-react';
 import Compare from '../fundDetailComponent/compare';
 import { useLocalStorage } from '../loginComponent/hook/useLocalStorage';
 import axios from 'axios';
@@ -14,8 +14,7 @@ import AuthContext from '../loginComponent/context/AuthProvider';
 
 const allStatus = {
   "goUp": <Triangle fill='#00bc91' size={18} className='text-[#00bc91] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px]' />,
-  "goDown": <Triangle fill='#ef5350' size={18} className='text-[#ef5350] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px] rotate-180' />,
-  "constant": <Minus fill='#6b7280' size={18} className='text-[#6b7280] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px]' />
+  "goDown": <Triangle fill='#ef5350' size={18} className='text-[#ef5350] mr-[7px] mt-[-4px] 2xl:w-[18px] 2xl:h-[18px] xl:w-[16px] xl:h-[16px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[10px] h-[10px] rotate-180' />
 }
 
 const apiClient = axios.create({
@@ -148,17 +147,17 @@ const FundDetailPage: React.FC = () => {
 
   useEffect(() => {
     if (fundData && fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 2) {
-      const numberDiff = fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][1] - fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 2][1];
+      const numberDiff = parseFloat(fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][1])  - parseFloat(fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 6][1]);
       if (numberDiff < 0) {
         setStatus(allStatus.goDown);
-        setNumber(numberDiff !== null ? numberDiff.toString() : null);
+        setNumber(numberDiff !== null ? numberDiff.toFixed(4).toString() : null);
       }
       else if (numberDiff > 0) {
         setStatus(allStatus.goUp);
-        setNumber(numberDiff !== null ? '+' + numberDiff : null);
+        setNumber(numberDiff !== null ? '+' + numberDiff.toFixed(4) : null);
       }
       else {
-        setStatus(allStatus.constant);
+        setStatus('');
         setNumber(numberDiff !== null ? numberDiff.toString() : null);
       }
     }
@@ -218,10 +217,16 @@ const FundDetailPage: React.FC = () => {
               )}
             </div>
             <div className='flex'>
-              <div className='pb-1 pt-5 flex space-x-6'>
+              <div className='pb-1 pt-5 flex items-center space-x-6'>
                 <button onClick={handleFavorite}><Favorite showFavorite={favorite} /></button>
                 <Compare fund={fund} />
               </div>
+              {fundData && (
+                <div className='ml-auto'>
+                <span className='flex justify-end px-2 py-1 text-gray-400 text-end text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px]'>(เปรียบเทียบกับ 5 วันก่อนหน้า)</span>
+                {fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 1 ? <span className='flex items-center justify-end px-2 py-2 text-gray-400 text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px]'><Clock className='w-[9px] md:w-[10px] lg:w-[11px] 2xl:w-[15px] mt-[-2px] mr-1'/>{fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][0]}</span> : ''}
+              </div>
+              )}
             </div>
           </div>
         </div>
