@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 interface OperatingResultsProps {
@@ -15,6 +16,8 @@ const apiClient = axios.create({
 
 const OperatingResults = ({ fund }: OperatingResultsProps) => {
     const [fundData, setFundData] = useState<any | null>(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const fetchDataForAllFunds = async () => {
@@ -26,6 +29,7 @@ const OperatingResults = ({ fund }: OperatingResultsProps) => {
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
+                navigate('/missing', { state: { from: location }, replace: true });
             }
         };
 

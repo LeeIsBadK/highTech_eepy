@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import DoughNutChart from "./doughnutChart";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface OverviewProps {
   funds: Array<string>;
@@ -17,6 +18,8 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
   const [topFiveData, setTopFiveData] = useState<Array<any> | null>(null);
   const [typeData, setTypeData] = useState<Array<any> | null>(null);
   const [investmentData, setInvestmentData] = useState<Array<any> | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
   const backgroundColor = [
     '#4BC0C0',
     '#36A2EB',
@@ -53,6 +56,7 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        navigate('/missing', { state: { from: location }, replace: true });
       }
     };
 

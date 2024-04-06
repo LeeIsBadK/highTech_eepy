@@ -1,6 +1,7 @@
 import DoughNutChart from "./doughnutChart";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface OverviewProps {
   fund: string;
@@ -15,6 +16,8 @@ const Investment = ({ fund }: OverviewProps) => {
   const [topFiveData, setTopFiveData] = useState<any | null>(null);
   const [typeData, setTypeData] = useState<any | null>(null);
   const [investmentData, setInvestmentData] = useState<any | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
   const backgroundColor = [
     '#4BC0C0',
     '#36A2EB',
@@ -39,6 +42,7 @@ const Investment = ({ fund }: OverviewProps) => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        navigate('/missing', { state: { from: location }, replace: true });
       }
     };
 

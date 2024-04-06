@@ -83,11 +83,13 @@ const FundDetailPage: React.FC = () => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        navigate('/missing', { state: { from: location }, replace: true });
       }
     };
-
+  
     fetchDataForAllFunds();
   }, [fundData, fund]);
+  
 
   useEffect(() => {
     const fetchData = async () => {

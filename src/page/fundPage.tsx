@@ -46,16 +46,30 @@ const FundPage: React.FC = () => {
   }, []);
 
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchFetch, setSearchFetch] = useState<boolean>(false);
 
   const handleSearch = async (value: string) => {
     setSearchTerm(value);
-    try {
-      const response = await apiClient.get(`/filter/product?searchString=${value}&take=20&skip=&orderBy=asc`);
-      setFundData2(response.data); // Assuming the API response is an array of fund objects
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+    setSearchFetch(true);
+    setTimeout(() => {
+      setSearchFetch(false);
+    }, 5000);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchFetch) {
+        try {
+          const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
+          setFundData2(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [searchTerm]);
 
   const handleFavorite = (favorite: boolean) => {
     setShowFavorite(!favorite);
@@ -94,7 +108,7 @@ const FundPage: React.FC = () => {
             </button>
           </div>
         </div>
-        <Fund funds={fundData2} showFavorite={showFavorite}/>
+        <Fund funds={fundData2} showFavorite={showFavorite} />
       </div>
     </div>
   );
