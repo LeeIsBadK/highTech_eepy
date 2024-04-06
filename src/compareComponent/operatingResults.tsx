@@ -70,12 +70,12 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                   <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ผลตอบแทนกองทุนรวม ? (
                       <div>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['3_month'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['3_month']).toFixed(2)  + '%' : '-' } </p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['6_month'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['6_month']).toFixed(2) + '%' : '-'}</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['1_year'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['1_year']).toFixed(2) + '%' : '-'}</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['3_year'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['3_year']).toFixed(2) + '%' : '-'}</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['5_year'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['5_year']).toFixed(2) + '%' : '-'}</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['10_year'] ? parseInt(fund.operating_results.ผลตอบแทนกองทุนรวม['10_year']).toFixed(2) + '%' : '-'}</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['3_month'] ? parseFloat(fund.operating_results.ผลตอบแทนกองทุนรวม['3_month']).toFixed(2)  + '%' : '-' } </p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['6_month'] ? parseFloat(fund.operating_results.ผลตอบแทนกองทุนรวม['6_month']).toFixed(2) + '%' : '-'}</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['1_year'] ? parseFloat(fund.operating_results.ผลตอบแทนกองทุนรวม['1_year']).toFixed(2) + '%' : '-'}</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['3_year'] ? parseFloat(fund.operating_results.ผลตอบแทนกองทุนรวม['3_year']).toFixed(2) + '%' : '-'}</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['5_year'] ? parseFloat(fund.operating_results.ผลตอบแทนกองทุนรวม['5_year']).toFixed(2) + '%' : '-'}</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ผลตอบแทนกองทุนรวม['10_year'] ? parseFloat(fund.operating_results.ผลตอบแทนกองทุนรวม['10_year']).toFixed(2) + '%' : '-'}</p>
                       </div>
                     ) : (
                       <div className="w-full min-h-[450px] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>
@@ -99,12 +99,12 @@ const OperatingResults = ({ funds, generateDeleteFundUrl }: OperatingResultsProp
                   <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} border border-gray-300 rounded-[10px] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                     {fund.operating_results.ความผันผวนของกองทุนรวม ? (
                       <div>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['3_month'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['3_month']).toFixed(2) + '%' : '-' }</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['6_month'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['6_month']).toFixed(2) + '%' : '-' }</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['1_year'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['1_year']).toFixed(2) + '%' : '-' }</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['3_year'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['3_year']).toFixed(2) + '%' : '-' }</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['5_year'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['5_year']).toFixed(2) + '%' : '-' }</p>
-                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['10_year'] ? parseInt(fund.operating_results.ความผันผวนของกองทุนรวม['10_year']).toFixed(2) + '%' : '-' }</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['3_month'] ? parseFloat(fund.operating_results.ความผันผวนของกองทุนรวม['3_month']).toFixed(2) + '%' : '-' }</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['6_month'] ? parseFloat(fund.operating_results.ความผันผวนของกองทุนรวม['6_month']).toFixed(2) + '%' : '-' }</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['1_year'] ? parseFloat(fund.operating_results.ความผันผวนของกองทุนรวม['1_year']).toFixed(2) + '%' : '-' }</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['3_year'] ? parseFloat(fund.operating_results.ความผันผวนของกองทุนรวม['3_year']).toFixed(2) + '%' : '-' }</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['5_year'] ? parseFloat(fund.operating_results.ความผันผวนของกองทุนรวม['5_year']).toFixed(2) + '%' : '-' }</p>
+                        <p className="flex justify-center p-4 py-6">{fund.operating_results.ความผันผวนของกองทุนรวม['10_year'] ? parseFloat(fund.operating_results.ความผันผวนของกองทุนรวม['10_year']).toFixed(2) + '%' : '-' }</p>
                       </div>
                     ) : (
                       <div className="w-full min-h-[450px] flex items-center justify-center text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">ไม่มีข้อมูล</div>

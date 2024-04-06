@@ -38,16 +38,16 @@ const OverView = ({ fund }: OverviewProps) => {
         <span className="flex items-center font-bold text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">ผลตอบแทน</span>
         {fundData ? (
           <div className="grid grid-cols-3 col-start-3 col-span-3">
-            <span className={`${ fundData.fund_resYTD['3_month'] && fundData.fund_resYTD['3_month'].includes('-') ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center`}>
-              {fundData.fund_resYTD['3_month'] && fundData.fund_resYTD['3_month'] !== '-' ? parseInt(fundData.fund_resYTD['3_month']).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
+            <span className={`${ (fundData.fund_resYTD["3_month"] && fundData.fund_resYTD["3_month"].includes('-')) ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center`}>
+              {fundData.fund_resYTD["3_month"] && fundData.fund_resYTD["3_month"] !== '-' ? parseFloat(fundData.fund_resYTD["3_month"]).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
               <p className="pt-2 text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">3M</p>
             </span>
-            <span className={`${fundData.fund_resYTD['6_month'] && fundData.fund_resYTD['6_month'].includes('-') ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center border-x border-gray-400`} >
-              {fundData.fund_resYTD['6_month'] && fundData.fund_resYTD['6_month'] !== '-' ? parseInt(fundData.fund_resYTD['6_month']).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
+            <span className={`${(fundData.fund_resYTD["6_month"] && fundData.fund_resYTD["6_month"].includes('-')) ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center border-x border-gray-400`} >
+              {(fundData.fund_resYTD["6_month"] && fundData.fund_resYTD["6_month"] !== '-' ) ? parseFloat(fundData.fund_resYTD["6_month"]).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
               <p className="pt-2 text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">6M</p>
             </span>
-            <span className={`${fundData.fund_resYTD['1_year'] && fundData.fund_resYTD['1_year'].includes('-') ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center`}>
-              {fundData.fund_resYTD['1_year'] && fundData.fund_resYTD['1_year'] !== '-' ? parseInt(fundData.fund_resYTD['1_year']).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
+            <span className={`${fundData.fund_resYTD["1_year"] && fundData.fund_resYTD["1_year"].includes('-') ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center`}>
+              {(fundData.fund_resYTD["1_year"] && fundData.fund_resYTD["1_year"] !== '-' ) ? parseFloat(fundData.fund_resYTD["1_year"]).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
               <p className="pt-2 text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">1Y</p>
             </span>
           </div>

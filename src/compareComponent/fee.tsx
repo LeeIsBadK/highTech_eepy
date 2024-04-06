@@ -125,8 +125,8 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                         </p>
                       )
                     )}
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.manage_fee === '-' ? '-' : parseInt(fund.data_from_sheet.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.ttl_fee === '-' ? '-' : parseInt(fund.data_from_sheet.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.manage_fee === '-' ? '-' : parseFloat(fund.data_from_sheet.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.ttl_fee === '-' ? '-' : parseFloat(fund.data_from_sheet.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
                   </div>
                   <div>
                     <p className="flex justify-center items-center py-5 font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500">เก็บจริง</p>
@@ -190,8 +190,8 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                         </p>
                       )
                     )}
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.manage_fee === '-' ? '-' : parseInt(fund.data_from_real.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.ttl_fee === '-' ? '-' : parseInt(fund.data_from_real.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.manage_fee === '-' ? '-' : parseFloat(fund.data_from_real.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.ttl_fee === '-' ? '-' : parseFloat(fund.data_from_real.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
                   </div>
                   <a href={fund.fund_fact_url} target="_blank" rel="noopener noreferrer" className='flex col-span-2 justify-center items-center py-5 cursor-pointer'>
                     <p className="flex py-2 px-2 rounded-[15px] text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] bg-gray-200 font-semibold"><BookText className='w-[9px] md:w-[11px] lg:w-[13px] 2xl:w-[17px] mr-1' />หนังสือชี้ชวน</p>
