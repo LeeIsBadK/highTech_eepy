@@ -77,7 +77,7 @@ const FundDetailPage: React.FC = () => {
       try {
         // Check if fundData is null before fetching the data
         if (!fundData && fund) {
-          const response = await apiClient.get('/product/' + fund);
+          const response = await apiClient.get('/detail/' + fund);
           setFundData(response.data);
         }
       } catch (error) {
@@ -146,7 +146,7 @@ const FundDetailPage: React.FC = () => {
   }
 
   useEffect(() => {
-    if (fundData && fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 2) {
+    if (fundData && fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 2 && fundData.dailyval !== 0) {
       const numberDiff = parseFloat(fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][1])  - parseFloat(fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 6][1]);
       if (numberDiff < 0) {
         setStatus(allStatus.goDown);
@@ -163,6 +163,7 @@ const FundDetailPage: React.FC = () => {
     }
   }, [fundData, number, status]);
 
+  console.log(fundData);
 
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[650px]"
@@ -205,7 +206,7 @@ const FundDetailPage: React.FC = () => {
                 <div className='flex flex-col items-end ml-auto'>
                   <span className='flex items-center px-2 text-[16px] md:text-[18px] lg:text-[20px] 2xl:text-[24px] font-bold text-[#072C29]'>
                     {status}
-                    {fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 2 ? parseFloat(fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][1]).toFixed(4) : '-'}
+                    {fundData.dailyval && fundData.dailyval !== 0 ? parseFloat(fundData.dailyval).toFixed(4) : '-'}
                   </span>
                   <span className={`px-2 text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] font-semibold ${number?.includes('-') ? "text-[#ef5350]" : "text-[#00bc91]"}`}>{number === '0' ? <span className='text-gray-500'>+0.00</span> : number}</span>
                 </div>
@@ -221,10 +222,10 @@ const FundDetailPage: React.FC = () => {
                 <button onClick={handleFavorite}><Favorite showFavorite={favorite} /></button>
                 <Compare fund={fund} />
               </div>
-              {fundData && fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 1 && (
+              {fundData && fundData.dailydate && fundData.dailydate !== '-' && (
                 <div className='ml-auto'>
                 <span className='flex justify-end px-2 py-1 text-gray-400 text-end text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px]'>(เปรียบเทียบกับ 5 วันก่อนหน้า)</span>
-                {fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 1 ? <span className='flex items-center justify-end px-2 py-2 text-gray-400 text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px]'><Clock className='w-[9px] md:w-[10px] lg:w-[11px] 2xl:w-[15px] mt-[-2px] mr-1'/>{fundData.Allinfo.nav.NAV[fundData.Allinfo.nav.NAV.length - 1][0]}</span> : ''}
+                <span className='flex items-center justify-end px-2 py-2 text-gray-400 text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px]'><Clock className='w-[9px] md:w-[10px] lg:w-[11px] 2xl:w-[15px] mt-[-2px] mr-1'/>{fundData.dailydate}</span>
               </div>
               )}
             </div>

@@ -63,8 +63,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
     fetchDataForAllFunds();
   }, [fundData, funds]);
 
-  console.log(chartDivRef.current , fundData , !chartInitializedRef.current)
-
   useEffect(() => {
     if (chartDivRef.current && fundData && !chartInitializedRef.current) {
       const root = am5.Root.new(chartDivRef.current);
