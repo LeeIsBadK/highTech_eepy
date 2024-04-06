@@ -89,12 +89,12 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
               <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-700 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[750px] border border-gray-300 rounded-[10px] text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-700 px-5 shadow-md w-full`}>
                 {Object.keys(fund.top_five_holding).length !== 0 ? (
                   <div>
                     <div className="flex justify-center p-4"><DoughNutChart allData={fund.top_five_holding} /></div>
                     {Object.keys(fund.top_five_holding).map((key, index) => (
-                      <p key={key} className="flex py-4 px-3">
+                      <p key={key} className="flex py-2.5 px-3">
                         <div><div className={`w-[12px] h-[12px] md:w-[14px] md:h-[14px] mt-[6px] mr-1 md:mr-2`} style={{ backgroundColor: backgroundColor[index], borderRadius: '50%' }}></div></div>
                         <div className='px-2 flex flex-col'>
                           <span className="text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">{parseFloat(fund.top_five_holding[key]).toFixed(2)} %</span>
@@ -118,12 +118,12 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
               <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-700 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[750px] border border-gray-300 rounded-[10px] text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-700 px-5 shadow-md w-full`}>
                 {Object.keys(fund.type_data).length !== 0 ? (
                   <div>
                     <div className="flex justify-center p-4"><DoughNutChart allData={fund.type_data} /></div>
                     {Object.keys(fund.type_data).map((key, index) => (
-                      <p key={key} className="flex py-4 px-3">
+                      <p key={key} className="flex py-2.5 px-3">
                         <div><div className={`w-[12px] h-[12px] md:w-[14px] md:h-[14px] flex items-center mt-[6px] mr-1 md:mr-2`} style={{ backgroundColor: backgroundColor[index], borderRadius: '50%' }}></div></div>
                         <div className='px-2 flex flex-col'>
                           <span className="text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">{parseFloat(fund.type_data[key]).toFixed(2)} %</span>
@@ -147,12 +147,12 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
               <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                 <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px] whitespace-nowrap`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-0.5 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund.proj_abbr_name)}><X className="w-[12px] md:w-[14px] lg:w-[16px] 2xl:w-[20px] text-gray-400" /></a></span>
               </div>
-              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[775px] border border-gray-300 rounded-[10px] text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-700 px-5 shadow-md w-full`}>
+              <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} min-h-[750px] border border-gray-300 rounded-[10px] text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] text-gray-700 px-5 shadow-md w-full`}>
                 {Object.keys(fund.Investment_proportion_data).length !== 0 ? (
                   <div>
                     <div className="flex justify-center p-4"><DoughNutChart allData={fund.Investment_proportion_data} /></div>
                     {Object.keys(fund.Investment_proportion_data).map((key, index) => (
-                      <p key={key} className="flex py-4 px-3">
+                      <p key={key} className="flex py-2.5 px-3">
                         <div><div className={`w-[14px] h-[14px] md:w-[16px] md:h-[16px] flex items-center mt-[6px] mr-1 md:mr-2`} style={{ backgroundColor: backgroundColor[index], borderRadius: '50%' }}></div></div>
                         <div className='px-2 flex flex-col'>
                           <span className="text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold">{parseFloat(fund.Investment_proportion_data[key]).toFixed(2)} %</span>
