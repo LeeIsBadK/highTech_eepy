@@ -32,8 +32,6 @@ const OverView = ({ fund }: OverviewProps) => {
     fetchDataForAllFunds();
   }, [fundData, fund]);
 
-  console.log(fundData)
-
   return (
     <div className="pb-[50px] pt-[45px]">
       <div className="grid grid-cols-7 gap-x-0 px-8 py-6 bg-[#eaeaea] rounded-[10px] shadow-md">
@@ -42,15 +40,15 @@ const OverView = ({ fund }: OverviewProps) => {
           <div className="grid grid-cols-3 col-start-3 col-span-3">
             <span className={`${ fundData.fund_resYTD['3_month'] && fundData.fund_resYTD['3_month'].includes('-') ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center`}>
               {fundData.fund_resYTD['3_month'] && fundData.fund_resYTD['3_month'] !== '-' ? parseInt(fundData.fund_resYTD['3_month']).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
-              <p className="pt-2 text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">3M</p>
+              <p className="pt-2 text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">3M</p>
             </span>
             <span className={`${fundData.fund_resYTD['6_month'] && fundData.fund_resYTD['6_month'].includes('-') ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center border-x border-gray-400`} >
               {fundData.fund_resYTD['6_month'] && fundData.fund_resYTD['6_month'] !== '-' ? parseInt(fundData.fund_resYTD['6_month']).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
-              <p className="pt-2 text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">6M</p>
+              <p className="pt-2 text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">6M</p>
             </span>
             <span className={`${fundData.fund_resYTD['1_year'] && fundData.fund_resYTD['1_year'].includes('-') ? 'text-[#ef5350]' : 'text-[#00bc91]'} flex flex-col text-[13px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] font-bold items-center`}>
               {fundData.fund_resYTD['1_year'] && fundData.fund_resYTD['1_year'] !== '-' ? parseInt(fundData.fund_resYTD['1_year']).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}
-              <p className="pt-2 text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">1Y</p>
+              <p className="pt-2 text-[11px] lg:text-[13px] 2xl:text-[17px] text-[#072C29] font-normal">1Y</p>
             </span>
           </div>
         ) : (
@@ -92,7 +90,7 @@ const OverView = ({ fund }: OverviewProps) => {
             <div className="grid grid-cols-2"><p className="p-4">นโยบายค่าเงิน</p><p className="ml-auto text-end p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p></div>
             <div className="grid grid-cols-2"><p className="p-4 pb-1">นโยบายการจ่ายปันผล</p><p className="ml-auto text-end p-4 pb-1">{fundData.Allinfo.dividen_policy}</p></div>
           </div>
-          <div className="py-1 px-8 w-full text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">
+          <div className="py-1 px-8 w-full text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">
             <div className="grid grid-cols-2"><p className="p-4">ค่าธรรมเนียมขาย</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feeHolders.front_end_fee[1]}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">ค่าธรรมเนียมรับซื้อคืน</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feeHolders.back_end_fee[1]}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">ค่าใช้จ่ายกองทุนรวม</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feefunds[1]}</p></div>

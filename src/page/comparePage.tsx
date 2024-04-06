@@ -91,7 +91,7 @@ const ComparePage: React.FC = () => {
   };
 
   return (
-    <div className="flex transition-all duration-500 ease-in-out min-w-[640px]"
+    <div className="flex transition-all duration-500 ease-in-out min-w-[685px]"
       style={{
         fontFamily: "'Noto Sans Thai', sans-serif",
       }}

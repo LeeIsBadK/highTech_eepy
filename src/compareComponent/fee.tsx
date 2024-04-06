@@ -35,8 +35,6 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
     fetchDataForAllFunds();
   }, [fundData, funds]);
 
-  console.log(fundData);
-
   return (
     <div className="pb-[60px] px-4">
       <div className="flex">
@@ -64,139 +62,139 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                 <div className="py-4 px-2 font-bold text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-[#072C29]">
                   <span className={`flex justify-center items-center w-full py-5 px-2 rounded-[10px]`}><a href={`/detail/${fund.proj_abbr_name}`} className='hover:bg-gray-200 px-1 rounded-[10px]'>{fund.proj_abbr_name}</a><a href={generateDeleteFundUrl(fund)}><X className="text-gray-400" /></a></span>
                 </div>
-                <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} grid grid-cols-2 border border-gray-300 rounded-[10px]text-[11px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
+                <div className={`${funds.indexOf(fund.proj_abbr_name) % 2 === 0 ? 'bg-[#fdfdfd]' : 'bg-[#f9f9f9]'} grid grid-cols-2 border border-gray-300 rounded-[10px] text-[11px] lg:text-[14px] 2xl:text-[18px] text-gray-600 px-5 shadow-md w-full`}>
                   <div>
                     <p className="flex justify-center items-center py-5 font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500">ตามหนังสือชี้ชวน</p>
                     {fund.data_from_sheet.Fund_Sell === "ดูหมายเหตุ" || fund.data_from_sheet.Fund_Sell === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_sheet.Fund_Sell === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_Sell} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
                     {fund.data_from_sheet.Fund_Buy === "ดูหมายเหตุ" || fund.data_from_sheet.Fund_Buy === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_sheet.Fund_Buy === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_Buy} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
                     {fund.data_from_sheet.Fund_switch_In === "ดูหมายเหตุ" || fund.data_from_sheet.Fund_switch_In === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_sheet.Fund_switch_In === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_switch_In} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
                     {fund.data_from_sheet.Fund_switch_Out === "ดูหมายเหตุ" || fund.data_from_sheet.Fund_switch_Out === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_sheet.Fund_switch_Out === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_switch_Out} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.manage_fee === '-' ? '-' : parseInt(fund.data_from_sheet.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.ttl_fee === '-' ? '-' : parseInt(fund.data_from_sheet.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.manage_fee === '-' ? '-' : parseInt(fund.data_from_sheet.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.ttl_fee === '-' ? '-' : parseInt(fund.data_from_sheet.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_sheet.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
                   </div>
                   <div>
-                    <p className="flex justify-center items-center py-5 font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500">เก็บจริง</p>
+                    <p className="flex justify-center items-center py-5 font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500">เก็บจริง</p>
                     {fund.data_from_real.Auc_Sell === "ดูหมายเหตุ" || fund.data_from_real.Auc_Sell === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_real.Auc_Sell === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_Sell} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
                     {fund.data_from_real.Auc_Buy === "ดูหมายเหตุ" || fund.data_from_real.Auc_Buy === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_real.Auc_Buy === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_Buy} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
                     {fund.data_from_real.Auc_switch_In === "ดูหมายเหตุ" || fund.data_from_real.Auc_switch_In === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_real.Auc_switch_In === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_switch_In} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
                     {fund.data_from_real.Auc_switch_Out === "ดูหมายเหตุ" || fund.data_from_real.Auc_switch_Out === "-" ? (
                       <p className="flex flex-col justify-center items-center py-5 font-semibold">-
-                        <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                        <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                       </p>
                     ) : (
                       fund.data_from_real.Auc_switch_Out === "ยกเว้น" ? (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">0.00 %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
                         <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_switch_Out} %
-                          <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
+                          <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
                     )}
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.manage_fee === '-' ? '-' : parseInt(fund.data_from_real.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
-                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.ttl_fee === '-' ? '-' : parseInt(fund.data_from_real.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.manage_fee === '-' ? '-' : parseInt(fund.data_from_real.manage_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.manage_fee === '-' ? '' : 'ต่อปี'}</p></p>
+                    <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.ttl_fee === '-' ? '-' : parseInt(fund.data_from_real.ttl_fee).toFixed(2) + '%'}<p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'>{fund.data_from_real.ttl_fee === '-' ? '' : 'ต่อปี'}</p></p>
                   </div>
                   <a href={fund.fund_fact_url} target="_blank" rel="noopener noreferrer" className='flex col-span-2 justify-center items-center py-5 cursor-pointer'>
-                    <p className="flex py-2 px-2 rounded-[15px] text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] bg-gray-200 font-semibold"><BookText className='w-[9px] md:w-[11px] lg:w-[13px] 2xl:w-[17px] mr-1' />หนังสือชี้ชวน</p>
+                    <p className="flex py-2 px-2 rounded-[15px] text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] bg-gray-200 font-semibold"><BookText className='w-[9px] md:w-[11px] lg:w-[13px] 2xl:w-[17px] mr-1' />หนังสือชี้ชวน</p>
                   </a>
                 </div>
               </div>

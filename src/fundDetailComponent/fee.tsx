@@ -29,8 +29,6 @@ const Fee = ({ fund }: OverviewProps) => {
         fetchDataForAllFunds();
     }, [fundData, fund]);
 
-    console.log(fundData);
-
     return (
         <div className="py-2 px-8">
             {fundData ? (
@@ -60,22 +58,22 @@ const Fee = ({ fund }: OverviewProps) => {
                     <div className={`grid grid-cols-3 py-5 bg-white rounded-[10px] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-gray-700 px-5 shadow-md w-full`}>
                         <div className="px-4 py-1 grid grid-rows-7">
                             <p className="py-1.5 row-start-2">ค่าธรรมเนียมเมื่อซื้อ<br />
-                                <span className="text-gray-400 text-[8px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Front-end Fee)</span>
+                                <span className="text-gray-400 text-[9px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Front-end Fee)</span>
                             </p>
                             <p className="py-1.5 row-start-3">ค่าธรรมเนียมการรับซื้อคืน<br />
-                                <span className="text-gray-400 text-[8px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Back-end Fee)</span>
+                                <span className="text-gray-400 text-[9px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Back-end Fee)</span>
                             </p>
                             <p className="py-1.5 row-start-4">ค่าธรรมเนียมการสับเปลี่ยนเข้า<br />
-                                <span className="text-gray-400 text-[8px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Switching-in Fee)</span>
+                                <span className="text-gray-400 text-[9px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Switching-in Fee)</span>
                             </p>
                             <p className="py-1.5 row-start-5">ค่าธรรมเนียมการสับเปลี่ยนออก<br />
-                                <span className="text-gray-400 text-[8px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Switching-out Fee)</span>
+                                <span className="text-gray-400 text-[9px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Switching-out Fee)</span>
                             </p>
                             <p className="py-1.5 row-start-6">ค่าธรรมเนียมการจัดการ<br />
-                                <span className="text-gray-400 text-[8px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Management Fee)</span>
+                                <span className="text-gray-400 text-[9px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Management Fee)</span>
                             </p>
                             <p className="py-1.5 row-start-7">ค่าธรรมเนียมและค่าใช้จ่ายรวมทั้งหมด<br />
-                                <span className="text-gray-400 text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">(Total Expense Ratio)</span>
+                                <span className="text-gray-400 text-[9px]  md:text-[10px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px]">(Total Expense Ratio)</span>
                             </p>
                         </div>
                         <div className="px-4 py-1 grid grid-rows-7 border-x border-dashed border-gray-400">

@@ -37,7 +37,6 @@ const LoginPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('in');
         try {
             const response = await axios.post(LOGIN_URL,
                 JSON.stringify({ user, pwd }),
@@ -46,7 +45,6 @@ const LoginPage: React.FC = () => {
                     withCredentials: true
                 }
             );
-            //console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
             setAuth({ user, pwd, accessToken });
             if (storedDetail)

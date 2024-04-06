@@ -22,7 +22,6 @@ const useLocalStorage = <T extends any>(keyName: string, defaultValue: T): [T, D
     try {
       window.localStorage.setItem(keyName, JSON.stringify(newValue));
     } catch (err) {
-      console.log(err);
     }
     setStoredValue(newValue);
   };

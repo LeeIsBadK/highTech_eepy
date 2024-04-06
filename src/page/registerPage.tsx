@@ -65,7 +65,7 @@ const RegisterPage: React.FC = () => {
             return;
         }
         try {
-            const response = await loginAxios.post(REGISTER_URL,
+            await loginAxios.post(REGISTER_URL,
                 JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -79,8 +79,6 @@ const RegisterPage: React.FC = () => {
                     withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response))
             setSuccess(true);
             setUser('');
             setPwd('');
