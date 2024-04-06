@@ -62,7 +62,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
 
   useEffect(() => {
     if (chartDivRef.current && fundData && !chartInitializedRef.current) {
-      console.log('in')
       const root = am5.Root.new(chartDivRef.current);
 
       class MyTheme extends am5.Theme {
@@ -113,7 +112,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
           });
         }
 
-        console.log(generatedData);
         return generatedData;
       }
 

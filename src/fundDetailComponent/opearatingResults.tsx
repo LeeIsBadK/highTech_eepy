@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Clock } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
@@ -34,8 +33,7 @@ const OperatingResults = ({ fund }: OperatingResultsProps) => {
     }, [fundData, fund]);
 
     return (
-        <div className="pb-[50px] p-4 md:p-6">
-            <p className="text-[0px]">{fund}</p>
+        <div className="pb-[50px] space-y-8 p-4 md:p-6">
             <div className=" grid grid-cols-1 gap-y-6 md:gap-y-0 md:grid-cols-2 gap-x-8">
                 <div className="bg-white shadow-md rounded-[10px] px-11 py-1"
                 >
@@ -168,7 +166,6 @@ const OperatingResults = ({ fund }: OperatingResultsProps) => {
                     </div>
                 </div>
             </div>
-            <span className='flex items-center px-2 py-4 pb-11 text-[8px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] text-[#7c8594]'><Clock size={18} className='mr-[6px]' /> ข้อมูล ณ วันที่ 20 มี.ค. 2567</span>
             <div className="bg-white px-8 py-6 shadow-md rounded-[10px] space-y-4 text-[9px] md:text-[11px] lg:text-[13px] xl:text-[15px] 2xl:text-[17px] text-gray-700">
                 <p>* ข้อมูลการจัดอันดับ Performance และ Standard Deviation ยึดจากสมาคมบริษัทจัดการลงทุนโดย</p>
                 <div className="flex space-x-3 md:space-x-6">

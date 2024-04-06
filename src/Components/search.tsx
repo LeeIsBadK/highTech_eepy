@@ -49,7 +49,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
               placeholder="Search Mutual Funds"
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
-              className="ml-3 w-[175px] md:w-[225px] lg:w-[275px] 2xl:w-[375px] h-[18px] md:h-[20px] lg:h-[24px] 2xl:h-[28px] outline-none placeholder-[#1CA59B] text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]"
+              className="ml-3 w-[175px] md:w-[225px] lg:w-[275px] 2xl:w-[375px] h-[18px] md:h-[20px] lg:h-[24px] 2xl:h-[28px] outline-none placeholder-[#1CA59B] text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]"
               onClick={() => {
                 setShowSearch(true);
               }}
@@ -62,7 +62,7 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
               {fundData ? (
                 fundData?.map((fund) => (
                   <a key={fund.id} href={"/detail/" + fund.proj_abbr_name}>
-                    <li className="cursor-pointer items-center w-full px-4 py-3 text-[14px] text-[12px] md:text-[14px] lg:text-[16px] font-semibold text-[#072C29] hover:bg-gray-200 rounded-[10px]">
+                    <li className="cursor-pointer items-center w-full px-4 py-3 text-[12px] md:text-[14px] lg:text-[16px] font-semibold text-[#072C29] hover:bg-gray-200 rounded-[10px]">
                       {fund.proj_abbr_name}
                       <span className='text-gray-400 font-normal flex flex-wrap text-[10px] md:text-[12px] lg:text-[14px] whitespace-normal'>{fund.proj_name_th}</span>
                     </li>

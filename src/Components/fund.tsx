@@ -26,7 +26,6 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
   const [maxArray, setMaxArray] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(selectedFavorite, selectedFavoriteName)
     if (showFavorite)
       setShowFunds(selectedFavorite);
     else
@@ -116,8 +115,6 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
       let updatedSortNum = sortNum;
       let updatedSort = sort;
 
-      console.log(sort, sortNum);
-
       if (updatedSortNum === 2 && updatedSort === data) {
         setSort('');
         setShowFunds(funds);
@@ -204,10 +201,10 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
               <span className="flex items-center justify-center">
                 เปรียบเทียบ
               </span>
-              <span className="flex col-span-3">
+              <span className="flex col-span-3 items-center">
                 ชื่อกองทุน
                 {((sort === 'name' && sortNum !== 2) || sort !== 'name') && (
-                  <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} mt-[-0.5px] lg:mt-[4px] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('name')} />
+                  <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('name')} />
                 )}
                 {sort === 'name' && sortNum === 2 && (
                   <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] sh-[9px]`} onClick={() => handleSort('name')} />
@@ -259,7 +256,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                     <div className='flex items-center justify-center h-full'>
                       <div className="px-2 py-1 h-full flex flex-col justify-between xl:space-y-3 space-y-2">
                         <button className={`${selectedFund.includes(fund.proj_abbr_name) ? 'bg-[#1CA59B] border border-[#1CA59B]' : 'border border-2 border-gray-400'} 
-                                                    flex items-center justify-center 2xl:w-[18px] 2xl:h-[18px] lg:w-[14px] lg:h-[14px] md:w-[12px] md:h-[12px] w-[11px] h-[11px] rounded-[3px] md:rounded-[4px] lg:rounded-[5px] transition-all duration-250 ease-in-out transition ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125`}
+                                                    flex items-center justify-center 2xl:w-[18px] 2xl:h-[18px] lg:w-[14px] lg:h-[14px] w-[12px] h-[12px] rounded-[2px] md:rounded-[4px] lg:rounded-[5px] transition-all duration-250 ease-in-out transition ease-in-out delay-75 hover:-translate-y-[0px] hover:scale-125`}
                           onClick={() => handleFundClick(fund.proj_abbr_name)}>
                           <Check className={`${selectedFund.includes(fund.proj_abbr_name) ? 'scale-100' : ''} text-white transform scale-0 transition-all duration-200 ease-in-out`} />
                         </button>
