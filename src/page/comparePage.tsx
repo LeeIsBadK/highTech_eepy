@@ -74,7 +74,11 @@ const ComparePage: React.FC = () => {
   };
 
   const generateAddFundUrl = (fund: string) => {
-    const fundArrayCopy = [...selectedFundArray, fund];
+    let fundArrayCopy;
+    if (fund === '')
+      fundArrayCopy = [...selectedFundArray];
+    else
+      fundArrayCopy = [...selectedFundArray, fund];
     const fundsQuery = fundArrayCopy.join(",");
     // Generate the compare URL with the selected funds
     return `/compare?selectedFund=${fundsQuery}`;
@@ -149,7 +153,7 @@ const ComparePage: React.FC = () => {
           </button>
           {showAddFund && (
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex items-center justify-center z-50">
-              <div className="bg-[#fafafa] p-6 rounded-lg shadow-lg min-w-[400px] w-[24vw] min-h-[240px] lg:min-h-[265px] lg:h-[25vh]"
+              <div className="bg-[#fafafa] p-6 rounded-lg shadow-lg min-w-[400px] w-[24vw] min-h-[20px] lg:min-h-[225px] lg:h-[25vh]"
                 style={{ whiteSpace: 'nowrap' }}
               >
                 <div className="flex">
@@ -194,20 +198,7 @@ const ComparePage: React.FC = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="flex py-2 pb-5 text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[14px]">
-                  <span className="mr-1">ตอนนี้มี:</span>
-                  <div className="flex flex-wrap">
-                    {selectedFundArray.map((fund) => (
-                      <span key={fund}>
-                        {selectedFundArray.indexOf(fund) !== 0 && (
-                          <span>, </span>
-                        )}
-                        {fund}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <button className="m-auto flex py-2 px-2" onClick={() => setShowAddFund(false)}>
+                <button className="w-full flex justify-center items-center py-6 px-2" onClick={() => setShowAddFund(false)}>
                   <a href={generateAddFundUrl(searchAddFund)}><span className="text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-4 py-2 hover:bg-[#116564] hover:text-gray-100">เพิ่มกองทุน</span></a>
                 </button>
               </div>
