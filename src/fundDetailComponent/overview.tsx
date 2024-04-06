@@ -33,6 +33,10 @@ const OverView = ({ fund }: OverviewProps) => {
     fetchDataForAllFunds();
   }, [fundData, fund]);
 
+  const numberWithCommas = (number:number) => {
+    return number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <div className="pb-[50px] pt-[45px]">
       <div className="grid grid-cols-7 gap-x-0 px-8 py-6 bg-[#eaeaea] rounded-[10px] shadow-md">
@@ -85,7 +89,7 @@ const OverView = ({ fund }: OverviewProps) => {
               )}
             </div>
             <div className="grid grid-cols-2"><p className="p-4">บลจ</p><p className="ml-auto text-end p-4">{fundData.companyTH}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">ประเภทกอง</p><p className="ml-auto text-end p-4">{fundData.fundType[0]}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ประเภทกอง</p><p className="ml-auto text-end p-4">{fundData.fundType.join(', ')}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">ค่าความเสี่ยง</p><p className="flex ml-auto text-end p-4">{fundData.risk_spectrum}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">Feeder Fund</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feeder_fund}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">นโยบายค่าเงิน</p><p className="ml-auto text-end p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p></div>
@@ -98,7 +102,7 @@ const OverView = ({ fund }: OverviewProps) => {
             <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งแรกขั้นต่ำ</p><p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งแรกขั้นต่ํา}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">ลงทุนครั้งต่อไปขั้นต่ำ</p><p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.การซื้อครั้งถัดไปขั้นต่ํา}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">วันที่จดทะเบียนกองทุน</p><p className="ml-auto text-end p-4">-</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">มูลค่าทรัพย์สินสุทธิ</p><p className="ml-auto text-end p-4">{fundData.Allinfo.buyInfo.nav && fundData.Allinfo.buyInfo.nav.NAV ? fundData.Allinfo.buyInfo.nav.NAV[10][2] : '-'}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">มูลค่าทรัพย์สินสุทธิ</p><p className="ml-auto text-end p-4">{fundData.dailynet && fundData.dailynet !== 0 ? numberWithCommas(fundData.dailynet) : '-'}</p></div>
           </div>
         </div>
       ) : (
