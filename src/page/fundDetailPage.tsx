@@ -4,7 +4,7 @@ import SearchBar from '../Components/search';
 import Favorite from '../fundDetailComponent/favorite';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Detail from '../fundDetailComponent/detail';
-import { ChevronLeft, Clock, Minus, Triangle } from 'lucide-react';
+import { ChevronLeft, Clock, Triangle } from 'lucide-react';
 import Compare from '../fundDetailComponent/compare';
 import { useLocalStorage } from '../loginComponent/hook/useLocalStorage';
 import axios from 'axios';
