@@ -36,15 +36,15 @@ const Investment = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         if (!topFiveData && !typeData && !investmentData && funds.length !== 0) {
           const topFive = funds.map(async (fund) => {
             const response = await apiClient.get('/page3/topfive/' + fund);
-            return response.data[0];
+            return response.data;
           });
           const type = funds.map(async (fund) => {
             const response = await apiClient.get('/page3/type/' + fund);
-            return response.data[0];
+            return response.data;
           });
           const investment = funds.map(async (fund) => {
             const response = await apiClient.get('/page3/investment/' + fund);
-            return response.data[0];
+            return response.data;
           });
 
           const dataForTopFive = await Promise.all(topFive);

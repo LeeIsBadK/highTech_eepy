@@ -36,9 +36,9 @@ const Investment = ({ fund }: OverviewProps) => {
           const type = await apiClient.get('/page3/type/' + fund);
           const investment = await apiClient.get('/page3/investment/' + fund);
 
-          setTopFiveData(topFive.data[0]);
-          setTypeData(type.data[0]);
-          setInvestmentData(investment.data[0]);
+          setTopFiveData(topFive.data);
+          setTypeData(type.data);
+          setInvestmentData(investment.data);
         }
       } catch (error) {
         console.error('Error fetching data:', error);

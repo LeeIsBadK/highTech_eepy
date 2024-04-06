@@ -25,7 +25,7 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
         if (!fundData && funds.length !== 0) {
           const promises = funds.map(async (fund) => {
             const response = await apiClient.get('/page1/' + fund);
-            return response.data[0];
+            return response.data;
           });
 
           const dataForAllFunds = await Promise.all(promises);

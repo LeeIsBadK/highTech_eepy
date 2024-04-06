@@ -22,7 +22,7 @@ const Fee = ({ fund }: OverviewProps) => {
             try {
                 if (!fundData && fund) {
                     const response = await apiClient.get('/page4/' + fund);
-                    setFundData(response.data[0]);
+                    setFundData(response.data);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
