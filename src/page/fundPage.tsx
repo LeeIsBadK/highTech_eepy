@@ -58,18 +58,16 @@ const FundPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (searchFetch) {
-        try {
-          const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
-          setFundData2(response.data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+      try {
+        const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
+        setFundData2(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [searchTerm]);
+  }, [searchTerm, searchFetch]);
 
   const handleFavorite = (favorite: boolean) => {
     setShowFavorite(!favorite);
