@@ -45,7 +45,6 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
   useEffect(() => {
     const fetchDataForAllFunds = async () => {
       try {
-        console.log(funds);
         if ((!fundData && funds && funds.length === 1 && funds[0] !== '') || (!fundData && funds.length > 1)) {
           const promises = funds.map(async (fund) => {
             const response = await apiClient.get('/page1/' + fund);

@@ -190,7 +190,7 @@ const Fee = ({ fund }: OverviewProps) => {
                                     </p>
                                 )
                             )}
-                            {fundData.data_from_real.Auc_Buy === "ดูหมายเหตุ" || fundData.data_from_real.Auc_switch_In === "-" ? (
+                            {fundData.data_from_real.Auc_Buy === "ดูหมายเหตุ" || fundData.data_from_real.Auc_Buy === "-" ? (
                                 <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
