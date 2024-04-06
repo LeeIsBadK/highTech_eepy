@@ -52,7 +52,7 @@ const Investment = ({ fund }: OverviewProps) => {
           <div className="py-4 px-4 text-[12px] lg:text-[16px] 2xl:text-[20px] text-[#072C29]">
             <span className={`w-full py-4 rounded-[10px] font-bold`}>TOP 5 Holding</span>
           </div>
-          <div className={`py-4 bg-white rounded-[10px] text-[12px] lg:text-[16px] 2xl:text-[20px] text-gray-700 px-5 shadow-md w-full`}>
+          <div className={`py-4 bg-white rounded-[10px] text-[11px] md:text-[12px] lg:text-[13px] 2xl:text-[17px] text-gray-700 px-5 shadow-md w-full`}>
             {Object.keys(topFiveData.top_five_holding).length !== 0 ? (
               <div className="grid grid-cols-2">
                 <div className="flex justify-center p-4"><DoughNutChart allData={topFiveData.top_five_holding} /></div>
