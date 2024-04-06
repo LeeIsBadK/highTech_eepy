@@ -32,18 +32,16 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (searchFetch) {
-        try {
-          const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
-          setFundData(response.data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+      try {
+        const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
+        setFundData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [searchTerm])
+  }, [searchTerm, searchFetch])
 
 
   return (

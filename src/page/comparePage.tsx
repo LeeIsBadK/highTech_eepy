@@ -52,7 +52,7 @@ const ComparePage: React.FC = () => {
         setCheckFunds(true);
       }
     } else {
-      setSelectedFundArray(selectedFund  ? selectedFund.split(",") : []);
+      setSelectedFundArray(selectedFund ? selectedFund.split(",") : []);
       setStoredCompare(selectedFund ? selectedFund.split(",") : []);
     }
   }, [location.search, checkFunds]);
@@ -79,7 +79,7 @@ const ComparePage: React.FC = () => {
     // Generate the compare URL with the selected funds
     return `/compare?selectedFund=${fundsQuery}`;
   };
-  
+
   const [searchFetch, setSearchFetch] = useState<boolean>(false);
 
   const handleSearch = async (e: any) => {
@@ -92,18 +92,16 @@ const ComparePage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (searchFetch) {
-        try {
-          const response = await apiClient.get(`/filter/product?searchString=${searchAddFund}&take=20&skip=&orderBy=asc`);
-          setAllFunds(response.data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+      try {
+        const response = await apiClient.get(`/filter/product?searchString=${searchAddFund}&take=20&skip=&orderBy=asc`);
+        setAllFunds(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [searchAddFund])
+  }, [searchAddFund, searchFetch])
 
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[650px]"
@@ -196,22 +194,22 @@ const ComparePage: React.FC = () => {
                     </ul>
                   </div>
                 </div>
-                  <div className="flex py-2 pb-5 text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[14px]">
-                    <span className="mr-1">ตอนนี้มี:</span>
-                    <div className="flex flex-wrap">
-                      {selectedFundArray.map((fund) => (
-                        <span key={fund}>
-                          {selectedFundArray.indexOf(fund) !== 0 && (
-                            <span>, </span>
-                          )}
-                          {fund}
-                        </span>
-                      ))}
-                    </div>
+                <div className="flex py-2 pb-5 text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[14px]">
+                  <span className="mr-1">ตอนนี้มี:</span>
+                  <div className="flex flex-wrap">
+                    {selectedFundArray.map((fund) => (
+                      <span key={fund}>
+                        {selectedFundArray.indexOf(fund) !== 0 && (
+                          <span>, </span>
+                        )}
+                        {fund}
+                      </span>
+                    ))}
                   </div>
-                  <button className="m-auto flex py-2 px-2" onClick={() => setShowAddFund(false)}>
-                    <a href={generateAddFundUrl(searchAddFund)}><span className="text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-4 py-2 hover:bg-[#116564] hover:text-gray-100">เพิ่มกองทุน</span></a>
-                  </button>
+                </div>
+                <button className="m-auto flex py-2 px-2" onClick={() => setShowAddFund(false)}>
+                  <a href={generateAddFundUrl(searchAddFund)}><span className="text-[10px] md:text-[11px] lg:text-[12px] 2xl:text-[16px] shadow-md text-white font-semibold bg-[#072C29] rounded-[7px] px-4 py-2 hover:bg-[#116564] hover:text-gray-100">เพิ่มกองทุน</span></a>
+                </button>
               </div>
             </div>
           )}
