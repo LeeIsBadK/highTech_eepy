@@ -49,10 +49,10 @@ const FundPage: React.FC = () => {
   const [searchFetch, setSearchFetch] = useState<boolean>(false);
 
   const handleSearch = async (value: string) => {
-    setSkip(0);
-    setPage(1);
     setSearchTerm(value);
     setSearchFetch(true);
+    setSkip(0);
+    setPage(1);
     setTimeout(() => {
       setSearchFetch(false);
     }, 7500);
@@ -80,6 +80,8 @@ const FundPage: React.FC = () => {
   const handleNext = async () => {
     try {
       const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=${skip + 20}&orderBy=asc`);
+      if (response.data.length === 0)
+        return;
       setFundData2(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -135,7 +137,7 @@ const FundPage: React.FC = () => {
           </div>
         </div>
         <Fund funds={fundData2} showFavorite={showFavorite} />
-        {fundData2 && (
+        {fundData2 && fundData2.length !== 0 && (
           <div className='w-full flex items-center justify-end space-x-6 px-16 py-4'>
             <button className='px-2 py-1 rounded-[10px] bg-white shadow-md' onClick={handlePrevious}>
               <ChevronLeft size={30} />

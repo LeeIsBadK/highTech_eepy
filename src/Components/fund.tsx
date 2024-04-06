@@ -338,7 +338,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
           }
         </div>
         {selectedFund.length != 0 && (
-          <div className="p-5 rounded-[15px] bg-white mt-9 shadow-md">
+          <div className="p-5 rounded-[15px] bg-white mt-9 mb-5 shadow-md">
             <div className="flex text-[12px] lg:text-[16px] 2xl:text-[20px] ">
               <span className="px-3 font-bold text-[#072C29]">เปรียบเทียบกองทุน:</span>
               <button className="ml-auto flex items-center" onClick={() => setSelectedFund([])}>

@@ -90,9 +90,9 @@ const Sidebar: React.FC = () => {
         <div>
           {navigation.map((item) => (
             <div key={item.text}>
-              <div className={`relative flex lg:py-3 lg:px-3 my-1 py-0 px-0 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
+              <div className={`relative`}>
+                <Link to={item.href} className={`relative flex items-center lg:py-4 lg:px-3 my-1 py-0 px-0 font-medium rounded-md cursor-pointer transition-colors duration-250 ease-in-out group
                   ${active === item.text ? "bg-gradient-to-tr from-[#00f7e7] to-[#1CA59B] text-white" : "hover:bg-gray-200 text-gray-600"}`}>
-                <Link to={item.href} className="flex items-center">
                   {item.icon}
                   <span
                     className={`overflow-hidden lg:transition-all transition-none duration-500 ease-in-out flex  ${expanded ? "2xl:w-[208px] lg:w-[160px] w-0 ml-3 2xl:text-[18px] lg:text-[16px]" : "w-0"
