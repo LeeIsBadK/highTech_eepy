@@ -40,6 +40,10 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
     fetchDataForAllFunds();
   }, [fundData, funds]);
 
+  const numberWithCommas = (number:number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <div className="pb-[50px]">
       <div className="flex">
@@ -133,7 +137,7 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
                 <p className="flex justify-center py-4 px-3">{fund.compareinfomation.buyInfo.การซื้อครั้งแรกขั้นต่ํา}</p>
                 <p className="flex justify-center py-4 px-3">{fund.compareinfomation.buyInfo.การซื้อครั้งถัดไปขั้นต่ํา}</p>
                 <p className="flex justify-center py-4 px-3">-</p>
-                <p className="flex justify-center py-4 px-3">{fund.compareinfomation.buyInfo.nav && fund.compareinfomation.buyInfo.nav.NAV ? fund.compareinfomation.buyInfo.nav.NAV[10][2] : '-'}</p>
+                <p className="flex justify-center py-4 px-3">{fund.dailynet && fund.dailynet !== 0 ? numberWithCommas(parseFloat(fund.dailynet)) : '-'}</p>
               </div>
             </div>
           ))}
