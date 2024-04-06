@@ -3,6 +3,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const apiClient = axios.create({
   baseURL: 'https://backend-ruby-eight.vercel.app',
@@ -12,6 +13,8 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
   const chartDivRef = useRef<HTMLDivElement>(null);
   const chartInitializedRef = useRef<boolean>(false);
   const [legendData, setLegendData] = useState<{ name: string; color: any }[]>([]);
+  const navigate = useNavigate();
+  const location = useLocation();
   const Themecolors: am5.Color[] = [
     am5.color(0x095256),
     am5.color(0xf5c06e),
@@ -42,10 +45,10 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
   useEffect(() => {
     const fetchDataForAllFunds = async () => {
       try {
-        // Check if fundData is null before fetching the data
-        if (!fundData && funds.length !== 0) {
+        console.log(funds);
+        if (!fundData && funds.length !== 0 && (funds.length === 1 && funds[0] !== '')) {
           const promises = funds.map(async (fund) => {
-            const response = await apiClient.get(`/page1/${fund}`);
+            const response = await apiClient.get('/page1/' + fund);
             return response.data[0];
           });
 
@@ -54,6 +57,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        navigate('/missing', { state: { from: location }, replace: true });
       }
     };
 
