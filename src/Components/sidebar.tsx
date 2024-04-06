@@ -212,7 +212,7 @@ const Sidebar: React.FC = () => {
             <button onClick={() => setShowProfile(!showProfile)}>
               <MoreVertical size={20} className="lg:w-[19px] w-0"/>
             </button>
-            <div className={`block absolute ml-[235px] z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-500 ease-in-out ${showProfile ? 'max-w-[300px]' : 'max-w-[0px]'}`}
+            <div className={`block absolute ml-[0px] lg:ml-[187px] 2xl:ml-[235px] z-10 bg-white rounded-[5px] shadow-md overflow-hidden transition-max-w duration-500 ease-in-out ${showProfile ? 'max-w-[0px] lg:max-w-[300px]' : 'max-w-[0px]'}`}
             >
               <ul className="py-1.5 px-3">
                 <button onClick={handleLogout} className="flex items-center h-[40px] w-full px-6 py-1 text-[1rem] text-gray-600 hover:bg-gray-200 rounded-[10px]" style={{ whiteSpace: 'nowrap' }}>

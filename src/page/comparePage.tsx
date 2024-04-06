@@ -52,7 +52,7 @@ const ComparePage: React.FC = () => {
         setCheckFunds(true);
       }
     } else {
-      setSelectedFundArray(selectedFund ? selectedFund.split(",") : []);
+      setSelectedFundArray(selectedFund  ? selectedFund.split(",") : []);
       setStoredCompare(selectedFund ? selectedFund.split(",") : []);
     }
   }, [location.search, checkFunds]);
