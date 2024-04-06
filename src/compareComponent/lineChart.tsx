@@ -178,7 +178,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
           <span key={value.name} className='px-[24px] 2xl:text-[16px] lg:text-[14px] md:text-[13px] text-[12px] py-2 flex items-center'><div className={`w-[14px] h-[14px] md:w-[16px] md:h-[16px] flex items-center mt-[-2px] mr-2 md:mr-3`} style={{ backgroundColor: value.color, borderRadius: '50%' }}></div>{value.name}</span>
         ))}
       </div>
-      {!chartInitializedRef.current || (legendData.length !== 0 && chartInitializedRef.current) ? (
+      {!check || (legendData.length !== 0 && check) ? (
         <div className='relative'>
           <div ref={chartDivRef} className='w-full 2xl:h-[500px] lg:h-[425px] md:h-[375px] h-[325px]'></div>
           {!check && (

@@ -90,7 +90,7 @@ const OverView = ({ fund }: OverviewProps) => {
             </div>
             <div className="grid grid-cols-2"><p className="p-4">บลจ</p><p className="ml-auto text-end p-4">{fundData.companyTH}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">ประเภทกอง</p><p className="ml-auto text-end p-4">{fundData.fundType.join(', ')}</p></div>
-            <div className="grid grid-cols-2"><p className="p-4">ค่าความเสี่ยง</p><p className="flex ml-auto text-end p-4">{fundData.risk_spectrum}</p></div>
+            <div className="grid grid-cols-2"><p className="p-4">ค่าความเสี่ยง</p><p className="flex ml-auto text-end p-4">{fundData.risk_spectrum === '-' ? '-' : fundData.risk_spectrum.replace(/\D/g, '') === '81' ? '8+' : fundData.risk_spectrum.replace(/\D/g, '')}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">Feeder Fund</p><p className="ml-auto text-end p-4">{fundData.Allinfo.feeder_fund}</p></div>
             <div className="grid grid-cols-2"><p className="p-4">นโยบายค่าเงิน</p><p className="ml-auto text-end p-4">{fundData.Allinfo.money_policy.length > 60 ? fundData.Allinfo.money_policy.substring(0, 60) + "..." : fundData.Allinfo.money_policy}</p></div>
             <div className="grid grid-cols-2"><p className="p-4 pb-1">นโยบายการจ่ายปันผล</p><p className="ml-auto text-end p-4 pb-1">{fundData.Allinfo.dividen_policy}</p></div>

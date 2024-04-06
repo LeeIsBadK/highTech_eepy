@@ -79,7 +79,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_Sell} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_sheet.Fund_Sell).toFixed(2) } %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
@@ -94,7 +94,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_Buy} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_sheet.Fund_Buy).toFixed(2)} %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
@@ -109,7 +109,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_switch_In} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_sheet.Fund_switch_In).toFixed(2)} %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
@@ -124,7 +124,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_sheet.Fund_switch_Out} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_sheet.Fund_switch_Out).toFixed(2)} %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
@@ -144,7 +144,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_Sell} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_real.Auc_Sell).toFixed(2)} %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
@@ -159,7 +159,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_Buy} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_real.Auc_Buy).toFixed(2)} %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
@@ -174,7 +174,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_switch_In} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_real.Auc_switch_In).toFixed(2)} %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )
@@ -189,7 +189,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       ) : (
-                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{fund.data_from_real.Auc_switch_Out} %
+                        <p className="flex flex-col justify-center items-center py-5 font-semibold">{parseFloat(fund.data_from_real.Auc_switch_Out).toFixed(2)} %
                           <p className='font-normal text-[10px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 2xl:h-[20px] lg:h-[16px] h-[12px]'></p>
                         </p>
                       )

@@ -98,14 +98,14 @@ const ComparePage: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await apiClient.get(`/filter/product?searchString=${searchAddFund}&take=20&skip=&orderBy=asc`);
-        setAllFunds(response.data);
+        setAllFunds(response.data.filter((f:any) => !selectedFundArray.includes(f.proj_abbr_name)));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [searchAddFund, searchFetch])
+  }, [searchAddFund, searchFetch]);
 
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[650px]"
