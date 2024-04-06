@@ -178,7 +178,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
       </div>
       {!chartInitializedRef.current || (legendData.length !== 0 && chartInitializedRef.current) ? (
         <div className='relative'>
-          <div ref={chartDivRef} className='w-full 2xl:h-[500px] lg:h-[425px] md:h-[400px] h-[375px]'></div>
+          <div ref={chartDivRef} className='w-full 2xl:h-[500px] lg:h-[425px] md:h-[375px] h-[325px]'></div>
           {!chartInitializedRef.current && (
             <div className="absolute inset-0 flex justify-center items-center">
               <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[15px] lg:text-[17px] font-medium rounded-md shadow-md text-gray-600 bg-gray-200">
