@@ -311,7 +311,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
               ))}
             </div>
           ) : (
-            <div className="max-h-[69svh] overflow-y-auto">
+            <div className="max-h-[62svh] overflow-y-auto">
               {Array.from({ length: 6 }, (_, i) => (
                 <div key={i} className="relative border-b py-4">
                   <div className="animate-pulse grid grid-cols-12 gap-x-4 mr-4">
@@ -338,7 +338,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
           }
         </div>
         {selectedFund.length != 0 && (
-          <div className="p-5 rounded-[15px] bg-white mt-9 shadow-md">
+          <div className="p-5 rounded-[15px] bg-white mt-9 mb-4 shadow-md">
             <div className="flex text-[12px] lg:text-[16px] 2xl:text-[20px] ">
               <span className="px-3 font-bold text-[#072C29]">เปรียบเทียบกองทุน:</span>
               <button className="ml-auto flex items-center" onClick={() => setSelectedFund([])}>
