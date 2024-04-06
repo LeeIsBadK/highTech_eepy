@@ -13,6 +13,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
   const chartDivRef = useRef<HTMLDivElement>(null);
   const chartInitializedRef = useRef<boolean>(false);
   const [legendData, setLegendData] = useState<{ name: string; color: any }[]>([]);
+  const [check, setCheck] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
   const Themecolors: am5.Color[] = [
@@ -165,6 +166,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
       });
 
       chartInitializedRef.current = true;
+      setCheck(true);
     }
   }, [fundData, chartInitializedRef.current, funds]);
 
@@ -179,7 +181,7 @@ const ChartComponent: React.FC<{ funds: string[] }> = ({ funds }) => {
       {!chartInitializedRef.current || (legendData.length !== 0 && chartInitializedRef.current) ? (
         <div className='relative'>
           <div ref={chartDivRef} className='w-full 2xl:h-[500px] lg:h-[425px] md:h-[375px] h-[325px]'></div>
-          {!chartInitializedRef.current && (
+          {!check && (
             <div className="absolute inset-0 flex justify-center items-center">
               <div className="flex items-center py-2 px-4 border border-transparent text-[13px] md:text-[15px] lg:text-[17px] font-medium rounded-md shadow-md text-gray-600 bg-gray-200">
                 <svg className="animate-spin -ml-1 mr-[10px] h-[22px] w-[22px] text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
