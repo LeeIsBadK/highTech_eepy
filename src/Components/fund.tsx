@@ -204,46 +204,46 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
               <span className="flex col-span-3 items-center">
                 ชื่อกองทุน
                 {((sort === 'name' && sortNum !== 2) || sort !== 'name') && (
-                  <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('name')} />
+                  <CircleChevronDown size={17} className={`${sort === 'name' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('name')} />
                 )}
                 {sort === 'name' && sortNum === 2 && (
-                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] sh-[9px]`} onClick={() => handleSort('name')} />
+                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 mt-[-0.5px] lg:mt-[4px] 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('name')} />
                 )}
               </span>
               <span className="flex col-span-2 justify-center items-center">
                 ความเสี่ยง
                 {((sort === 'risk' && sortNum !== 2) || sort !== 'risk') && (
-                  <CircleChevronDown size={17} className={`${sort === 'risk' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px] `} onClick={() => handleSort('risk')} />
+                  <CircleChevronDown size={17} className={`${sort === 'risk' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px] `} onClick={() => handleSort('risk')} />
                 )}
                 {sort === 'risk' && sortNum === 2 && (
-                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('risk')} />
+                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('risk')} />
                 )}
               </span>
               <span className="flex col-span-2 justify-center items-center">
                 ประเภทกองทุน
                 {((sort === 'type' && sortNum !== 2) || sort !== 'type') && (
-                  <CircleChevronDown size={17} className={`${sort === 'type' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('type')} />
+                  <CircleChevronDown size={17} className={`${sort === 'type' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('type')} />
                 )}
                 {sort === 'type' && sortNum === 2 && (
-                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('type')} />
+                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('type')} />
                 )}
               </span>
               <span className="flex col-span-2 justify-center items-center">
                 NAV
                 {((sort === 'value' && sortNum !== 2) || sort !== 'value') && (
-                  <CircleChevronDown size={17} className={`${sort === 'value' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] w-[9px] h-[9px]`} onClick={() => handleSort('value')} />
+                  <CircleChevronDown size={17} className={`${sort === 'value' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] w-[10px] h-[10px]`} onClick={() => handleSort('value')} />
                 )}
                 {sort === 'value' && sortNum === 2 && (
-                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('value')} />
+                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('value')} />
                 )}
               </span>
               <span className="flex col-span-2 justify-center items-center">
-                ผลตอบแทน (%)
+                ผลตอบแทน
                 {((sort === 'returns' && sortNum !== 2) || sort !== 'returns') && (
-                  <CircleChevronDown size={17} className={`${sort === 'returns' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('returns')} />
+                  <CircleChevronDown size={17} className={`${sort === 'returns' && sortNum === 1 ? 'text-[#1CA59B]' : 'text-[#666]'} ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('returns')} />
                 )}
                 {sort === 'returns' && sortNum === 2 && (
-                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[9px] h-[9px]`} onClick={() => handleSort('returns')} />
+                  <CircleChevronUp size={17} className={`text-[#1CA59B] ml-1 2xl:w-[17px] 2xl:h-[17px] lg:w-[13px] lg:h-[13px] md:w-[11px] md:h-[11px] w-[10px] h-[10px]`} onClick={() => handleSort('returns')} />
                 )}
               </span>
             </div>
@@ -298,12 +298,12 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                     </div>
                     <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ? parseFloat(fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length - 1][1]).toFixed(4) : '-'}</p>
                     {fund.Allinfo.fund_resYTD['year_to_date'] && fund.Allinfo.fund_resYTD['year_to_date'].includes('-') ? (
-                      <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date && fund.Allinfo.fund_resYTD.year_to_date.length !== 1 ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
+                      <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date && fund.Allinfo.fund_resYTD.year_to_date.length !== 1 ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}</p>
                     ) : (
                       fund.Allinfo.fund_resYTD['year_to_date'] === 'N/A' ? (
-                        <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
+                        <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}</p>
                       ) : (
-                        <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
+                        <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) + '%' : <span className="text-[#072C29]">-</span>}</p>
                       )
                     )}
                   </div>

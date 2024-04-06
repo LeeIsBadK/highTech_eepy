@@ -62,7 +62,7 @@ const FundPage: React.FC = () => {
   };
 
   return (
-    <div className="flex transition-all duration-500 ease-in-out min-w-[685px]"
+    <div className="flex transition-all duration-500 ease-in-out min-w-[650px]"
       style={{
         fontFamily: "'Noto Sans Thai', sans-serif",
       }}
