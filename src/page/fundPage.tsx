@@ -17,6 +17,9 @@ const FundPage: React.FC = () => {
   const [showFavorite, setShowFavorite] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchFetch, setSearchFetch] = useState<boolean>(false);
+  const [check, setCheck] = useState<boolean>(false);
 
   useEffect(() => {
     const url = location.pathname; // Get the current pathname from the location object
@@ -28,25 +31,10 @@ const FundPage: React.FC = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const search = searchParams.get("search");
-    if (search)
+    if (search) 
       setSearchTerm(search);
+    setCheck(true);
   }, [location.search]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiClient.get('/filter/product?searchString=&take=20&skip=&orderBy=asc');
-        setFundData2(response.data); // Assuming the API response is an array of fund objects
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [searchFetch, setSearchFetch] = useState<boolean>(false);
 
   const handleSearch = async (value: string) => {
     setSearchTerm(value);
@@ -60,16 +48,18 @@ const FundPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
-        setFundData2(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      if (check) {
+        try {
+          const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
+          setFundData2(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
       }
-    };
 
+    };
     fetchData();
-  }, [searchTerm, searchFetch]);
+  }, [searchTerm, searchFetch, check]);
 
   const handleFavorite = (favorite: boolean) => {
     setShowFavorite(!favorite);

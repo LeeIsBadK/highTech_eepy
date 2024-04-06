@@ -71,7 +71,7 @@ const OverView = ({ funds, generateDeleteFundUrl }: OverviewProps) => {
                   <a href={fund.compareinfomation.feeHolders.fund_fact_url} target="_blank" rel="noopener noreferrer" className='flex justify-center p-2'><p className="flex justify-center items-center py-0.5 lg:py-1 xl:py-1.5 px-2 rounded-[15px] text-[11px] lg:text-[13px] 2xl:text-[17px] bg-gray-200 font-semibold"><BookText className='w-[9px] md:w-[11px] lg:w-[13px] 2xl:w-[17px] mr-1' />หนังสือชี้ชวน</p></a>
                   <p className="flex justify-center text-center py-4 px-3 whitespace-normal row-span-2 leading-7">{fund.compareinfomation.companyTH}</p>
                   <p className="flex justify-center py-4 px-3">{fund.compareinfomation.fundType[0]}</p>
-                  <p className="flex justify-center py-4 px-3">{fund.compareinfomation.risk === '-' ? '-' : fund.compareinfomation.risk.replace(/\D/g, '')}</p>
+                  <p className="flex justify-center py-4 px-3">{fund.compareinfomation.risk === '-' ? '-' : fund.compareinfomation.risk.replace(/\D/g, '') === 81 ? '8+' : fund.compareinfomation.risk.replace(/\D/g, '')} </p>
                   <p className="flex justify-center py-4 px-3">{fund.compareinfomation.feeder_fund.length > 27 ? fund.compareinfomation.feeder_fund.substring(0, 25) + "..." : fund.compareinfomation.feeder_fund}</p>
                   <p className="flex justify-center py-4 px-3">{fund.compareinfomation.money_policy.length > 27 ? fund.compareinfomation.money_policy.substring(0, 27) + "..." : fund.compareinfomation.money_policy}</p>
                   <p className="flex justify-center py-4 px-3">{fund.compareinfomation.dividen_policy}</p>
