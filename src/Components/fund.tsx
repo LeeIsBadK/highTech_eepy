@@ -64,13 +64,13 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
   }, [compare.current, showCompare]);
 
   const handleFundClick = (fund: string): void => {
-    if (selectedFund.length >= 10) {
-      setMaxArray(true);
-      return;
-    }
     if (selectedFund.includes(fund)) {
       setSelectedFund(selectedFund.filter((f) => f !== fund));
     } else {
+      if (selectedFund.length >= 10) {
+        setMaxArray(true);
+        return;
+      }
       setSelectedFund([...selectedFund, fund]);
     }
   };
