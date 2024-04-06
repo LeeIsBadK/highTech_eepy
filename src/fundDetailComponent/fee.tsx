@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Coins, NotebookPen } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 interface OverviewProps {
@@ -13,6 +14,8 @@ const apiClient = axios.create({
 
 const Fee = ({ fund }: OverviewProps) => {
     const [fundData, setFundData] = useState<any | null>(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const fetchDataForAllFunds = async () => {
@@ -23,6 +26,7 @@ const Fee = ({ fund }: OverviewProps) => {
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
+                navigate('/missing', { state: { from: location }, replace: true });
             }
         };
 

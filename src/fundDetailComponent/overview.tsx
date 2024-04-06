@@ -26,6 +26,7 @@ const OverView = ({ fund }: OverviewProps) => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        navigate('/missing', { state: { from: location }, replace: true });
       }
     };
 

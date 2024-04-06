@@ -20,15 +20,30 @@ const SearchBar: React.FC<Props> = ({ funds }) => {
       setFundData(funds);
   }, [funds, fundData]);
 
-  const handleSearch = async (e: any) => {
-    setSearchTerm(e);
-    try {
-      const response = await apiClient.get(`/filter/product?searchString=${e}&take=20&skip=&orderBy=asc`);
-      setFundData(response.data); // Assuming the API response is an array of fund objects
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  const [searchFetch, setSearchFetch] = useState<boolean>(false);
+
+  const handleSearch = async (value: string) => {
+    setSearchTerm(value);
+    setSearchFetch(true);
+    setTimeout(() => {
+      setSearchFetch(false);
+    }, 5000);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchFetch) {
+        try {
+          const response = await apiClient.get(`/filter/product?searchString=${searchTerm}&take=20&skip=&orderBy=asc`);
+          setFundData(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [searchTerm])
 
 
   return (

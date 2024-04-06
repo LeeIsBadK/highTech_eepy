@@ -79,16 +79,31 @@ const ComparePage: React.FC = () => {
     // Generate the compare URL with the selected funds
     return `/compare?selectedFund=${fundsQuery}`;
   };
+  
+  const [searchFetch, setSearchFetch] = useState<boolean>(false);
 
   const handleSearch = async (e: any) => {
     setSearchAddFund(e);
-    try {
-      const response = await apiClient.get(`/filter/product?searchString=${e}&take=20&skip=&orderBy=asc`);
-      setAllFunds(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+    setSearchFetch(true);
+    setTimeout(() => {
+      setSearchFetch(false);
+    }, 5000);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchFetch) {
+        try {
+          const response = await apiClient.get(`/filter/product?searchString=${searchAddFund}&take=20&skip=&orderBy=asc`);
+          setAllFunds(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [searchAddFund])
 
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[650px]"
@@ -166,9 +181,9 @@ const ComparePage: React.FC = () => {
                   </button>
                   <div className={`block absolute px-12 ml-[-8px] mt-[48px] z-10 bg-white rounded-[5px] shadow-md overflow-y-auto overflow-hidden transition-max-h duration-300 ease-in-out  ${showAddSearch ? 'max-h-[25vh]' : 'max-h-0'
                     }`}>
-                    <ul className="py-2 pr-6 min-w-[175px] w-[12.5vw]">
+                    <ul className="py-2 pr-6 min-w-[175px] w-[12vw]">
                       {filteredFunds.map((fund) => (
-                        <li key={fund.id} className="cursor-pointer min-h-[44px] w-full px-4 py-2 text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[16px] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
+                        <li key={fund.id} className="cursor-pointer font-semibold min-h-[44px] w-full px-4 py-2 text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[16px] text-gray-600 ml-[0px] hover:bg-gray-200 rounded-[10px]"
                           onClick={() => {
                             setSearchAddFund(fund.proj_abbr_name)
                             setShowAddSearch(false)

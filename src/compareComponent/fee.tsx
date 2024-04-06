@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { BookText, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface OperatingResultsProps {
   funds: Array<string>;
@@ -13,6 +14,8 @@ const apiClient = axios.create({
 
 const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
   const [fundData, setFundData] = useState<Array<any> | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchDataForAllFunds = async () => {
@@ -29,6 +32,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+        navigate('/missing', { state: { from: location }, replace: true });
       }
     };
 
