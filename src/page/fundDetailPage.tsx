@@ -79,7 +79,7 @@ const FundDetailPage: React.FC = () => {
         // Check if fundData is null before fetching the data
         if (!fundData && fund) {
           const response = await apiClient.get('/product/' + fund);
-          setFundData(response.data[0]);
+          setFundData(response.data);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -109,7 +109,7 @@ const FundDetailPage: React.FC = () => {
       if (fund && !selectedFavorite) {
         try {
           const response = await apiClient.get(`/fav/${auth.user}`);
-          const data = response.data[0].proj_abbr_name_list;
+          const data = response.data.proj_abbr_name_list;
           setSelectedFavorite(data);
           if (data.includes(fund))
             setFavorite(true);

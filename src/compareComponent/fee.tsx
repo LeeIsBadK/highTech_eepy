@@ -24,7 +24,7 @@ const Fee = ({ funds, generateDeleteFundUrl }: OperatingResultsProps) => {
         if (!fundData && funds.length !== 0) {
           const promises = funds.map(async (fund) => {
             const response = await apiClient.get('/page4/' + fund);
-            return response.data[0];
+            return response.data;
           });
 
           const dataForAllFunds = await Promise.all(promises);

@@ -22,7 +22,7 @@ const OverView = ({ fund }: OverviewProps) => {
         // Check if fundData is null before fetching the data
         if (!fundData && fund) {
           const response = await apiClient.get('/detail/' + fund);
-          setFundData(response.data[0]);
+          setFundData(response.data);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
