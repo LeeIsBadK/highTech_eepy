@@ -249,7 +249,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
             </div>
           </div>
           {showFunds ? (
-            <div className="max-h-[69svh] overflow-y-auto">
+            <div className="max-h-[62svh] overflow-y-auto">
               {showFunds.map((fund) => (
                 <div key={fund.id} className="relative flex items-center border-b py-4">
                   <div className="w-full grid grid-cols-12 gap-x-4">
@@ -294,7 +294,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                       )}
                     </div>
                     <div className="col-span-2 flex justify-center items-center">
-                      <p className="px-3 lg:px-2 py-1 rounded-[10px] items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0] : '-'}</p>
+                      <p className="px-3 lg:px-2 py-1 rounded-[10px] items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0]  : '-'}{fund.Allinfo.fundType && fund.Allinfo.fundType.length > 1 ? ', ...'  : ''}</p>
                     </div>
                     <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ? parseFloat(fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length - 1][1]).toFixed(4) : '-'}</p>
                     {fund.Allinfo.fund_resYTD['year_to_date'] && fund.Allinfo.fund_resYTD['year_to_date'].includes('-') ? (

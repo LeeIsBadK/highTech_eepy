@@ -15,7 +15,7 @@ const navigation = [
 
 
 const Sidebar: React.FC = () => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useLocalStorage<boolean>("expanded", true);
   const [active, setActive] = useState<string>('');
   const [showProfile, setShowProfile] = useState<boolean>(false);
   const { auth, setAuth } = useContext(AuthContext);
@@ -26,6 +26,10 @@ const Sidebar: React.FC = () => {
   const [compare, setCompare] = useState<boolean>(false);
   const [ storedCompare ] = useLocalStorage<string[]>("compare", []);
   const [ storedDetail ] = useLocalStorage("detail", "");
+
+  useEffect(() => {
+    setExpanded(expanded);
+  }, [expanded]);
 
   useEffect(() => {
     const url = location.pathname; // Get the current pathname from the location object
