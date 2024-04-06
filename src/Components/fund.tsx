@@ -160,7 +160,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
             if (b.Allinfo.fund_resYTD['year_to_date'] === '-') return -1000;
           }
 
-          return updatedSortNum === 1 ? parseFloat(a.Allinfo.fund_resYTD['year_to_date']) - parseFloat(b.Allinfo.fund_resYTD['year_to_date']) : parseFloat(b.Allinfo.fund_resYTD['year_to_date']) - parseInt(a.Allinfo.fund_resYTD['year_to_date']);
+          return updatedSortNum === 1 ? parseFloat(a.Allinfo.fund_resYTD['year_to_date']) - parseFloat(b.Allinfo.fund_resYTD['year_to_date']) : parseFloat(b.Allinfo.fund_resYTD['year_to_date']) - parseFloat(a.Allinfo.fund_resYTD['year_to_date']);
         } else if (data === 'value') {
           if (updatedSortNum === 1) {
             if (!a.Allinfo.nav.NAV || a.Allinfo.nav.NAV.length === 0) return -1000;
@@ -176,7 +176,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
             if (!b.Allinfo.nav.NAV && b.Allinfo.nav.NAV.length !== 0 && b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1] === '-') return -1000;
           }
 
-          return updatedSortNum === 1 ? parseFloat(a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1]) - parseFloat(b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1]) : parseFloat(b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1]) - parseInt(a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1]);
+          return updatedSortNum === 1 ? parseFloat(a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1]) - parseFloat(b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1]) : parseFloat(b.Allinfo.nav.NAV[b.Allinfo.nav.NAV.length - 1][1]) - parseFloat(a.Allinfo.nav.NAV[a.Allinfo.nav.NAV.length - 1][1]);
         }
       });
 
