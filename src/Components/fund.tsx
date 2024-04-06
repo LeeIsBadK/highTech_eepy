@@ -38,8 +38,8 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
     const fetchFav = async () => {
       try {
         const response = await apiClient.get(`/fav/${auth.user}`);
-        setSelectedFavorite(response.data[0].product_json_list);
-        setSelectedFavoriteName(response.data[0].proj_abbr_name_list);
+        setSelectedFavorite(response.data.product_json_list);
+        setSelectedFavoriteName(response.data.proj_abbr_name_list);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
