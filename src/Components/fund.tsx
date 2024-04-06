@@ -197,7 +197,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
     >
       <div className="px-5 lg:px-9">
         <div className="w-full bg-white p-6 lg:p-8 rounded-[15px] shadow-md">
-          <div className="w-full h-full flex pt-2 pb-3text-[11px] md:text-[10px] lg:text-[12px] 2xl:text-[16px] font-medium text-[#999999]"
+          <div className="w-full h-full flex pt-2 pb-3 text-[11px] lg:text-[12px] 2xl:text-[16px] font-medium text-[#999999]"
             style={{ whiteSpace: 'nowrap' }}
           >
             <div className="w-full grid grid-cols-12 gap-x-4">
@@ -272,9 +272,9 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                         </button>
                       </div>
                     </div>
-                    <a href={`/detail/${fund.proj_abbr_name}`} className="col-span-3 hover:bg-gray-100 p-2 rounded-[10px]text-[11px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">
+                    <a href={`/detail/${fund.proj_abbr_name}`} className="col-span-3 hover:bg-gray-100 p-2 rounded-[10px] text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">
                       <span className="pt-1">{fund.proj_abbr_name}</span>
-                      <span className="text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.proj_name_th}</span>
+                      <span className="text-[10px] lg:text-[11px] 2xl:text-[15px] text-gray-400 font-normal flex flex-wrap">{fund.proj_name_th}</span>
                     </a>
                     <div className='flex col-span-2 justify-center items-center'>
                       {fund.risk_spectrum && fund.risk_spectrum !== '-' ? (
@@ -282,7 +282,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                           <p className='relative text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold pl-[7px] pr-[9px] py-[2px] lg:px-[8.5px] lg:pr-[11.5px] lg:py-[3px] 2xl:pl-[10px] 2xl:pr-[14px] 2xl:py-[4px] border border-2 rounded-md'
                             style={{ color: '#EB7650', borderColor: '#EB7650' }}>
                             {8}
-                            <span className="absolute top-0 right-1/8text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">+</span>
+                            <span className="absolute top-0 right-1/8 text-[11px] md:text-[12px] lg:text-[14px] 2xl:text-[18px]">+</span>
                           </p>
                         ) : (
                           <p className='text-[12px] md:text-[14px] lg:text-[16px] 2xl:text-[20px] font-semibold px-[8px] py-[2px] lg:px-[10px] lg:py-[3px] 2xl:px-[12px] 2xl:py-[4px] border border-2 rounded-md'
@@ -297,16 +297,16 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
                       )}
                     </div>
                     <div className="col-span-2 flex justify-center items-center">
-                      <p className="px-3 lg:px-2 py-1 rounded-[10px] items-centertext-[11px] text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0] : '-'}</p>
+                      <p className="px-3 lg:px-2 py-1 rounded-[10px] items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold">{fund.Allinfo.fundType ? fund.Allinfo.fundType[0] : '-'}</p>
                     </div>
-                    <p className="flex col-span-2 justify-center items-centertext-[11px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ? parseFloat(fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length - 1][1]).toFixed(4) : '-'}</p>
+                    <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.nav && fund.Allinfo.nav.NAV && fund.Allinfo.nav.NAV.length !== 0 ? parseFloat(fund.Allinfo.nav.NAV[fund.Allinfo.nav.NAV.length - 1][1]).toFixed(4) : '-'}</p>
                     {fund.Allinfo.fund_resYTD['year_to_date'] && fund.Allinfo.fund_resYTD['year_to_date'].includes('-') ? (
-                      <p className="flex col-span-2 justify-center items-centertext-[11px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date && fund.Allinfo.fund_resYTD.year_to_date.length !== 1 ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
+                      <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#ef5350]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date && fund.Allinfo.fund_resYTD.year_to_date.length !== 1 ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
                     ) : (
                       fund.Allinfo.fund_resYTD['year_to_date'] === 'N/A' ? (
-                        <p className="flex col-span-2 justify-center items-centertext-[11px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
+                        <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#072C29]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
                       ) : (
-                        <p className="flex col-span-2 justify-center items-centertext-[11px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
+                        <p className="flex col-span-2 justify-center items-center text-[11px] lg:text-[13px] 2xl:text-[17px] font-semibold text-[#00bc91]">{fund.Allinfo.fund_resYTD && fund.Allinfo.fund_resYTD.year_to_date ? parseFloat(fund.Allinfo.fund_resYTD.year_to_date).toFixed(2) : <span className="text-[#072C29]">-</span>}</p>
                       )
                     )}
                   </div>
@@ -345,23 +345,23 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
             <div className="flex text-[12px] lg:text-[16px] 2xl:text-[20px] ">
               <span className="px-3 font-bold text-[#072C29]">เปรียบเทียบกองทุน:</span>
               <button className="ml-auto flex items-center" onClick={() => setSelectedFund([])}>
-                <X className="mr-1 2xl:w-[24px] 2xl:h-[24px] lg:w-[18px] lg:h-[18px] md:h-[16px] md:w-[16px] w-[14px] h-[14px]" />
+                <X className="mr-1 2xl:w-[24px] 2xl:h-[24px] lg:w-[18px] lg:h-[18px] h-[14px] w-[14px] " />
                 <span className="font-bold text-[#072C29]">รีเซ็ต</span>
               </button>
             </div>
-            <div className="flex flex-wrap pt-3 px-1text-[11px] lg:text-[12px] 2xl:text-[16px]">
+            <div className="flex flex-wrap pt-3 px-1 text-[11px] lg:text-[12px] 2xl:text-[16px]">
               {selectedFund.map((fund) => (
                 <div className="px-2 mb-3" key={fund}>
                   <div className="flex px-2 py-1 bg-gray-200 rounded-md shadow-sm">
                     <span>{fund}</span>
-                    <X className="ml-1 2xl:w-[20px] 2xl:h-[20px] lg:w-[16px] lg:h-[16px] md:h-[14px] md:w-[14px] w-[12px] h-[12px]" onClick={() => setSelectedFund(selectedFund.filter((f) => f !== fund))} />
+                    <X className="ml-1 2xl:w-[18px] 2xl:h-[18px] lg:w-[14px] lg:h-[14px] md:h-[13px] md:w-[13px]" onClick={() => setSelectedFund(selectedFund.filter((f) => f !== fund))} />
                   </div>
                 </div>
               ))}
             </div>
             <button className="ml-auto flex">
               <a href={generateCompareUrl()} className="py-2">
-                <span className="text-[10px] md:text-[12px] lg:text-[14px] 2xl:text-[18px] text-white font-bold bg-[#072C29] rounded-[5px] px-2 py-1.5 hover:bg-[#116564] hover:text-gray-100">เปรียบเทียบ</span>
+                <span className="text-[12px] lg:text-[14px] 2xl:text-[18px] text-white font-bold bg-[#072C29] rounded-[5px] px-2 py-1.5 hover:bg-[#116564] hover:text-gray-100">เปรียบเทียบ</span>
               </a>
             </button>
           </div>
@@ -389,7 +389,7 @@ const Fund = ({ funds, showFavorite }: FundProps) => {
           }}
         >
           <div className="bg-white flex flex-col items-center py-8 px-12 space-y-6 rounded-md shadow-md relative">
-            <p className="text-[16px] md:text-[18px] lg:text-[20px] font-bold">เปรียบกองทุนได้สูงสุด 10 กองทุน</p>
+            <p className="text-[15px] md:text-[17px] lg:text-[19px] font-bold">เปรียบกองทุนได้สูงสุด 10 กองทุน</p>
             <p className="pb-1 text-[12px] md:text-[14px] lg:text-[16px]">โปรดเลือกกองทุนใหม่</p>
             <button className={`px-5 py-[7px] bg-gradient-to-tr from-[#00f2e1] to-[#1CA59B] hover:from-[#00e6d7] hover:to-[#118a82] rounded-[5px] text-white text-[12px] md:text-[14px] lg:text-[16px] font-semibold shadow-md `}
               style={{ whiteSpace: 'nowrap' }} onClick={() => setMaxArray(false)}
