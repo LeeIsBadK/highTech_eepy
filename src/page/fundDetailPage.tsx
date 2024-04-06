@@ -222,7 +222,7 @@ const FundDetailPage: React.FC = () => {
                 <button onClick={handleFavorite}><Favorite showFavorite={favorite} /></button>
                 <Compare fund={fund} />
               </div>
-              {fundData && fundData.dailydate && fundData.dailydate !== '-' && (
+              {fundData && fundData.Allinfo.nav && fundData.Allinfo.nav.NAV && fundData.Allinfo.nav.NAV.length !== 0 && fundData.Allinfo.nav.NAV[0].length > 2 && fundData.dailydate && fundData.dailydate !== '-' && (
                 <div className='ml-auto'>
                 <span className='flex justify-end px-2 py-1 text-gray-400 text-end text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px]'>(เปรียบเทียบกับ 5 วันก่อนหน้า)</span>
                 <span className='flex items-center justify-end px-2 py-2 text-gray-400 text-[9px] md:text-[10px] lg:text-[11px] 2xl:text-[15px]'><Clock className='w-[9px] md:w-[10px] lg:w-[11px] 2xl:w-[15px] mt-[-2px] mr-1'/>{fundData.dailydate}</span>
