@@ -236,31 +236,31 @@ const Fee = ({ fund }: OverviewProps) => {
                                 )
                             )}
                             {fundData.data_from_real.manage_fee === "ดูหมายเหตุ" || fundData.data_from_real.manage_fee === "-" ? (
-                                <p className="flex justify-center items-center py-5 font-semibold">-
+                                <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
                             ) : (
                                 (fundData.data_from_real.manage_fee === "ยกเว้น" || fundData.data_from_real.manage_fee === "0") ? (
-                                    <p className="flex justify-center items-center py-5 font-semibold">0.00 <span className="font-normal ml-1">% ต่อปี</span>
+                                    <p className="flex justify-center py-2 font-semibold">0.00 <span className="font-normal ml-1">% ต่อปี</span>
                                         <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                     </p>
                                 ) : (
-                                    <p className="flex justify-center items-center py-5 font-semibold">{parseFloat(fundData.data_from_real.manage_fee).toFixed(2)} <span className="font-normal ml-1">% ต่อปี</span>
+                                    <p className="flex justify-center py-2 font-semibold">{parseFloat(fundData.data_from_real.manage_fee).toFixed(2)} <span className="font-normal ml-1">% ต่อปี</span>
                                         <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                     </p>
                                 )
                             )}
                             {fundData.data_from_real.ttl_fee === "ดูหมายเหตุ" || fundData.data_from_real.ttl_fee === "-" ? (
-                                <p className="flex justify-center items-center py-5 font-semibold">-
+                                <p className="flex justify-center py-2 font-semibold">-
                                     <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                 </p>
                             ) : (
                                 (fundData.data_from_real.ttl_fee === "ยกเว้น" || fundData.data_from_real.ttl_fee === "0") ? (
-                                    <p className="flex justify-center items-center py-5 font-semibold">0.00 <span className="font-normal ml-1">% ต่อปี</span>
+                                    <p className="flex justify-center py-2 font-semibold">0.00 <span className="font-normal ml-1">% ต่อปี</span>
                                         <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                     </p>
                                 ) : (
-                                    <p className="flex justify-center items-center py-5 font-semibold">{parseFloat(fundData.data_from_real.ttl_fee).toFixed(2)} <span className="font-normal ml-1">% ต่อปี</span>
+                                    <p className="flex justify-center py-2 font-semibold">{parseFloat(fundData.data_from_real.ttl_fee).toFixed(2)} <span className="font-normal ml-1">% ต่อปี</span>
                                         <p className='font-normal text-[9px] md:text-[11px] lg:text-[13px] 2xl:text-[17px] text-gray-500 '></p>
                                     </p>
                                 )

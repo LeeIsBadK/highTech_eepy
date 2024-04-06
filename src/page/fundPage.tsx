@@ -127,7 +127,7 @@ const FundPage: React.FC = () => {
           </div>
         </div>
         <Fund funds={fundData2} showFavorite={showFavorite} />
-        {fundData2 && fundData2.length !== 0 && (
+        {fundData2 && fundData2.length !== 0 && !showFavorite && (
           <div className='w-full flex items-center justify-end space-x-6 px-16 py-4'>
             <button className='px-2 py-1 rounded-[10px] bg-white shadow-md' onClick={handlePrevious}>
               <ChevronLeft size={30} />
