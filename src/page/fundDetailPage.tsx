@@ -163,8 +163,6 @@ const FundDetailPage: React.FC = () => {
     }
   }, [fundData, number, status]);
 
-  console.log(fundData);
-
   return (
     <div className="flex transition-all duration-500 ease-in-out min-w-[650px]"
       style={{
